@@ -1,0 +1,227 @@
+[System]
+Generator=Priority
+Finalize=True
+VirtSeat=False
+Version=3.53
+[Priorities]
+Priority1= 0 
+Priority2= 0 
+Priority3= 0 
+Priority4= 0 
+Priority5= 0 
+Magic= 4 
+Attributes= 0 
+Skills= 50 
+MaxMoney= 7556 
+ShapeShift= 0 
+Shapesel=0
+[Race]
+Rsel= 0 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Human
+RunMult=
+[General]
+CharName=Max Williams
+RealName=Edward Black
+StreetName1=Edge
+StreetName2=Orion
+LifeStyle1=(1)_Mi:_________________________~0~3~0~1~5000~~_________________________~~~~N
+CredStick1=1500
+CredStick2=5000
+CredStick3=1056
+BirthDate=Unknown
+BirthPlace=Unknown
+BirthNotes=
+Sex=Male
+Height=5'11"
+Weight=166
+Hair=Short black
+Eyes=Steel Grey
+Notes=
+Archtype=Hitman
+CreationDate=30/01/2002
+ModDate=1/14/2003 
+Creator=Robert Blake
+CurMoney= 13000 
+ProgramMode= 1 
+GifFile=sr3logo.gif
+[Edges]
+Edge0=Photographic_Memory____________~3~SRC-24~~Character_never_forgets_anything_he_has_heard,_seen_or_experienced.~E
+Edge1=Friends_Abroad_________________~3~SRC-27~~One_additional_contact_abroad_or_in_another_town.~E
+Edge2=Borrowed_Time__________________~-6~SRC-19~~Character_has_only_3d6_months_left_to_live.~E
+
+[Attributes]
+MaxAttributes=0
+BeCKScost= 0 
+Body=5|0|0|0|5
+Quickness=6|0|0|0|6
+Strength=6|0|0|0|6
+Charisma=3|0|0|0|3
+Intelligence=4|0|0|0|4
+Willpower=3|0|0|0|3
+Essence=6|0|0|-0.80|5.20
+Magic=0|0|0|0|0
+Reaction=5|0|0|0|5
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=6
+Control=0
+Hacking=0
+Spell=0
+Task=0
+CombatPoolMod=0
+[Skills]
+SkillsBeCKScost=0
+SkillsBeCKSKnowCost=0
+SkillsBeCKSActCost=0
+Skill0=Bike(REA)~[4]=14X
+Skill1=Bike_B/R(INT)~[2]=4X
+Skill2=Biotech(INT)~[3]=8X
+Skill3=Computer(INT)~[3]=8X
+Skill4=Cyber_Implant_Combat(STR)~[6]=30X
+Skill5=Electronics(INT)~[4]=14X
+Skill6=Electronics_B/R(INT)~[2]=4X
+Skill7=Etiquette(CHA)/Corporate~[1/3]=4X
+Skill8=Pistols(QCK)~[6]=30X
+Skill9=Pistols_B/R(INT)~[3]=8X
+Skill10=Rifles(QCK)~[6]=30X
+Skill11=Rifles_B/R(INT)~[3]=8X
+Skill12=Stealth(QCK)~[6]=30X
+Skill13=BK:Intimidation(KNO)~[3]=6X
+Skill14=ST:Mafia_Controlled_Establishments(KNO)~[2]=3X
+Skill15=ST:Mafia_Politics(KNO)~[3]=6X
+Skill16=AC:Military_Theory(KNO)~[2]=3X
+Skill17=AC:Security_Devices(KNO)~[4]=10X
+Skill18=AC:Security_Systems(KNO)~[4]=10X
+Skill19=ST:Yakuza_Teritory(KNO)~[2]=3X
+Skill20=English(LAN)~[4]=10X
+Skill21=__English(LAN)__(RW)~[2]=3X
+Skill22=German(LAN)~[2]=3X
+Skill23=__German(LAN)__(RW)~[1]=1X
+MaxSkills= 50 
+[Cyberware]
+SensitiveSystem=0
+Cyber0=Smartlink_II(A)~0.40~6400~MM-31~~5P-N~~~~2.00~E
+Cyber1=+_Personalized_Safety(A)~0.00~400~MM-32~~Legal~~~E~1.50~E
+Cyber2=Spur,_Retract(A)~0.24~23000~SR3-302~~3-N~~~D~1.00~E
+Cyber3=Eyes,_Cyber_Replacement(A)~0.16~10000~SR3-300~~Legal~~0.5~E~0.75~E
+Cyber4=+_Eyes,_Low-Light(A)~0.16~6000~SR3-300~~Legal~~~E~1.25~E
+Cyber5=+_Eyes,_Thermographic(A)~0.16~6000~SR3-300~~Legal~~~E~1.25~E
+Cyber6=+_Eyes,_Vis_Mag_Opt3(A)~0.16~12000~SR3-300~~Legal~~~E~1.00~E
+
+CurrentEssence=5.20
+BioIndex=0.00
+[Magic]
+MageType=Not Selected
+Adept=0
+Magic=4
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=X:Ares_Predator_III______(HPist)_~3|4|15(c)|SA|9M|2.25|5/24hrs|0|1|Int._Smartgun_II|CC-19|
+Gear1=X:__Pers_Safety_Modification_~6|-|-|-|0.1|3/36hrs|0|1.5||MM-32|A_smartgun_with_a_personalized_safety_feature_only_works_for_the_user_possessing_the_specific_smartlink_system_for_which_it_was_programmed.
+Gear2=X:__Quick_Draw_Holster_(Conc.)_~6|-|(+2)|-|0.1|5/72hrs|0|.75|CC-33|
+Gear3=X:__Silencer_~6|Barrel|(-2)|-|0.2|4/48hrs|0|2|SR3-282|
+Gear4=X:__[3]Spare_Clip_~5|-|-|-|.75|0|.75|SR3-282|
+Gear5=X:__[6]Regular_Rnds_(10)_~5|8|-|3|2/24hrs|0|.75|SR3-281|
+Gear6=X:__[2]Spare_Clip_~5|-|-|-|.75|0|.75|SR3-282|
+Gear7=X:__[3]Gel_Rnds_(10)_~5|8|(see_rules)|0.75|4/48hrs|0|1|SR3-281|
+Gear8=X:Secure_Long_Coat_~8|10|4|2|2|3/24hrs|0|.9|SR3-284|
+Gear9=Armanté_"London_Fog"_Profsnl_~8|13|2|2|2|4/48hrs|0|.75|CC-46|
+Gear10=Fine_Clothing_~8|-|-|-|1|Always|0|1|SR3-284|
+Gear11=X:Ordinary_Clothing_~8|-|-|-|1|Always|0|.8|SR3-284|
+Gear12=X:Wrist_Phone_w/Flip-Up_Screen_~14|-|-|Always|0|1|SR3-287|
+Gear13=Medkit_~13|3|2/24hrs|3|0|3|SR3-304|
+Gear14=[5]Medkit_Supplies_~13|-|2/24hrs|-|0|3|SR3-304|
+Gear15=X:Ares_Viper_Slivergun__Smart2_(HPist)_~3|6|30(c)|SA/BF|9S(f)|2.25|3/48hrs|0|1|Silencer,_Fires_Flechettes_Only_Smart2|SR3-278|
+Gear16=X:__Quick_Draw_Holster_(Conc.)_~6|-|(+2)|-|0.1|5/72hrs|0|.75||CC-33|
+Gear17=X:__Pers_Safety_Modification_~6|-|-|-|0.1|3/36hrs|0|1.5||MM-32|A_smartgun_with_a_personalized_safety_feature_only_works_for_the_user_possessing_the_specific_smartlink_system_for_which_it_was_programmed.
+Gear18=X:__Spare_Clip_~5|-|-|-|.75|0|.75|SR3-282|
+Gear19=X:__[6]Flechette_Rnds_(10)_~5|8|(see_rules)|3|3/36hrs|0|.8|SR3-281|
+Gear20=Survival_Kit_~10|-|2|2/48hrs|0|1|SR3-298|
+Gear21=Vehicle_Kit_~10|3|5|5/48hrs|0|2|SR3-288|
+Gear22=Electronic_ToolKit_~10|3|5|5/48hrs|0|2|SR3-288|
+Gear23=X:CUS:junk_~11|1|0|0|1|1|CUS-GER|
+TotalWeight=14.85
+
+[Vech]
+Vech0=Harley-Davidson_Scorpion_______~24|4/5|120/6|2/1|2/2|-/0|4/60|2m|0|2/24hrs|1||R3-158||Choppers
+Vech1=__Smartlink-II___________________~23|0|6/48hrs|2|Vehicle_Kit|24_hrs/Vehicle_B/R(4)|1|||R3-139||Smartlink_Integration_Kits
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=No deck selected
+
+[Contacts]
+Contact0=Bad_Czech~LA~Fixer~~Fixer~1~~~0
+Contact1=Alex_Langan~LA~Corporate_Security~~Corporate_Hitman______________~1~~~0
+Contact2=Moe~LA~Bartender~~~1~~~0~X
+[Karma]
+TotalKarma=25
+SpentKarma=0
+RemainKarma=23
+PropKarmaSpent=0
+LostKarmaPool=0
+KarmaPool=3
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=Completed
+[GMInfo]
+NoRulesMoney=0
+GM0========_Finalize_============01-30-2002
+GM1=Generator=Priority
+GM2=Version=3.39_-_22_Dec_2001
+GM3=Magic=4
+GM4=Attributes=27
+GM5=Current_Attributes_=_27
+GM6=Max_Skills=50
+GM7=Current_Skills_=_50
+GM8=MaxMoney=1076
+GM9=Current_Money_=_0
+GM10=Street_Availability_is_turned_OFF
+GM11=Initial_Beta_&_Delta_Cyberware_is_OFF
+GM12=Max_Edge_Points_=_5
+GM13=Max_Flaw_/_Edges_=_10
+GM14=Max_Spell_Points_=_0
+GM15=Max_Availability_Rating_=_8
+GM16========_Finalized_===========01-30-2002
+GM17=Karma_change:0->4
+GM18=Karma_change:4->9
+GM19=Karma_change:9->25

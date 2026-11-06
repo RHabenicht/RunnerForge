@@ -1,0 +1,203 @@
+[System]
+Generator=Priority
+Finalize=False
+Version=3.33 - 19 Mar 2001
+[Priorities]
+Priority1= 5 
+Priority2= 3 
+Priority3= 1 
+Priority4= 4 
+Priority5= 2 
+Magic= 5 
+Attributes= 27 
+Skills= 30 
+MaxMoney= 1000000 
+[Race]
+Rsel= 1 
+SelIndex=-1 
+chkAlbino= 0 
+AlbinoSel= 0 
+RaceName=Elf
+RaceDesc1=Low_Light_Vision
+[General]
+CharName=archTheFace
+RealName=
+LifeStyle1=(4)_Hi:_________________________~0~4~0~4~40000~~_________________________~~~~E
+LifeStyle2=(4)_Hi:_________________________~0~4~0~4~40000~~_________________________~~~~E
+LifeStyle3=(10)_Lo:_________________________~0~2~0~10~10000~~_________________________~~~~E
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Female
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=unable_to_buy_luxury_life_style_of_1_month_=_100K
+CreationDate=3/27/01
+ModDate=3/27/01 
+CurMoney= 913800 
+ProgramMode= 0 
+GifFile=
+[Edges]
+
+[Attributes]
+Body=3|0|0|0
+Quickness=5|+1|0|0
+Strength=3|0|0|0
+Charisma=6|+2|0|0
+Intelligence=6|0|0|0
+Willpower=4|0|0|0
+Essence=6|0|0|-1.54
+Magic=6|0|0|0
+Reaction=6|0|0|0
+Initiative=1|0|0|0
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=8
+Control=6
+Hacking=2
+Spell=0
+Task=0
+CombatPoolMod=0
+[Skills]
+Skill0=Car(REA)~[2]=2
+Skill1=Etiquette(CHA)~[6]=6
+Skill2=Interrogation(CHA)~[6]=6
+Skill3=Negotiations(CHA)~[6]=6
+Skill4=Pistols(QCK)/Fichetti_Security~[2/4]=3
+Skill5=Stealth(QCK)~[4]=4
+Skill6=Unarmed_combat_(STR)/Caromeg~[2/4]=3
+Skill7=Elven_Society_(KNO)~[4]=4
+Skill8=English(LAN)~[5]=5
+Skill9=__English(LAN)_(R/W)~[2]=0
+Skill10=Esoteric_Trivia_(KNO)~[4]=4
+Skill11=AC:Literature(KNO)~[3]=3
+Skill12=Megacorp_Politics_(KNO)~[5]=5
+Skill13=Modern_Art_(KNO)~[4]=4
+Skill14=Sperethiel(LAN)~[4]=4
+Skill15=__Sperethiel(LAN)_(R/W)~[2]=0
+Skill16=Seattle_High_Society_(KNO)~[5]=5
+Skill17=Underworld_Politics_(KNO)~[5]=5
+MaxSkills= 30 
+[Cyberware]
+Cyber0=Datajack(A)~0.16~2000~SR3-298~~Legal~~~H~0.90~N
+Cyber1=+_Eyes,_Disp_Link(A)~0.08~2000~SR3-300~~Legal~~~E~1.00~N
+Cyber2=+_Ear_Recorder(A)~0.24~14000~SR3-299~~12P-N~~~R~2.00~N
+Cyber3=Memory_(150_Mps)(A)~0.40~45000~SR3-298~~Legal~~~H~0.80~N
+Cyber4=Knowsoft_Link(A)~0.08~2000~SR3-298~~Legal~~~H~1.00~N
+Cyber5=+_Eyes,_Retinal_Clock(A)~0.08~900~SR3-300~~Legal~~~E~1.00~N
+Cyber6=+_Eyes,_Ret_Dup._L5~0.10~125000~SR3-300~~3-Q~~~E~2.00~N
+Cyber7=+_Sound_Filter_5~0.20~50000~SR3-299~~Legal~~~R~1.25~N
+Cyber8=V_Mod_Playback~0.20~40000~SR3-302~~Legal~~~~1.00~N
+Cyber9=V_Mod_Second_Pattern_6~0.00~150000~SR3-302~~Legal~~~~2.00~N
+
+CurrentEssence=4.46
+BioIndex=0.00
+[Magic]
+MageType=Not Selected
+Adept=0
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=35
+Cur_Spells=0
+TotemInfo=<P>_Do_not_use_magic_skills_(except_Astral_combat).__Cannot_astrally_^`project_and_cannot_use_astral_perception_unless_purchased._</P>^`
+InitText=
+GaesaText=
+GroupsText=
+[Gear]
+Gear0====Carried_Gear_below_======__~26|0|SR3-???|
+Gear1=Fichetti_Security_500__(LPist)~3|7|12(c)|SA|6L|1|3/12hrs|400|.8|None|SR3-278|
+Gear2=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear3=__Concealable_Holster___________~6|-|(+2)|-|0.1|2/24hrs|100|.75|SR3-282|
+Gear4=Fichetti_Security_500a_(LPist)~3|6|25(c)|SA|6L|1.25|3/12hrs|550|.8|RC(1)|SR3-278|
+Gear5=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear6=__Silencer______________________~6|Barrel|(-2)|-|0.2|4/48hrs|500|2|SR3-282|
+Gear7=Real_Leather_(Jacket_or_Pants)~8|-|0|2|1|Always|750|.75|SR3-284|
+Gear8=Secure_Long_Coat______________~8|10|4|2|2|3/24hrs|650|.9|SR3-284|
+Gear9=Bug_Scanner_Lv_6______________~10|3|1|6/48hrs|3000|1.5|SR3-292|
+Gear10=Dataline_Scanner_Lv_6_________~21|2|6|6|6/14days|600|2|SR3-292|
+Gear11=DocWagon:_Gold_Service________~13|-|On_Payment|-|25000|-|SR3-304|
+Gear12=Micro-Camcorder_______________~10|8|-|6/48hrs|2500|2|SR3-292|
+Gear13=Micro-Transceiver_5___________~10|10|-|5/48hrs|5000|2|SR3-290|
+Gear14=Basic_Pocket_Secretary________~14|3|0.5|Always|2000|1|SR3-285|
+Gear15=Tres_Chic_Clothing____________~8|-|-|-|1|Always|1000|1|SR3-284|
+Gear16=Vidlink_Transmitter__Rating_5_~10|9|1|4/1week|10000|2|SR3-290|
+Gear17=White_Noise_Generator_Lv_5____~21|3|5|1|5/72hrs|7500|1.5|SR3-292|
+Gear18=Wrist_Phone_w/Flip-Up_Screen__~14|-|-|Always|150|1|SR3-285|
+TotalWeight=21
+
+[Vech]
+Vech0=Eurocar_Westwind_2000_Turbo___~24|3/8|240/12|3/0|1/3|-/1|5/45|3|138000|7/7days|2|Advanced_Passenger_Protection_System,Turbo|SR3-308||Cars
+Vech1=__Datajack_Port_________________~18|3/72hrs|2500|1.5|SR3-306||Special_Gear
+Vech2=Samuvani_Criscraft_Otter______~24|4|45/6|5/0|3/2|-/1|18/300|4|27500|2/2days|1||SR3-309||Motorboats
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods=0
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 0 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=No deck selected
+
+[Contacts]
+Contact0=Club_Owner~~~~Club_Owner~1~~~0
+Contact1=Decker_Lev2~~~~Decker~2~~~10000~X
+Contact2=Fence~~~~Fence~1~~~0
+Contact3=Fixer~~~~Fixer~2~~~10000~X
+Contact4=Government_Official~~~~Government_Official~2~~~10000~X
+Contact5=Lone_Star_Cop~~~~Lone_Star_Cop~1~~~5000~X
+Contact6=Mafia_Sottocapo~~~~Mafia_Sottocapo~2~~~10000~X
+Contact7=Street_Mage~~~~Street_Mage~1~~~5000~X
+Contact8=Technician~~~~Technician~1~~~5000~X
+Contact9=Triad_Soldier~~~~Triad_Soldier~1~~~5000~X
+Contact10=Yakuza_Soldier~~~~Yakuza_Soldier~1~~~5000~X
+Contact11=Name1~~~~~1~~~5000~X
+Contact12=Name2~~~~~1~~~5000~X
+Contact13=Name3~~~~~1~~~5000~X
+Contact14=Name4~~~~~1~~~5000~X
+Contact15=Name5~~~~~1~~~5000~X
+Contact16=Name6~~~~~1~~~5000~X
+Contact17=Name7~~~~~1~~~5000~X
+Contact18=Name8~~~~~1~~~5000~X
+Contact19=Name9~~~~~1~~~5000~X
+Contact20=Name10~~~~~1~~~5000~X
+Contact21=Big10MegaCorp1~~~~~1~~~5000~X
+Contact22=Big10MegaCorp2~~~~~1~~~5000~X
+Contact23=Big10MegaCorp3~~~~~1~~~5000~X
+Contact24=Big10MegaCorp4~~~~~1~~~5000~X
+Contact25=Big10MegaCorp5~~~~~1~~~5000~X
+Contact26=Big10MegaCorp6~~~~~1~~~5000~X
+Contact27=Big10MegaCorp7~~~~~1~~~5000~X
+Contact28=Big10MegaCorp8~~~~~1~~~5000~X
+Contact29=Big10MegaCorp9~~~~~1~~~5000~X
+Contact30=Big10MegaCorp10~~~~~1~~~5000~X
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=0
+KarmaPool=1

@@ -1,0 +1,211 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 5 
+Priority2= 4 
+Priority3= 3 
+Priority4= 1 
+Priority5= 2 
+Magic= 5 
+Attributes= 24 
+Skills= 40 
+MaxMoney= 1000000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 3 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Ork
+RaceDesc1=Low_Light_Vision
+RunMult=3
+
+[General]
+CharName=Combat Decker
+RealName=
+LifeStyle1=(5)_Mi:Middle_Lifestyle~0~19~0~5~25000~01/64~Middle_Lifestyle~~~~N
+LifeStyle2=(6)_Lo:Low_Lifestyle~0~13~0~6~6000~01/64~Low_Lifestyle~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Increased_Lifestyles_to_use_up_initial_Resources.
+Archtype=Combat_Decker
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 999700 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=24
+BeCKScost= 0 
+IFM= 0 
+Body=3|+3|0|0|6
+Quickness=4|0|0|0|4
+Strength=3|+2|0|2|5(7)
+Charisma=3|-1|0|0|2
+Intelligence=6|-1|0|0|5
+Willpower=5|0|0|0|5
+Essence=6|0|0|-4.46|1.54
+Magic=0|0|0|0|0
+Reaction=4|0|0|2|4(6)
+Initiative=1|0|0|1|1(2)
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=0
+Hacking=4
+Spell=0
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=40
+SkillsBeCKSKnowCost=32
+SkillsBeCKSActCost=40
+Skill0=Bike(REA)~[4]=4
+Skill1=Computer(INT)~[6]=7
+Skill2=Computer_B/R(INT)~[4]=4
+Skill3=Cyber_Implant_Combat(STR)/Spur~[4/6]=5
+Skill4=Electronics_B/R(INT)~[4]=4
+Skill5=Etiquette(CHA)/Matrix~[1/3]=2
+Skill6=Pistols(QCK)~[5]=6
+Skill7=Stealth(QCK)~[4]=4
+Skill8=Unarmed_Combat-SR3(STR)~[4]=4
+Skill9=SW:Data_Havens(KNO)~[5]=5
+Skill10=SW:Jackpoint_Locations(KNO)~[4]=4
+Skill11=SW:Matrix_Gangs(KNO)~[4]=4
+Skill12=AK:Seattle_Corporate_Hosts(KNO)~[4]=4
+Skill13=SW:Seedy_Ork_Bars(KNO)~[4]=4
+Skill14=IN:20th_Cen_Comic_books(KNO)~[4]=4
+Skill15=English(LAN)/Decker_Lingo~[3/5]=4
+Skill16=__English(LAN)__(RW)~[1]=0
+Skill17=Japanese(LAN)~[3]=3
+Skill18=__Japanese(LAN)__(RW)~[1]=0
+MaxSkills= 40 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+Cyber0=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber1=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber2=Memory_(200_Mps)(A)~0.53~60000~sr3.298~~Legal~~~H~3~N
+Cyber3=Radio_[5](A)~0.60~20000~sr3.298~~Legal~10_programmed_frequencies~~~2~N
+Cyber4=Obv._CyberArm~1.00~75000~sr3.303~~Legal~~~~4~N
+Cyber5=Smartlink_(Int)~0.25~2500~sr3.302~~5P-N~~~~3~N
+Cyber6=Str_Enh_[2]~0.00~100000~sr3.303~+2STR,~6P-Q~+2STR~~~6~N
+Cyber7=Spur,_Retract~0.00~11500~sr3.302~~3-N~(STR)M~~~5~N
+Cyber8=Wired_Reflexes_[1](A)~1.60~110000~sr3.302~+2RCT,+1INI,~5P-Q~+2RCT,_+1INI~~~4~N
+Cyber9=Reflex_Trig_[1](A)~0.16~26000~sr3.302~~4P-Q~~~~4~N
+
+CurrentEssence=1.54
+
+BioIndex=0.00
+
+[Magic]
+MageType=Not Selected
+Adept=9
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=X:Ceska_Black_Scorpion_Smart1_(MaPist)_~3|5|35(c)|SA/BF|6L|3.5|5/36hrs|1700|2|Fold._Stock(1RC)_Smart1|sr3.278|
+Gear1=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear2=X:__[20]Explosive_Rnds_~5|8|(see_rules)|1.5|3/36hrs|5|.8|sr3.281|
+Gear3=X:Armor_Jacket_~8|6|5|3|2|3/36hrs|900|.75|sr3.284|
+Gear4=X:Computer_Shop_~10|-|-|8/72hrs|15000|3|sr3.288|
+TotalWeight=9.5
+
+[Vech]
+Vech0=Yamaha_Rapier__________________~24|3/6|195/10|2/0|2/1|-/0|1/40|1m|14200|2/24hrs|1||sr3.308,_r3.159||Racing_Bikes
+Vech1=__Datajack_Port__________________~23|2500|3/72hrs|1.5|Vehicle_Facility|56_hrs/Vehicle_B/R(4)|1|15kg||r3.128||Datajack/Other
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Deck0=CMT_Avatar____________________~11|7|4|700|1400|300|1|6/7days|250000|1|sr3.304||Stock_Cyberdecks
+Deck1=__Analyze_Rating_[4]__(48)~33|4/7days|9600|1.5|3|sr3.220||Analyze
+Deck2=__Armor_Rating_[6]__(108)~33|4/7days|21600|1.5|3|sr3.222||Armor
+Deck3=__Attack_Deadly_Rating_[6]__(180)~33|4/7days|36000|1.5|5|sr3.221||Attack
+Deck4=__Browse_Rating_[6]__(36)~33|4/7days|7200|1.5|1|sr3.220||Browse
+Deck5=__Cloak_Rating_[4]__(48)~33|4/7days|9600|1.5|3|sr3.222||Cloak
+Deck6=__Commlink_Rating_[5]__(25)~33|4/7days|5000|1.5|1|sr3.304||Commlink
+Deck7=__Deception_Rating_[6]__(72)~33|4/7days|14400|1.5|2|sr3.220||Deception
+Deck8=__Decrypt_Rating_[6]__(36)~33|4/7days|7200|1.5|1|sr3.220||Decrypt
+Deck9=__Killjoy_Rating_[5]__(250)~33|4/7days|50000|1.5|10|sr3.221||Killjoy
+Deck10=__Medic_Rating_[6]__(144)~33|4/7days|28800|1.5|4|sr3.222||Medic
+Deck11=__Read/Write_Rating_[5]__(50)~33|4/7days|10000|1.5|2|sr3.220||Read/Write
+Deck12=__Relocate_Rating_[5]__(50)~33|4/7days|10000|1.5|2|sr3.220||Relocate
+Deck13=__Scanner_Rating_[4]__(48)~33|4/7days|9600|1.5|3|sr3.220||Scanner
+Deck14=__Sleaze_Rating_[6]__(108)~33|4/7days|21600|1.5|3|sr3.221||Sleaze
+Deck15=__Spoof_Rating_[4]__(48)~33|4/7days|9600|1.5|3|sr3.220||Spoof
+Mod0=2
+Mod1=1
+HackingPoolMods= 0 
+DeckInfo0=7
+DeckInfo1=4
+DeckInfo2=700
+DeckInfo3=1400
+DeckInfo4=300
+DeckInfo5=1
+MPCP= 7 
+Persona0=5
+Persona1=5
+Persona2=6
+Persona3=5
+DeckName=CMT Avatar
+Otaku=0
+
+[Contacts]
+Contact0=Bartender~~~~~1~~~0
+Contact1=Fixer~~~~Fixer_________________________~1~~~0
+Contact2=Mercenary~~~~Mercenary~1~~~5000~X
+Contact3=Renraku_Corporate_Decker~~~~Corporate_Decker~2~~~10000~X
+Contact4=Technician~~~~Technician~2~~~10000~X
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

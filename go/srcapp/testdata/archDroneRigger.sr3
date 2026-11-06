@@ -1,0 +1,216 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 4 
+Priority2= 5 
+Priority3= 3 
+Priority4= 1 
+Priority5= 2 
+Magic= 5 
+Attributes= 24 
+Skills= 50 
+MaxMoney= 400000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 2 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Dwarf
+RaceDesc1=Thermographic_Vision
+RaceDesc2=Resist._to_Disease/Toxin_(+2)
+RunMult=2
+
+[General]
+CharName=Drone Rigger
+RealName=
+LifeStyle1=(3)_Mi:Middle_Lifestyle_#1~0~19~0~3~15000~01/64~Middle_Lifestyle_#1~~~~N
+LifeStyle2=(2)_Lo:Low_Lifestyle~0~13~0~2~2000~01/64~Low_Lifestyle~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Reduced_lifestyles,_and_dropped_Adjusted_Controls_of_vehicle,_in_order_to_fit_within_resource_limit._He_will_always_drive_the_vehicle_Rigged.
+Archtype=Drone_Rigger
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 399905 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=24
+BeCKScost= 0 
+IFM= 0 
+Body=4|+1|0|0|5
+Quickness=5|0|0|0|5
+Strength=3|+2|0|0|5
+Charisma=3|0|0|0|3
+Intelligence=5|0|0|0|5
+Willpower=4|+1|0|0|5
+Essence=6|0|0|-4.37|1.63
+Magic=0|0|0|0|0
+Reaction=5|0|0|0|5
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=9
+Hacking=0
+Spell=0
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=50
+SkillsBeCKSKnowCost=32
+SkillsBeCKSActCost=50
+Skill0=Car(REA)~[5]=5
+Skill1=Car_B/R(INT)~[3]=3
+Skill2=Computer(INT)~[3]=3
+Skill3=Electronics(INT)~[5]=5
+Skill4=Electronics_B/R(INT)~[4]=4
+Skill5=Etiquette(CHA)~[3]=3
+Skill6=Gunnery(INT)~[6]=7
+Skill7=Pistols(QCK)~[4]=4
+Skill8=Rotor_Aircraft(REA)~[5]=5
+Skill9=Rotor_Aircraft_B/R(INT)~[3]=3
+Skill10=Vector_Thrust_Aircraft(REA)~[5]=5
+Skill11=Vector_thrust_Aircraft_B/R(INT)~[3]=3
+Skill12=BK:Computer(KNO)~[4]=4
+Skill13=ST:Mafia_Finances(KNO)~[4]=4
+Skill14=IN:Opera(KNO)~[3]=3
+Skill15=IN:Pirate_Trid_Broadcasters(KNO)~[5]=5
+Skill16=ST:Safehouse_Locations(KNO)~[4]=4
+Skill17=ST:Seattle_Junkyards(KNO)~[5]=5
+Skill18=English(LAN)~[6]=7
+Skill19=__English(LAN)__(RW)~[3]=0
+MaxSkills= 50 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+Cyber0=Eyes,_Cyber_Replacement(A)~0.16~10000~sr3.300~~Legal~Holds_.5_Essence_of_eye_mods_free_of_Essence_cost~0.5~E~2~N
+Cyber1=+_Eyes,_Image_Link(A)~0.16~3200~sr3.300~~Legal~Display_text_and_images_in_field_of_vision~~E~4~N
+Cyber2=+_Eyes,_Thermographic(A)~0.16~6000~sr3.300~~Legal~Thermographic_vision~~E~4~N
+Cyber3=+_Eyes,_Flare_Comp(A)~0.08~4000~sr3.300~~Legal~Eliminate_glare_modifiers~~E~5~N
+Cyber4=Commlink_[5]_for_Radio/Phone~0.15~25000~sr3.298~~Legal~Monitor_10_radio_or_phone_frequencies,_requires_headware_radio_or_phone~~~3~N
+Cyber5=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber6=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber7=Memory_(100_Mps)(A)~0.26~30000~sr3.298~~Legal~~~H~3~N
+Cyber8=Radio_[5](A)~0.60~20000~sr3.298~~Legal~10_programmed_frequencies~~~2~N
+Cyber9=Knowsoft_Link(A)~0.08~2000~sr3.298~~Legal~Access_headware/datajack_knowsofts~~H~3~N
+Cyber10=Smartlink(A)~0.40~5000~sr3.302~~5P-N~-2_to_TNs_for_firing_a_Smartlinked_weapon~~~3~N
+Cyber11=Vehicle_Ctrl_Rig_[2](A)~2.40~120000~sr3.302~+4VCT,+2VNI,+2VCR,~6P-N~Mods_only_apply_when_rigging~~~8~N
+
+CurrentEssence=1.63
+
+BioIndex=0.00
+
+[Magic]
+MageType=Not Selected
+Adept=9
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=X:Browning_Max-Power____Smart1_(HPist)_DwMod~3|6|10(c)|SA|9M|2.5|3/24hrs|990|1|None_Smart1|sr3.278|
+Gear1=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear2=X:Armor_Jacket_DwMod~8|6|5|3|2|3/36hrs|990|.75|sr3.284|
+Gear3=X:Electronic_ToolKit_DwMod~10|3|5|5/48hrs|1650|2|sr3.288|
+Gear4=X:Basic_Pocket_Secretary_~14|8|0.5|Always|2000|1|sr3.287|
+Gear5=Vehicle_Kit_DwMod~10|3|5|5/48hrs|1100|2|sr3.288|
+Gear6=Vehicle_Shop_DwMod~10|-|-|8/72hrs|11000|3|sr3.288|
+TotalWeight=12.5
+
+[Vech]
+Vech0=Chrysler-Nissan_Jackrabbit(M)__~24|3/8|90/6|3/0|4/1|-/0|1/100|2+1b|16500|2/24hrs|1|Folding_Bench_Seat,_Methane|sr3.307,_r3.168||Subcompacts
+Vech1=__Rigger_Adaptation______________~23|2800|4/7days|2|Vehicle_Facility|40_hrs/Vehicle_B/R(4)|1|10kg||r3.130||Datajack/Other
+Vech2=__Rem-Contr._Intr.__Bod[3]_______~23|7500|4/72hrs|2|Vehicle_Facility|16_hrs/Vehicle_B/R(4),_Electronics_B/R(4)||||r3.130||Remote-Control_Interfaces
+Vech3=Cyberspace_Designs_Dalmatian___~24|3|105/8|2/0|6/0|2/1|3/80|-|16000|2/24hrs|1|Remote-Control_Interface,_Rigger_Adaptation|sr3.312,r3.177||Vectored-Thrust
+Vech4=GM-Nissan_Doberman_____________~24|3/5|70/8|2/6|2/0|2/1|2.5/50|-|25000|8/8_days|2|Remote-Control_Interface,_Rigger_Adaptation,_External_Fixed_Firmpoint(0.4_CF_Ammo_Bin),_Remote_Micro-turret(1_CF_Ammo_Bin)|sr3.311,r3.173||Crawlers
+Vech5=__Ingram_Valiant__________Smart1_(LMG)_~3|-|belt/50(c)|BF/FA|7S|9.5|6/5days|3000|2|Hip_Brace(1RC),_Gas_Vent_II(2RC)_Smart1|sr3.279||Imported_Items
+Vech6=__LMG_Customization_Kit__________~23|750|6/72hrs|2.5|Weapon_Kit|24_hrs/Vehicle_B/R(4)|0|0.5||r3.136||Weapon_Customization_Kits
+Vech7=__Smartlink-I_Integration_Kit____~23|650|4/48hrs|1|Vehicle_Kit|24_hrs/Vehicle_B/R(4)|1|||r3.139||Smartlink_Integration_Kits
+Vech8=__[100]Regular_Rnds___________________~5|8|-|.05|2/24hrs|2|.75|sr3.281||Imported_Items
+Vech9=__Defiance_Super_Shock___Smart1_(Tasr)_~3|4|4(m)|SA|10S_Stun|2.5|5/24hrs|2000|1|Low-light_Scope_Smart1|sr3.278||Imported_Items
+Vech10=__Pistol_Customization_Kit_______~23|150|4/36hrs|2|Weapon_Kit|24_hrs/Vehicle_B/R(4)|0|||r3.136||Weapon_Customization_Kits
+Vech11=__Smartlink-I_Integration_Kit____~23|650|4/48hrs|1|Vehicle_Kit|24_hrs/Vehicle_B/R(4)|1|||r3.139||Smartlink_Integration_Kits
+Vech12=__[10]Taser_Darts____________________~5|3|special|.05|6/36hrs|5|1.5|sr3.281||Imported_Items
+Vech13=MCT-Nissan_Roto-Drone__________~24|4|70/6|2/0|4/0|1/1|4/150|-|10500|2/24hrs|1|Remote-Control_Interface,_Rigger_Adaptation|sr3.312,r3.176||Rotary_Wing
+Vech14=Laser_Microphone_Lv_[6]________~21|5|6|1|6/48hrs|9000|1.5|sr3.292||Imported_Items
+Vech15=Remote_Control_Deck_Rating_[6]_~21|-|6|3|4/72hrs|30000|2|sr3.306||Remote_Control_Deck_&_Acc
+Vech16=Audio/Visual_Screen_Display____~26|100|2/24hrs|1|0.5|r3.98||Other
+Vech17=Intercom_System________________~26|25|2/24hrs|1||r3.98||Other
+Vech18=[4]Hitcher_Jack___________________~26|250|2/48hrs|1||r3.98||Other
+Mod0=4
+Mod1=2
+ControlPoolMods=0
+VCR=2
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Mafia_Bookie~~~~Mafia_Bookie~1~~~0
+Contact1=Mechanic~~~~Mechanic~2~~~10000~X
+Contact2=Media_Snoop~~~~Media_Snoop~1~~~0
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

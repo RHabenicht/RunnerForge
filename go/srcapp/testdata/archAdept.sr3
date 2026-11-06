@@ -1,0 +1,204 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 3 
+Priority2= 2 
+Priority3= 4 
+Priority4= 5 
+Priority5= 1 
+Magic= 2 
+Attributes= 30 
+Skills= 34 
+MaxMoney= 20000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 0 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Human
+RunMult=3
+
+[General]
+CharName=Adept
+RealName=
+LifeStyle1=(2)_Lo:Low_Lifestyle~0~13~0~2~2000~01/64~Low_Lifestyle~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Reduced_Lifestyle_to_fit_in_allocated_resources.
+Archtype=Adept
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 19185 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=30
+BeCKScost= 0 
+IFM= 0 
+Body=5|0|0|0|5
+Quickness=6|0|0|0|6
+Strength=6|0|1|0|7
+Charisma=3|0|0|0|3
+Intelligence=6|0|0|0|6
+Willpower=4|0|0|0|4
+Essence=6|0|0|0.00|6.00
+Magic=6|0|0|0|6
+Reaction=6|0|0|2|6(8)
+Initiative=1|0|0|1|1(2)
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=8
+Control=0
+Hacking=0
+Spell=5
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=34
+SkillsBeCKSKnowCost=43
+SkillsBeCKSActCost=34
+Skill0=Athletics(BOD)~[6]=7
+Skill1=Clubs(STR)/Rattan_Sticks~[5/7]=6
+Skill2=Etiquette(CHA)~[3]=3
+Skill3=Stealth(QCK)~[6]=6
+Skill4=Throwing_Weapons(STR)~[6]=6
+Skill5=P:Unarmed_Combat-SR3(STR)~[6]=6
+Skill6=IN:Legendary_Martial_Artists(KNO)~[3]=3
+Skill7=BK:Magic_Background(KNO)~[4]=4
+Skill8=AC:Medicine(KNO)~[4]=4
+Skill9=IN:Meditation(KNO)~[4]=4
+Skill10=AC:Philosophy(KNO)~[4]=4
+Skill11=SW:Professional_Bodyguarding(KNO)~[4]=4
+Skill12=IN:Sculpture(KNO)~[3]=3
+Skill13=Chinese(LAN)~[4]=4
+Skill14=__Chinese(LAN)__(RW)~[2]=0
+Skill15=English(LAN)~[5]=5
+Skill16=__English(LAN)__(RW)~[2]=0
+Skill17=Filipino(LAN)~[4]=4
+Skill18=__Filipino(LAN)__(RW)~[2]=0
+MaxSkills= 34 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+CurrentEssence=6.00
+
+BioIndex=0.00
+
+[Magic]
+MageType=PhysAd Adept
+Adept=0
+Magic=2
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=<P>_Do_not_use_magic_skills_(except_Astral_combat).__Cannot_astrally_^`project_and_cannot_use_astral_perception_unless_purchased._</P>^`
+InitText=
+Tradition= 0 
+Mods0=6
+Mods1=0
+Mods2=0
+Mods3=0
+Mods4=6
+SpentMagic=0
+MagicLossPts=0
+DicePoolSpell=5
+DicePoolAstral=0
+ModGeasCnt= 0 
+
+Cur_powers=6.00
+Power0=Imp._Phys._Attr.(STR)>RACMOD~1.0000~+1RTR~sr3.169~With_this_power_you_can_improve_a_physical_attribute_beyond_the_Racial_Modified_limit.__Each_level_of_the_power_increases_the_attribute_by_1.~N
+Power1=Imp_Abl_Combat_Skl/Unarmed_Combat-SR3(STR)~0.5000~~sr3.169~This_power_gives_you_additional_dice_for_use_with_a_specific_Active_Skill.~N
+Power2=Imp._Reflexes_Level_1~2.0000~+2RCT,+1INI~sr3.169~This_power_increases_the_speed_at_which_you_react,_just_like_wired_reflexes_SR3-301.~N
+Power3=Killing_Hands_STR(Medium)~1.0000~~sr3.170~This_power_uses_magic_to_turn_unarmed_attacks_into_medium_physical_damage.~N
+Power4=Pain_Resistance_[3]~1.5000~~sr3.170~Pain_resistance_allows_you_to_ignore_the_effects_of_injury.__It_does_not_reduce_actualdamage,_only_it's_effects_on_you.~N
+PhysAdMod=0
+
+[Gear]
+Gear0=X:[5]Cue_Ball__________________(CB)_~2|8|-|(STR)L|2.5|Always|5|1|Legal|sr3.XXX|
+Gear1=X:Rattan_Stick(CLB)_~1|5|1|(STR+1)M_Stun|0.2|2/6hrs|10|1|cc.10|
+Gear2=X:Shock_Glove(UNA)_~1|9|-|7S_Stun|0.5|5/48hrs|950|2|sr3.275|
+Gear3=X:Armor_Jacket_~8|6|5|3|2|3/36hrs|900|.75|sr3.284|
+Gear4=X:Ascent/Descent_Kit_~10|3|2|always|250|1|sr3.295,fof.56|
+Gear5=X:__Flash-Pak_~5|12|(Special)|0.2|3/36hrs|250|1|sr3.283|
+Gear6=X:Jammer_Lv_[5]_~21|2|5|5|5/72hrs|5000|1.5|sr3.292|
+Gear7=X:Goggles,_Low-Light_~9|6|20x|-|6/48hrs|2000|2|sr3.290|
+Gear8=X:Micro-Transceiver_[5]_~21|10|5|-|5/48hrs|5000|2|sr3.290|
+Gear9=X:Basic_Pocket_Secretary_~14|8|0.5|Always|2000|1|sr3.287|
+Gear10=X:[5]Stimulant_Patch_[4]_~13|4|2/24hrs|-|100|1|sr3.304|
+Gear11=X:[3]Tranq_Patch_[5]_~13|5|4/48hrs|-|100|2|sr3.304|
+TotalWeight=12.9
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=CMT Avatar
+Otaku=0
+
+[Contacts]
+Contact0=Fixer~~~~Fixer~1~~~0
+Contact1=Professional_Bodyguard~~~~Professional_Bodyguard~1~~~0
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

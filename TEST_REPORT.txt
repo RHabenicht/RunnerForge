@@ -1,0 +1,74 @@
+NSRCG II — SR3 INTEGRATION BUILD TEST REPORT
+
+BUILD/ENVIRONMENT
+Compiled on Linux, cross-targeted to Windows amd64 with Go 1.23.2 and no CGO.
+Win32 binary: NSRCG_II_SR3_integration_preview.exe
+SHA-256: d392a2759d87a352207719624b178099fef42c82faba84290ddbeb03b8ac3228
+Format: Windows PE32+ GUI subsystem (Windows x86-64); no VB6 or ActiveX dependency.
+Windows 10/11 GUI runtime: NOT TESTED.
+
+INTEGRATION RESULTS
+Original source: 2005 user-supplied NSRCG installer; all original files preserved.
+GitHub references used: finsterdexter/sr3data (unlicensed, reference only); apampuch/PySRCG (MIT, reference only).
+Sourcebooks in original catalog: 50; retained: 35; excluded: 15.
+Retained source-data entries: 9082.
+No retained entry contains a citation exclusively to an excluded sourcebook (unit-test enforced).
+The SR3-only priority and derivation implementation is preliminary, not a finished rules engine.
+
+AUTOMATED TESTS
+- Go unit and integration tests: PASS (including 17 legacy archetype subtests).
+- 17/17 archetypes imported and re-saved with original binary bytes preserved exactly.
+- SR3 attribute priority allocation reference test: PASS.
+- Human / Ork racial modifiers, cyberware reaction, and initiative test: PASS.
+- Street Samurai: Reaction 11, Initiative 11 + 3D6, Combat Pool 7, Essence 0.09: PASS.
+- Catalog sourcebook exclusions and search: PASS.
+- Distinct spell/cyberware collections: PASS.
+- Unicode and HTML injection/escaping checks: PASS.
+- Go vet static analysis: PASS.
+- Windows x64 GUI compilation: PASS.
+- Actual Windows window startup and user interaction: NOT RUN.
+- PDF output from Windows Edge: NOT RUN.
+
+DATA CONVERSION SUMMARY
+- gear: 3875 retained of 5428; 1553 filtered
+- cyberware: 795 retained of 1100; 305 filtered
+- bioware: 119 retained of 195; 76 filtered
+- adept_powers: 120 retained of 122; 2 filtered
+- spells: 245 retained of 245; 0 filtered
+- vehicles: 912 retained of 924; 12 filtered
+- cyberdecks: 1343 retained of 1346; 3 filtered
+- edges_flaws: 282 retained of 282; 0 filtered
+- magic_gear: 373 retained of 373; 0 filtered
+- contacts: 163 retained of 163; 0 filtered
+- skills: 711 retained of 711; 0 filtered
+- totems: 144 retained of 144; 0 filtered
+
+CONVERSION WARNINGS (37 unsupported original-data records or lines; show first 20)
+- gear:1754: unsupported line 3-* Bayonet on Rifle (STR+2)M +2rch6|Under|(-
+- gear:2009: unsupported line 4-Mark XXVI System                 6|-|(-1)|-
+- gear:3126: unsupported line 3-* V-Island "Sleeping Tiger" Jack.8|10|.5|1|
+- gear:3127: unsupported line 3-* V-Island "Sleeping Tiger" Slac.8|8|.5|1.5
+- gear:3128: unsupported line 3-* V-Island "Sleeping Tiger" Shir.8|12|.5|.5
+- gear:3839: unsupported line 4-* SIN/CredStkChkPort[2-3](20000¥)21|-|2-3|1
+- gear:4141: unsupported line 4-* Cerebrotech Comp.Release Contr.26|5000|cs
+- gear:4646: unsupported line 4-* Raiton Chaffer (ultrasound jam)10|-|.1|6/
+- gear:6061: unsupported line 2-* BigRipp wth.Cybrarm mnting(CYB)1|||(STR+2
+- gear:6077: unsupported line 2-* CyberOptic Teargas Sprayer(CYB)3||||DAM||
+- cyberware:190: unsupported line 2-PMP Hair Implants                1|tss.5|3/
+- cyberware:394: unsupported line 2-* BigRipp wth.Cybrarm mnting(CYB)1|cb4.136|
+- cyberware:412: unsupported line 2-* CyberOptic Teargas Sprayer(CYB)1|cb1.29|6
+- vehicles:343: unsupported line 4-* Chrysler-Nissan G12A(passenger)24|4|120/5
+- vehicles:601: unsupported line 4-* Snake-Spine Elec. Discharge Arm19|Mechani
+- vehicles:699: unsupported line 4-* Charges for Smokegen. large(12)18|4/7days
+- vehicles:803: unsupported line 5-* Remote Ex-Large Turret(Anti-Air23|3000000
+- edges_flaws:6: unsupported line 1-ATTRIBUTES |E
+- edges_flaws:25: unsupported line 1-SKILLS |E
+- edges_flaws:28: unsupported line 1-PHYSICAL |E
+
+KNOWN LIMITATIONS
+- Legacy priority allocations still need exact decoding from original NSRCG file semantics.
+- Full Karma/advancement, skill budgeting, edges/flaws, magic, metatype limits, bioware, decking, rigging, gear interactions and character finalization not yet verified/implemented.
+- PDF export uses installed Edge, without a Windows runtime test.
+- Legacy data unparsed lines and cross-book references need manual review.
+- Previous preview saved JSON compatibility not yet verified.
+- This is a NEW source-based preview, not a modification of the earlier binary (its source was not provided).

@@ -1,0 +1,218 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 5 
+Priority2= 4 
+Priority3= 3 
+Priority4= 1 
+Priority5= 2 
+Magic= 5 
+Attributes= 24 
+Skills= 40 
+MaxMoney= 1000000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 2 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Dwarf
+RaceDesc1=Thermographic_Vision
+RaceDesc2=Resist._to_Disease/Toxin_(+2)
+RunMult=2
+
+[General]
+CharName=Vehicle Rigger
+RealName=
+LifeStyle1=(2)_Mi:Middle_Lifestyle_#1~0~19~0~2~10000~01/50~Middle_Lifestyle_#1~~~~N
+LifeStyle2=(2)_Mi:Middle_Lifestyle_#2~1~19~0~2~10000~01/64~Middle_Lifestyle_#2~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Increased_Engineering_Skill_to_5.^`Extra_resources,_so_added_a_hovercraft.
+Archtype=Vehicle_Rigger
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 996490 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=24
+BeCKScost= 0 
+IFM= 0 
+Body=3|+1|0|0|4
+Quickness=5|0|0|0|5
+Strength=3|+2|0|0|5
+Charisma=3|0|0|0|3
+Intelligence=6|0|0|0|6
+Willpower=4|+1|0|0|5
+Essence=6|0|0|-5.56|0.44
+Magic=0|0|0|0|0
+Reaction=5|0|0|0|5
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=8
+Control=11
+Hacking=0
+Spell=0
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=40
+SkillsBeCKSKnowCost=39
+SkillsBeCKSActCost=40
+Skill0=Car(REA)~[5]=5
+Skill1=Car_B/R(INT)~[3]=3
+Skill2=Electronics_B/R(INT)~[4]=4
+Skill3=Etiquette(CHA)~[3]=3
+Skill4=Hovercraft(REA)~[3]=3
+Skill5=Gunnery(INT)~[5]=5
+Skill6=Rotor_Aircraft(REA)~[5]=5
+Skill7=Rotor_Aircraft_B/R(INT)~[5]=5
+Skill8=Vector_Thrust_Aircraft(REA)~[3]=3
+Skill9=Shotguns(QCK)/Enfield~[3/5]=4
+Skill10=AC:Engineering(KNO)~[5]=5
+Skill11=ST:Gang_Identification(KNO)/Go_Gangs~[4/6]=5
+Skill12=IN:Hardcore_Punk_Bands(KNO)~[3]=3
+Skill13=SW:Military_Winged_Aircraft(KNO)~[3]=3
+Skill14=ST:NAN_Border_Patrol_Tactics(KNO)~[4]=4
+Skill15=ST:Smuggler_Havens(KNO)~[5]=5
+Skill16=ST:Smuggling_Routes(KNO)~[5]=5
+Skill17=English(LAN)/Cityspeak~[4/6]=5
+Skill18=__English(LAN)__(RW)~[2]=0
+Skill19=Sioux(LAN)~[4]=4
+Skill20=__Sioux(LAN)__(RW)~[2]=0
+MaxSkills= 40 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+Cyber0=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber1=Smartlink(A)~0.40~5000~sr3.302~~5P-N~-2_to_TNs_for_firing_a_Smartlinked_weapon~~~3~N
+Cyber2=Vehicle_Ctrl_Rig_[3]~5.00~300000~sr3.302~+6VCT,+3VNI,+3VCR,~5P-N~Mods_only_apply_when_rigging~~~8~N
+
+CurrentEssence=0.44
+
+BioIndex=0.00
+
+[Magic]
+MageType=Not Selected
+Adept=9
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=X:Enfield_AS7____________Smart1_(ShtG)_DwMod~3|3|10(c)|SA/BF|8S|4.5|8/8days|2200|1|Laser_Sight_Smart1|sr3.278|
+Gear1=X:__Gas_Vent_III_~6|Barrel|(-2)|3|0.75|2/24hrs|700|1||sr3.282|
+Gear2=X:Ares_Antioch____________(GrLn)_~3|6(-3)|6(m)|SS|(Grenade)|2|8/4days|1700|3|Standalone_or_Acc_for_Gun|sr3.279|
+Gear3=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear4=X:__[10]Off._HE_Minigrenade_B:-1/m_~5|8|10S|1|6/6days|60|3|sr3.283,fof.48|
+Gear5=X:Secure_Ultra-Vest_DwMod~8|14|3|2|2.5|3/36hrs|385|.9|sr3.284|
+Gear6=Micro_Flare_Launcher_DwMod~3|6|1(b)|SS|(Micro_flare)|2|Always|55|1|None|sr3.295|
+Gear7=__[4]Micro_Flares_~5|10|6M|-|Always|75|1|sr3.295|
+Gear8=Nav-Dat_GPS_~10|8|0.5|6/48hrs|700|1|sr3.295,cc.122|
+Gear9=Scanner_[5]_~21|8|5|1|5/24hrs|500|2|sr3.290|
+Gear10=Vehicle_Shop_DwMod~10|-|-|8/72hrs|11000|3|sr3.288|
+Gear11=Vehicle_Kit_DwMod~10|3|5|5/48hrs|1100|2|sr3.288|
+TotalWeight=13.25
+
+[Vech]
+Vech0=Ford_Americar__________________~24|4/8|105/8|3/0|2/2|-/1|12/110|2+1b|20000|2/24hrs|1||sr3.308,_r3.165||Sedans
+Vech1=__Rigger_Adaptation______________~23|2800|4/7days|2|Vehicle_Facility|40_hrs/Vehicle_B/R(4)|1|10kg||r3.130||Datajack/Other
+Vech2=__Rem-Contr._Intr.__Bod[3]_______~23|7500|4/72hrs|2|Vehicle_Facility|16_hrs/Vehicle_B/R(4),_Electronics_B/R(4)||||r3.130||Remote-Control_Interfaces
+Vech3=Ford-Canada_Bison______________~24|4/3|135/6|4/4|2/3|-/1|67/1918|2+5b|145000|8/8days|1|Concealed_Armor,_Folding_Bench_Seat,_2_Basic_Living_Amenites|sr3.309,_r3.164||RVs
+Vech4=__Rigger_Adaptation______________~23|2800|4/7days|2|Vehicle_Facility|40_hrs/Vehicle_B/R(4)|1|10kg||r3.130||Datajack/Other
+Vech5=Gaz-Niki_GNRD-71_BIS_Snooper___~24|4/3|75/3|1/0|8/0|1/1|2/30|-|8500|2/24hrs|1|Remote-Control_Interface,_Rigger_Adaptation|sr3.312,r3.172||Crawlers
+Vech6=Hughes_WK-2_Stallion___________~24|5|190/14|4/0|3/3|-/1|70/1250|2|257500|13/13_Days|1.00||sr3.310,r3.184|Utility_Helicopters
+Vech7=__Rigger_Adaptation______________~23|2800|4/7days|2|Vehicle_Facility|40_hrs/Vehicle_B/R(4)|1|10kg||r3.130||Datajack/Other
+Vech8=__External_Hardpoint_____________~23|2000|6/7days|2|Vehicle_Facility|24_hrs/Vehicle_B/R(4)|2|10kg+Weapon||r3.136||Fixed_Mounts
+Vech9=__Ares_Vermicide_Autocannon______Smart1~19|Autocannon|10(c)|SA|12D|45.5|GM|24000|GM|sr3.312|Standard_Weapons
+Vech10=__Smartlink-I_Integration_Kit____~23|650|4/48hrs|1|Vehicle_Kit|24_hrs/Vehicle_B/R(4)|1|||r3.139||Smartlink_Integration_Kits
+Vech11=__[100]Assault_Cannon_Rnds____________~5|3|-|.125|5/3days|45|2|sr3.281||Imported_Items
+Vech12=__[3]Anti-Vehicle_Missile___________~4|4|16D|-8/m|2D6|3.25|12/14days|5000|3|sr3.281||Imported_Items
+Vech13=Northrup_Wasp_PRC-42B__________~24|3|130/15|3/0|3/0|-/2|2/72|1|54000|9/9_days|2.00|ECCM_1,Micro-Turret_(weapon_n/i)|sr3.311,r3.183|Autogyros
+Vech14=__Rigger_Adaptation______________~23|2800|4/7days|2|Vehicle_Facility|40_hrs/Vehicle_B/R(4)|1|10kg||r3.130||Datajack/Other
+Vech15=__Rem-Contr._Intr.__Bod[3]_______~23|7500|4/72hrs|2|Vehicle_Facility|16_hrs/Vehicle_B/R(4),_Electronics_B/R(4)||||r3.130||Remote-Control_Interfaces
+Vech16=__AK-97__________________Smart1_(AsRf)_~3|3|38(c)|SA/BF/FA|8M|5|3/36hrs|1400|2|None_Smart1|sr3.278||Imported_Items
+Vech17=__Rifle_Customization_Kit________~23|750|6/72hrs|2.5|Weapon_Kit|24_hrs/Vehicle_B/R(4)|0|0.5||r3.136||Weapon_Customization_Kits
+Vech18=__Smartlink-I_Integration_Kit____~23|650|4/48hrs|1|Vehicle_Kit|24_hrs/Vehicle_B/R(4)|1|||r3.139||Smartlink_Integration_Kits
+Vech19=__[100]Regular_Rnds___________________~5|8|-|.05|2/24hrs|2|.75|sr3.281||Imported_Items
+Vech20=Remote_Control_Deck_Rating_[4]_~21|-|4|3|4/72hrs|20000|2|sr3.306||Remote_Control_Deck_&_Acc
+Vech21=Chrysler-Nissan_G12A(passenger_~24|4|120/5|4/0|2/2|-/0|12/250|10|57000|3/72_hrs|1.00||sr3.309,_r3.182|Medium_Hovercraft
+Vech22=__Rigger_Adaptation______________~23|2800|4/7days|2|Vehicle_Facility|40_hrs/Vehicle_B/R(4)|1|10kg||sr3.306,r3.130||Datajack/Other
+Mod0=6
+Mod1=3
+ControlPoolMods=0
+VCR=3
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Seattle_DMV_Worker~~~~Seattle_DMV_Worker~1~~~0
+Contact1=Fixer~~~~Fixer_________________________~1~~~0
+Contact2=Technician_Buddy~~~~Technician~2~~~10000~X
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=257500
+GM0=_Added:_No_Rules_03-09-2004

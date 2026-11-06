@@ -1,0 +1,197 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 3 
+Priority2= 5 
+Priority3= 1 
+Priority4= 4 
+Priority5= 2 
+Magic= 5 
+Attributes= 30 
+Skills= 30 
+MaxMoney= 400000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 4 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Troll
+RaceDesc1=Thermographic_Vision
+RaceDesc2=Dermal_Armor(+1BOD)
+RaceDesc3=Reach_(+1)
+RunMult=3
+
+[General]
+CharName=Mercenary
+RealName=
+LifeStyle1=(3)_Mi:Middle_Lifestyle~0~19~0~3~15000~01/64~Middle_Lifestyle~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Gear_is_correctly_Troll_Modified.
+Archtype=Mercenary
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 398956 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=30
+BeCKScost= 0 
+IFM= 0 
+Body=5|+5|0|3|10(13)
+Quickness=6|-1|0|2|5(7)
+Strength=5|+4|0|2|9(11)
+Charisma=4|-2|0|0|2
+Intelligence=6|-2|0|0|4
+Willpower=4|0|0|0|4
+Essence=6|0|0|-4.98|1.02
+Magic=0|0|0|0|0
+Reaction=4|0|0|1|4(5)
+Initiative=1|0|0|1|1(2)
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=1
+e_armor_ballisticArmorMod=1
+
+[Pools]
+Combat=7
+Control=0
+Hacking=0
+Spell=0
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=30
+SkillsBeCKSKnowCost=26
+SkillsBeCKSActCost=30
+Skill0=Assault_Rifles(QCK)~[5]=5
+Skill1=Etiquette(CHA)/Mercenary~[1/3]=2
+Skill2=Heavy_Weapons(STR)~[6]=6
+Skill3=Launch_Weapons(INT)~[4]=4
+Skill4=Pistols(QCK)~[4]=4
+Skill5=Stealth(QCK)/Sneaking~[2/4]=3
+Skill6=Unarmed_Combat-SR3(STR)~[6]=6
+Skill7=IN:Desert_Wars(KNO)~[4]=4
+Skill8=BK:Electronics(KNO)~[4]=4
+Skill9=Mercenary_Groups(KNO)~[4]=4
+Skill10=Mercenary_Hot_Spots(KNO)~[4]=4
+Skill11=IN:Weightlifting(KNO)~[4]=4
+Skill12=English(LAN)~[5]=6
+Skill13=__English(LAN)__(RW)~[2]=0
+MaxSkills= 30 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+Cyber0=Boosted_Reflexes_[2](A)~1.00~80000~sr3.302~+1RCT,+1INI,~6P-Q~+1RCT,_+1INI~~~3~N
+Cyber1=+_Eyes,_Vis_Mag_Ele[3]~0.10~11000~sr3.300~~Legal~Undetectable,_see_pages_SR3-110_and_SR3-280_for_effects~~E~8~N
+Cyber2=+_Eyes,_Flare_Comp(A)~0.08~4000~sr3.300~~Legal~Eliminate_glare_modifiers~~E~5~N
+Cyber3=Muscle_Replac._[2](A)~1.60~80000~sr3.302~+2QCK,+2STR,~5P-Q~+2QCK,_+2STR~~~4~N
+Cyber4=Smartlink(A)~0.40~5000~sr3.302~~5P-N~-2_to_TNs_for_firing_a_Smartlinked_weapon~~~3~N
+Cyber5=Bone_Lace,_Titanium(A)~1.80~150000~sr3.302~+2BOD,+1IMP,+1BAL,~6-R~Unarmed_=_(STR+4)M_Stun,_+2BOD,_+1IMP,_+1BAL~~~5~N
+
+CurrentEssence=1.02
+
+BioIndex=0.00
+
+[Magic]
+MageType=Not Selected
+Adept=9
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=Ares_Antioch___________Smart1_(GrLn)_TrMod~3|6(-3)|6(m)|SS|(Grenade)|2.5|8/4days|4250|3|Standalone_or_Acc_for_Gun_Smart1|sr3.279|
+Gear1=__[10]Off._HE_Minigrenade_B:-1/m_~5|8|10S|1|6/6days|60|3|sr3.283,fof.48|
+Gear2=X:Ingram_Valiant__________Smart1_(LMG)_TrMod~3|-|belt/50(c)|BF/FA|7S|9.5|6/5days|3750|2|Hip_Brace(1RC),_Gas_Vent_II(2RC)_Smart1|sr3.279|
+Gear3=X:__Gyro_Mount,_Deluxe_TrMod~6|Under|(-6)|6|8|4/48hrs|7500|1|RC:6,+1IMP,+1BAL,_(Melee:TN+4,1/2CP)|sr3.282|
+Gear4=__[200]Regular_Rnds_~5|8|-|10|2/24hrs|2|.75|sr3.281|
+Gear5=__[100]EX_Explosive_Rnds_~5|8|(see_rules)|7.5|6/72hrs|10|1.5|sr3.281,fof.51|
+Gear6=Beretta_Model_101T____Smart1_(LPist)_TrMod~3|5|12(c)|SA|6L|1.5|3/12hrs|876|.8|None_Smart1|sr3.278|
+Gear7=__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear8=FN_HAR_________________Smart1_(AsRf)_TrMod~3|2|35(c)|SA/BF/FA|8M|5|4/48hrs|3000|2|Laser_Sight,_Gas_Vent_II(2RC),_Fold_Stock(1RC)_Smart1|sr3.278|
+Gear9=__[100]Regular_Rnds_~5|8|-|5|2/24hrs|2|.75|sr3.281|
+Gear10=X:Armored_Vest_with_Plates_TrMod~8|10|4|3|2|3/36hrs|750|1|sr3.284|
+Gear11=Camo_Full_Suit_(Urban)_TrMod~8|-|5|3|2|5/36hrs|1500|1|sr3.284|
+Gear12=X:Goggles,_Low-Light_&_Thermo_~9|6|20x|-|6/48hrs|2700|2|sr3.290|
+Gear13=X:Micro-Transceiver_[5]_~21|10|5|-|5/48hrs|5000|2|sr3.290|
+Gear14=X:Nav-Dat_GPS_~10|8|0.5|6/48hrs|700|1|sr3.295,cc.122|
+Gear15=Ration_Bars_(10_Days)_~10|-|1|2/48hrs|30|1|sr3.295|
+Gear16=Survival_Kit_~10|-|2|2/48hrs|100|1|sr3.295|
+Gear17=X:[3]Trauma_Patch_~13|-|4/48hrs|-|500|4|sr3.304|
+TotalWeight=20
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Ares_Arms_Quartermaster~~~~Ares_Arms_Quartermaster~2~~~10000~X
+Contact1=Mercenary_Dealer/Fixer~~~~Mercenary_Dealer/Fixer~1~~~0~X
+Contact2=Street_Doc~~~~Street_Doc~2~~~10000~X
+Contact3=UCAS_Military_Officer~~~~UCAS_Military_Officer~1~~~0~X
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

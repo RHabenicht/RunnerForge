@@ -1,0 +1,215 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 5 
+Priority2= 3 
+Priority3= 4 
+Priority4= 2 
+Priority5= 1 
+Magic= 4 
+Attributes= 27 
+Skills= 34 
+MaxMoney= 1000000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 0 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Human
+RunMult=3
+
+[General]
+CharName=Street Samurai
+RealName=
+LifeStyle1=(3)_Mi:Middle_Lifestyle_2~0~19~0~3~15000~01/64~Middle_Lifestyle_2~~~~N
+LifeStyle2=(3)_Mi:Middle_Lifestyle_1~0~19~0~3~15000~01/64~Middle_Lifestyle_1~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Insufficient_Resources._Dropped_1_Trauma_Patch.
+Archtype=Street_Samurai
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 1000000 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=27
+BeCKScost= 0 
+IFM= 0 
+Body=4|0|0|2|4(6)
+Quickness=6|0|0|0|6
+Strength=5|0|0|3|5(7)
+Charisma=3|0|0|0|3
+Intelligence=6|0|0|0|6
+Willpower=3|0|0|0|3
+Essence=6|0|0|-5.91|0.09
+Magic=0|0|0|0|0
+Reaction=6|0|0|5|6(11)
+Initiative=1|0|0|2|1(3)
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=0
+Hacking=0
+Spell=0
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=34
+SkillsBeCKSKnowCost=39
+SkillsBeCKSActCost=34
+Skill0=Athletics(BOD)~[4]=4
+Skill1=Cyber_Implant_Combat(STR)/Spurs~[4/6]=5
+Skill2=Edged_Weapons(STR)~[3]=3
+Skill3=Etiquette(CHA)/Street~[2/4]=3
+Skill4=Leadership(CHA)~[3]=3
+Skill5=Pistols(QCK)~[6]=6
+Skill6=Stealth(QCK)~[4]=4
+Skill7=Submachine_Guns(QCK)~[6]=6
+Skill8=IN:Bushido_Philosophy(KNO)~[5]=5
+Skill9=English(LAN)~[5]=5
+Skill10=__English(LAN)__(RW)~[2]=0
+Skill11=ST:Gang_Identification(KNO)~[4]=4
+Skill12=Japanese(LAN)~[4]=4
+Skill13=__Japanese(LAN)__(RW)~[2]=0
+Skill14=IN:Japanese_Society(KNO)~[3]=3
+Skill15=SW:Megacorporate_Security(KNO)~[4]=4
+Skill16=ST:Security_Procedures(KNO)~[4]=4
+Skill17=ST:Shadowrunner_Haunts(KNO)~[4]=4
+Skill18=BK:Small_Unit_Tactics(KNO)~[6]=6
+MaxSkills= 34 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+Cyber0=Eyes,_Cyber_Replacement(A)~0.16~10000~sr3.300~~Legal~Holds_.5_Essence_of_eye_mods_free_of_Essence_cost~0.5~E~2~N
+Cyber1=+_Eyes,_Flare_Comp(A)~0.08~4000~sr3.300~~Legal~Eliminate_glare_modifiers~~E~5~N
+Cyber2=+_Eyes,_Disp_Link(A)~0.08~2000~sr3.300~~Legal~Display_text_in_field_of_vision~~E~4~N
+Cyber3=+_Eyes,_Low-Light(A)~0.16~6000~sr3.300~~Legal~Low-light_vision~~E~4~N
+Cyber4=+_Eyes,_Prot._Covers(A)~0.00~1000~sr3.300~~Legal~Protect_eyes~~E~4~N
+Cyber5=+_Eyes,_Thermographic(A)~0.16~6000~sr3.300~~Legal~Thermographic_vision~~E~4~N
+Cyber6=+_Ear_Dampener(A)~0.08~7000~sr3.299~~Legal~Protect_against_loud/damaging_sound~~R~4~N
+Cyber7=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber8=Dermal_Plating_[1](A)~0.40~12000~sr3.302~+1BOD,~6P-N~+1BOD~~~4~N
+Cyber9=+_Ear_Hearing_Amp(A)~0.16~7000~sr3.299~~Legal~Similar_to_shotgun_microphone~~R~4~N
+Cyber10=Pair_Obv._Cyb_Arms~2.00~150000~sr3.303~+1BOD,+1PCA~Legal~~~~4~N
+Cyber11=Smartlink~0.25~2500~sr3.302~~5P-N~-2_to_TNs_for_firing_a_Smartlinked_weapon~~~3~N
+Cyber12=Spur,_Retract~0.00~11500~sr3.302~~3-N~(STR)M~~~5~N
+Cyber13=Spur,_Retract~0.00~11500~sr3.302~~3-N~(STR)M~~~5~N
+Cyber14=Str_Enh_[3]_(Pair)~0.00~300000~sr3.303~+3STR,~6P-Q~+3STR~~~6~N
+Cyber15=Reaction_Enhance_[1]~0.30~60000~sr3.302~+1RCT,~6P-R~+1RCT~~~6~N
+Cyber16=Wired_Reflexes_[2](A)~2.40~330000~sr3.302~+4RCT,+2INI,~4P-Q~+4RCT,_+2INI~~~4~N
+
+CurrentEssence=0.09
+
+BioIndex=0.00
+
+[Magic]
+MageType=Not Selected
+Adept=9
+Magic=4
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=X:Ares_Predator_________Smart1_(HPist)_~3|5|15(c)|SA|9M|2.75|3/24hrs|900|.5|None_Smart1|sr3.278|
+Gear1=X:__Silencer_~6|Barrel|(-2)|-|0.2|4/48hrs|500|2||sr3.282|
+Gear2=__[300]Regular_Rnds_~5|8|-|15|2/24hrs|2|.75|sr3.281|
+Gear3=__[100]EX_Explosive_Rnds_~5|8|(see_rules)|7.5|6/72hrs|10|1.5|sr3.281,fof.51|
+Gear4=Colt_American_L36_____Smart1_(LPist)_~3|6|11(c)|SA|6L|1.5|3/12hrs|700|.8|None_Smart1|sr3.278|
+Gear5=__Concealable_Holster_~6|-|(+2)|-|0.1|2/24hrs|100|.75||sr3.282|
+Gear6=__[150]Regular_Rnds_~5|8|-|7.5|2/24hrs|2|.75|sr3.281|
+Gear7=X:Ingram_Smartgun_Mod._20t_(SMG)_~3|5|32(c)|BF/FA|7M|3|4/24hrs|950|1|Smartlink,_Fold._Stock(1RC),_Gas_Vent_II(2RC)|sr3.278|
+Gear8=__[400]Regular_Rnds_~5|8|-|20|2/24hrs|2|.75|sr3.281|
+Gear9=__[100]Gel_Rnds_~5|8|(see_rules)|2.5|4/48hrs|3|1|sr3.281|
+Gear10=Ingram_Smartgun_Mod._20t_(SMG)_~3|5|32(c)|BF/FA|7M|3|4/24hrs|950|1|Smartlink,_Fold._Stock(1RC),_Gas_Vent_II(2RC)|sr3.278|
+Gear11=X:Survival_Knife(EDG)_~1|6|-|(STR+2)L|0.75|3/6hrs|450|1|sr3.275|
+Gear12=Sword(EDG)_~1|4|1|(STR+2)M|1|3/24hrs|500|1|sr3.275|
+Gear13=X:Armor_Jacket_~8|6|5|3|2|3/36hrs|900|.75|sr3.284|
+Gear14=X:__[5]Concussion_Grenade_B:-1/m_~5|6|12M_Stun|1.25|5/4days|30|2|sr3.283|
+Gear15=X:DocWagon:_Gold_Service_~13|-|On_Payment|-|25000|1|sr3.304|
+Gear16=X:Micro-Transceiver_[5]_~21|10|5|-|5/48hrs|5000|2|sr3.290|
+Gear17=X:[2]Restraints,_Plasteel_~10|3|-|4/48hrs|50|1|sr3.294|
+Gear18=X:[2]Stimulant_Patch_[6]_~13|6|2/24hrs|-|150|1|sr3.304|
+Gear19=X:Trauma_Patch_~13|-|4/48hrs|-|500|4|sr3.304|
+Gear20=__Ultrasound_Goggles_~6|NA|-|-|-|3/36hrs|1100|1||sr3.282|
+Gear21=__Ultrasound_Sight_~6|Top/Under|(-2)|-|0.25|8/4days|1300|.8||sr3.282|
+Gear22=X:Wrist_Phone_~14|8|-|Always|100|.75|sr3.287|
+TotalWeight=9.95
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Armorer~~~~Armorer_______________________~1~~~0
+Contact1=Bartender~~~~Bartender_____________________~1~~~0
+Contact2=Fixer~~~~Fixer~1~~~5000~X
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

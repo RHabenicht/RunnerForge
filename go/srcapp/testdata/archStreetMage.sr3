@@ -1,0 +1,207 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 2 
+Priority2= 5 
+Priority3= 1 
+Priority4= 3 
+Priority5= 4 
+Magic= 1 
+Attributes= 21 
+Skills= 27 
+MaxMoney= 400000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 1 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Elf
+RaceDesc1=Low_Light_Vision
+RunMult=3
+
+[General]
+CharName=Street Mage
+RealName=
+LifeStyle1=(3)_Mi:Middle_Lifestyle_#1~0~19~0~3~15000~01/64~Middle_Lifestyle_#1~~~~N
+LifeStyle2=(3)_Mi:Middle_Lifestyle_#2~0~19~0~3~15000~01/64~Middle_Lifestyle_#2~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Exactly_as_in_book
+Archtype=Street_Mage
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 396350 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=21
+BeCKScost= 0 
+IFM= 0 
+Body=2|0|0|0|2
+Quickness=3|+1|0|0|4
+Strength=1|0|0|0|1
+Charisma=4|+2|0|0|6
+Intelligence=5|0|0|0|5
+Willpower=6|0|0|0|6
+Essence=6|0|0|0.00|6.00
+Magic=6|0|0|0|6
+Reaction=4|0|0|0|4
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=0
+Hacking=0
+Spell=5
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=27
+SkillsBeCKSKnowCost=32
+SkillsBeCKSActCost=27
+Skill0=Aura_Reading(INT)~[5]=5
+Skill1=Conjuring(WIL)~[6]=6
+Skill2=Etiquette(CHA)~[4]=4
+Skill3=Pistols(QCK)~[3]=3
+Skill4=Sorcery(WIL)~[6]=6
+Skill5=Stealth(QCK)~[3]=3
+Skill6=BK:Magic_Background(KNO)~[5]=5
+Skill7=Magical_Groups(KNO)~[3]=3
+Skill8=Magical_Threats(KNO)~[4]=4
+Skill9=Named_Spirits(KNO)~[5]=5
+Skill10=Parapsychology(KNO)~[5]=5
+Skill11=IN:Tir_Tairngire_Politics(KNO)~[3]=3
+Skill12=English(LAN)~[4]=4
+Skill13=__English(LAN)__(RW)~[2]=0
+Skill14=Sperethiel(LAN)~[3]=3
+Skill15=__Sperethiel(LAN)__(RW)~[1]=0
+MaxSkills= 27 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+CurrentEssence=6.00
+
+BioIndex=0.00
+
+[Magic]
+MageType=Full Mage
+Adept=9
+Magic=1
+PhysAdMagic= 0 
+Max_Spells=34
+Cur_Spells=34
+BoughtSpellPts=9
+TotemInfo=<P>Can_use_Sorcery_and_Conjuring_skills,_access_the_astral^`plane,_and_use_foci.</P>^`
+InitText=
+Tradition= 0 
+Mods0=6
+Mods1=0
+Mods2=0
+Mods3=0
+Mods4=6
+SpentMagic=0
+MagicLossPts=0
+DicePoolSpell=5
+DicePoolAstral=8
+ModGeasCnt= 0 
+Spell0=Armor~P~6~S~LOS~+2(M)~[05]~sr3.198~0~~0
+Spell1=Detect_Enemies~M~DT(R)~S~T/A~(M)~[04]~sr3.192~0~~0
+Spell2=Influence~M~W(T)~P~LOS~(S)~[05]~sr3.196~0~~0
+Spell3=Heal~M~10-E(V)~P~T~(DL)~[05]~sr3.193~0~~0
+Spell4=Levitate~P~4(R)~S~LOS~+2(M)~[05]~sr3.197~0~~0
+Spell5=Manabolt~M~W(R)~I~LOS~(DL)~[06]~sr3.191~0~~0
+Spell6=Physical_Mask~P~4(R)~S~LOS~+1(M)~[04]~sr3.195~0~~0
+
+Cur_powers=0.00
+PhysAdMod=0
+
+MageGear0=[3]Elem._Conj._Materials_6~15|0|6/24hrs|18000|1|sr3.305|__
+MageGear1=Exp._Spell_Focus_4_Combat~15|0|3/36hrs|6000|1|sr3.305|
+MageGear2=Exp._Spell_Focus_4_Transform~15|0|3/36hrs|6000|1|sr3.305|
+MageGear3=Conjuring_Library_Rtg._6~15|0|6/7days|36000|1|sr3.167|
+MageGear4=Sorcery_Library_Rtg._6~15|0|6/7days|36000|1|sr3.167|
+[Gear]
+Gear0=X:Remington_Roomsweeper__(HPist)_~3|6|8(m)|SA|9S(f)|2.5|3/24hrs|300|1|None|sr3.278|
+Gear1=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear2=X:Secure_Long_Coat_~8|10|4|2|2|3/24hrs|650|.9|sr3.284|
+Gear3=X:Binoculars_~9|5|50x|1|Always|100|.8|sr3.290|
+Gear4=X:DocWagon:_Gold_Service_~13|-|On_Payment|-|25000|1|sr3.304|
+Gear5=X:Basic_Pocket_Secretary_~14|8|0.5|Always|2000|1|sr3.287|
+Gear6=X:Micro-Transceiver_[6]_~21|10|6|-|6/48hrs|6000|2|sr3.290|
+Gear7=X:[2]Stimulant_Patch_[4]_~13|4|2/24hrs|-|100|1|sr3.304|
+TotalWeight=8.5
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Ancients_Gang_Member~~~~Ancients_Gang_Member_______________~1~~~0
+Contact1=Street_Shaman~~Street_Shaman~~Street_Shaman~1~~~0
+Contact2=Talismonger~~~~Talismonger___________________~1~~~5000
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

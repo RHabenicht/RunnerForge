@@ -1,0 +1,13 @@
+NSRCG II — SOURCE INTEGRATION RECORD
+
+Repository: https://github.com/finsterdexter/sr3data
+Reviewed: README.md, TODO.md, parse_functions.py, export_json.py, export_sqlite.py, file tree and data schema.
+Finding: Original NSRCG DAT data can be transformed to JSON with hierarchical categories and sourcebook references. The project's SQLite export is acknowledged by the author to omit some JSON properties. No license was published for repository source. Therefore NSRCG II's converter is an independent implementation against the user-provided original DAT data; GitHub code was not copied.
+
+Repository: https://github.com/apampuch/PySRCG
+Reviewed: README.md, LICENSE, GenModes/priority.py, GenModes/finalized.py, CharData/race.py, CharData/statblock.py, CharData/character.py, char_io.py, game_data.py, assets/json-schema.txt and GUI feature inventory.
+Finding: Python/Tkinter SR3 implementation provides a useful reference for priority assignments, racial modifiers, derived attribute relationships, and save-model structure. It is incomplete in certain pools and has save-field errors; we wrote separate rules functions and regression tests. PySRCG is MIT licensed; copyright/license remains with its authors for any future code incorporation. No PySRCG source files were copied into this enhancement package.
+
+Direct source: user-supplied NSRCG 2005 installation ZIP, unpacked locally; original files unchanged. NSRCG II's catalog preserves the original line/file provenance and applies the user's approved sourcebook filter.
+
+Scope: Shadowrun Third Edition rules only. Older sourcebooks may be referenced as SR3 supplements case by case. Exclude SR1 core and 14 unofficial conversion/internet supplements.

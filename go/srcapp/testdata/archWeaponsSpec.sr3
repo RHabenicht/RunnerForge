@@ -1,0 +1,187 @@
+[System]
+Generator=Priority
+Finalize=False
+Version=3.33 - 19 Mar 2001
+[Priorities]
+Priority1= 4 
+Priority2= 3 
+Priority3= 5 
+Priority4= 2 
+Priority5= 1 
+Magic= 4 
+Attributes= 27 
+Skills= 50 
+MaxMoney= 90000 
+[Race]
+Rsel= 0 
+SelIndex=-1 
+chkAlbino= 0 
+AlbinoSel= 0 
+RaceName=Human
+[General]
+CharName=archWeaponsSpec
+RealName=
+LifeStyle1=(1)_Lo:_________________________~0~2~0~1~1000~~_________________________~~~~E
+LifeStyle2=(2)_Sq:_________________________~0~1~0~2~200~~_________________________~~~~E
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=
+CreationDate=4/17/2001
+ModDate=4/17/2001 
+CurMoney= 89450 
+ProgramMode= 0 
+GifFile=
+[Edges]
+
+[Attributes]
+Body=4|0|0|0
+Quickness=6|0|0|0
+Strength=5|0|0|0
+Charisma=3|0|0|0
+Intelligence=6|0|0|0
+Willpower=3|0|0|0
+Essence=6|0|0|-2.35
+Magic=6|0|0|0
+Reaction=6|0|0|1
+Initiative=1|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=6
+Hacking=2
+Spell=0
+Task=0
+CombatPoolMod=0
+[Skills]
+Skill0=Biotech(INT)/First_Aid~[1/3]=2
+Skill1=Edged_Weapons(STR)~[5]=5
+Skill2=Etiquette(CHA)~[3]=3
+Skill3=Gunnery(INT)~[6]=6
+Skill4=Heavy_Weapons(STR)~[5]=5
+Skill5=Heavy_Weapons_B/R(INT)~[3]=3
+Skill6=Pistols(QCK)~[6]=6
+Skill7=Pistols_B/R(INT)~[4]=4
+Skill8=Projectile_Weapons_B/R(INT)~[4]=4
+Skill9=Submachine_Guns(QCK)~[6]=6
+Skill10=Stealth(QCK)/Sneaking~[1/3]=2
+Skill11=Throwing_Weapons(STR)~[4]=4
+Skill12=Arms_Dealers_(KNO)~[4]=4
+Skill13=Body_Armor_Fabrication_(KNO)~[3]=3
+Skill14=Demolitions_Background_(KNO)~[4]=4
+Skill15=English(LAN)~[5]=5
+Skill16=__English(LAN)_(R/W)~[2]=0
+Skill17=Gambling_Card_Games_(KNO)~[4]=4
+Skill18=German(LAN)~[4]=4
+Skill19=__German(LAN)_(R/W)~[2]=0
+Skill20=Gunsmithing_(KNO)~[5]=5
+Skill21=Miltech_Manufacturers_(KNO)~[3]=3
+Skill22=Physics_(KNO)/Ballistics~[2/4]=3
+Skill23=Swat_Team_Tactics_(KNO)~[4]=4
+MaxSkills= 50 
+[Cyberware]
+Cyber0=Boosted_Reflexs_2~1.25~40000~SR3-302~+1RCT,+1INI,~6P-Q~~~~1.25~N
+Cyber1=Eyes,_Cyber_Replacement~0.20~5000~SR3-300~~Legal~~0.5~~0.75~N
+Cyber2=Eyes,_Disp_Link~0.10~1000~SR3-300~~Legal~~~~1.00~N
+Cyber3=Eyes,_Flare_Comp~0.10~2000~SR3-300~~Legal~~~~1.25~N
+Cyber4=Eyes,_Low-Light~0.20~3000~SR3-300~~Legal~~~~1.25~N
+Cyber5=Eyes,_Vis_Mag_Ele3~0.10~11000~SR3-300~~Legal~~~~1.00~N
+Cyber6=Smartlink(A)~0.40~5000~SR3-302~~5P-N~~~~1.00~N
+
+CurrentEssence=3.65
+BioIndex=0.00
+[Magic]
+MageType=Not Selected
+Adept=0
+Magic=4
+PhysAdMagic= 0 
+Max_Spells=35
+Cur_Spells=0
+TotemInfo=<P>Can_use_Sorcery_and_Conjuring_skills,_access_the_astral^`plane,_and_use_foci.__Plus_the_benefits_and_disadvantages_of^`their_totem._</P>^`<P>ENV:_Anywhere_under_the_open_sky</P>^`<P>DESC:_Raven_is_a_harbinger_of_trouble_in_cultures_world-^`wide._He_is_a_trickster,_dark_and_devious,_and_a^`transformer,_responsible_for_changes._Raven^`thrives_off_the_bounty_of_carnage_and_chaos,_but^`does_not_cause_them._He_merely_knows_an^`opportunity_when_he_sees_one._Raven_shamans_love^`to_eat,_and_they_rarely_refuse_an_offer_of_food.</P>^`<P>ADVAN:_+2_dice_for_manipulation_spells,_+2_dice_for_sky^`spirits</P>^`<P>DISADVAN:_+1_to_all_magical_target_numbers_while_not_under^`the_open_sky</P>^`
+InitText=
+GaesaText=
+GroupsText=
+[Gear]
+Gear0====Carried_Gear_below_======__~26|0|SR3-???|
+Gear1=AK-97__________________Smart1_(AsRf)~3|3|38(c)|SA/BF/FA|8M|5|3/36hrs|1400|2|None_Smart1|SR3-278|
+Gear2=__Sound_Suppresser______________~6|Barrel|(-2)|-|0.5|6/48hrs|750|2|SR3-282|
+Gear3=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear4=__[5]Gel_Rnds_(10)_________________~5|8|(see_rules)|1.25|4/48hrs|30|1|SR3-281|
+Gear5=Ingram_Smartgun_Mod._20t_(SMG)~3|5|32(c)|BF/FA|7M|3|4/24hrs|950|1|Recoil_2(3),_Smartlink|SR3-278|
+Gear6=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear7=Ares_Predator_________Smart1_(HPist)~3|5|15(c)|SA|9M|2.75|3/24hrs|900|.5|None_Smart1|SR3-278|
+Gear8=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear9=__[2]Explosive_Rnds_(10)___________~5|8|(see_rules)|1.5|3/36hrs|50|.8|SR3-281|
+Gear10=Ruger_Super_Warhawk___Smart1_(HPist)~3|4|6(cy)|SS|10M|3|3/24hrs|600|1|None_Smart1|SR3-278|
+Gear11=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear12=__[5]Gel_Rnds_(10)_________________~5|8|(see_rules)|1.25|4/48hrs|30|1|SR3-281|
+Gear13=Fichetti_Security_500aSmart1_(LPist)~3|6|25(c)|SA|6L|1.75|3/12hrs|1100|.8|RC(1)_Smart1|SR3-278|
+Gear14=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear15=__Concealable_Holster___________~6|-|(+2)|-|0.1|2/24hrs|100|.75|SR3-282|
+Gear16=Ingram_Valiant__________Smart1_(LMG)~3|-|belt/50(c)|BF/FA|7S|9.5|6/5days|3000|2|Recoil_3,_Shock_Pads_Smart1|SR3-278|
+Gear17=__[10]Regular_Rnds_(10)_____________~5|8|-|5|2/24hrs|20|.75|SR3-281|
+Gear18=Heavy_Crossbow___________(HCB)~2|-|5|8S|4|6/36hrs|750|1|6-D|SR3-276|
+Gear19=[50]Bolts_________________________~2|4|-|(As_crossbow)|2.5|5/36hrs|5|1|10-D|SR3-276|
+Gear20=Katana________________________~1|3|1|(STR+3)M|1|4/48hrs|1000|2|SR3-275|
+Gear21=10_Shurikens______________(SH)~2|8|-|(STR)L|0.25|2/24hrs|300|2|6-D|SR3-276|
+Gear22=Survival_Knife________________~1|6|-|(STR+2)L|0.75|3/6hrs|450|1|SR3-275|
+Gear23=Armor_Jacket__________________~8|6|5|3|2|3/36hrs|900|.75|SR3-284|
+Gear24=Camouflage_Full_Suit__________~8|-|5|3|-|4/36hrs|1200|1|SR3-284|
+Gear25=Riot_Shield,_Ballistic________~8|-|3|1|2|8/14days|1500|2|SR3-284|
+Gear26=__[5]Concussion_Grenade_B:-1/m_____~5|6|12M_Stun|1.25|5/4days|30|2|SR3-283|
+Gear27=CUS:Pistol_Tool_Kit~11|1|0|1000|1|CUS-GER|
+Gear28=Medkit________________________~13|3|2/24hrs|3|200|3|SR3-304|
+Gear29=Micro-Transceiver_1___________~10|10|-|1/48hrs|1000|2|SR3-290|
+Gear30=__[5]Offensive_HE_Grenade_B:-1/m___~5|6|10S|1.25|4/4days|30|2|SR3-283|
+Gear31=__[5]Smoke_(IR)_Grenade____________~5|6|-|1.25|4/48hrs|40|2|SR3-283,FOF-48|
+Gear32=Goggles,_Thermographic________~9|6|20x|-|6/48hrs|2200|2|SR3-290|
+Gear33=Wrist_Phone___________________~14|4|-|Always|100|.75|SR3-285|
+TotalWeight=68
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods=0
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 0 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName= No deck selected
+
+[Contacts]
+Contact0=Knight_Errant_Security_Guard~~~~Knight_Errant_Security_Guard~1~~~0
+Contact1=Gun_Dealer~~~~Gun_Dealer~1~~~0
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=0
+KarmaPool=1

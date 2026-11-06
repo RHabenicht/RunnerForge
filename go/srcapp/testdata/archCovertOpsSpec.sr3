@@ -1,0 +1,193 @@
+[System]
+Generator=Priority
+Finalize=False
+Version=3.33 - 19 Mar 2001
+[Priorities]
+Priority1= 4 
+Priority2= 5 
+Priority3= 1 
+Priority4= 3 
+Priority5= 2 
+Magic= 5 
+Attributes= 21 
+Skills= 50 
+MaxMoney= 400000 
+[Race]
+Rsel= 1 
+SelIndex=-1 
+chkAlbino= 0 
+AlbinoSel= 0 
+RaceName=Elf
+RaceDesc1=Low_Light_Vision
+[General]
+CharName=archCovertOpsSpec
+RealName=
+LifeStyle1=(2)_Hi:_________________________~0~4~0~2~20000~~_________________________~~~~E
+LifeStyle2=(2)_Mi:_________________________~0~3~0~2~10000~~_________________________~~~~E
+LifeStyle3=(2)_Mi:_________________________~0~3~0~2~10000~~_________________________~~~~E
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=lost_low_light_vision_due_to_cyber_replacements
+Also:_about_24000_nuyen_not_spent..._?had_to_change_Retinal_Dup_5_from_alpha_grade_to_standard.
+CreationDate=3/23/01
+ModDate=3/25/01 
+CurMoney= 363100 
+ProgramMode= 0 
+GifFile=
+[Edges]
+
+[Attributes]
+Body=3|0|0|0
+Quickness=4|+1|0|0
+Strength=3|0|0|0
+Charisma=4|+2|0|0
+Intelligence=4|0|0|0
+Willpower=3|0|0|0
+Essence=6|0|0|-2.88
+Magic=6|0|0|0
+Reaction=4|0|0|0
+Initiative=1|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=6
+Control=4
+Hacking=1
+Spell=0
+Task=0
+CombatPoolMod=0
+[Skills]
+Skill0=Athletics(BOD)~[6]=9
+Skill1=Clubs(STR)/Stun_Batons~[3/5]=5
+Skill2=Computer(INT)~[4]=4
+Skill3=Electronics(INT)/Maglocks~[3/5]=4
+Skill4=Etiquette(CHA)/Corporate~[5/7]=6
+Skill5=Negotiations(CHA)/Fast_talk~[5/7]=6
+Skill6=Pistols(QCK)~[4]=4
+Skill7=Stealth(QCK)~[6]=7
+Skill8=Unarmed_Combat-SR3(STR)/Kicks~[3/5]=5
+Skill9=Corporate_Finances_(KNO)~[4]=4
+Skill10=Corporate_Politics_(KNO)~[4]=4
+Skill11=IN:Elven_Wines(KNO)~[1]=1
+Skill12=English(LAN)~[4]=4
+Skill13=__English(LAN)_(R/W)~[2]=0
+Skill14=Japanese_Culture_(KNO)~[4]=4
+Skill15=Japanese(LAN)~[4]=4
+Skill16=__Japanese(LAN)_(R/W)~[2]=0
+Skill17=Modern_Jazz_(KNO)~[1]=1
+Skill18=AC:Psychology_(KNO)~[4]=4
+MaxSkills= 50 
+[Cyberware]
+Cyber0=Boosted_Reflexs_1~0.50~15000~SR3-302~+1INI,~8P-Q~~~~1.00~N
+Cyber1=Ears_Cyber_Repl(A)~0.24~8000~SR3-299~~Legal~~0.5~R~0.75~N
+Cyber2=+_Ear_Dampener(A)~0.08~7000~SR3-299~~Legal~~~R~1.25~N
+Cyber3=+_Ear_Hearing_Amp(A)~0.16~7000~SR3-299~~Legal~~~R~1.25~N
+Cyber4=+_Ear_Recorder(A)~0.24~14000~SR3-299~~12P-N~~~R~2.00~N
+Cyber5=Eyes,_Cyber_Replacement(A)~0.16~10000~SR3-300~~Legal~~0.5~E~0.75~N
+Cyber6=+_Eyes,_Camera(A)~0.32~10000~SR3-300~~Legal~~~E~2.00~N
+Cyber7=+_Eyes,_Flare_Comp(A)~0.08~4000~SR3-300~~Legal~~~E~1.25~N
+Cyber8=+_Eyes,_Low-Light(A)~0.16~6000~SR3-300~~Legal~~~E~1.25~N
+Cyber9=+_Eyes,_Ret_Dup._L5~0.10~125000~SR3-300~~3-Q~~~E~2.00~N
+Cyber10=+_Eyes,_Thermographic(A)~0.16~6000~SR3-300~~Legal~~~E~1.25~N
+Cyber11=Datajack(A)~0.16~2000~SR3-298~~Legal~~~H~0.90~N
+Cyber12=Memory_(150_Mps)~0.50~22500~SR3-298~~Legal~~~H~0.80~N
+Cyber13=Radio_6(A)~0.60~24000~SR3-298~~Legal~~~~0.80~N
+Cyber14=Smartlink(A)~0.40~5000~SR3-302~~5P-N~~~~1.00~N
+
+CurrentEssence=3.12
+BioIndex=0.00
+[Magic]
+MageType=Not Selected
+Adept=0
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=35
+Cur_Spells=0
+TotemInfo=<P>_Do_not_use_magic_skills_(except_Astral_combat).__Cannot_astrally_^`project_and_cannot_use_astral_perception_unless_purchased._</P>^`
+InitText=
+GaesaText=
+GroupsText=
+[Gear]
+Gear0====Carried_Gear_below_======__~26|0|SR3-???|
+Gear1=Secure_Clothing_______________~8|12|3|0|1.5|3/36hrs|450|.9|SR3-284|
+Gear2=Defiance_Super_Shock___Smart1_(Tasr)~3|4|4(m)|SA|10S_Stun|2.5|5/24hrs|2000|1|Low-light_Scope_Smart1|SR3-278|
+Gear3=__[4]Taser_Darts(10)_______________~5|3|special|2|6/36hrs|50|1.5|SR3-281|
+Gear4=Walther_Palm_Pistol__Smart1_(HOPist)~3|9|2(b)|SS|4L|0.75|3/12hrs|400|.75|None_Smart1|SR3-275|
+Gear5=__[2]Explosive_Rnds_(10)___________~5|8|(see_rules)|1.5|3/36hrs|50|.8|SR3-281|
+Gear6=Stun_Baton____________________~1|4|1|6S_Stun|1|3/36hrs|750|1|SR3-275|
+Gear7=DocWagon:_Basic_Service_______~13|-|On_Payment|-|5000|-|SR3-304|
+Gear8=Ascent/Descent_Harness________~10|-|0.25|always|75|1|SR3-295,FOF-56|
+Gear9=Ascent/Descent_Kit____________~10|-|2|always|250|1|SR3-295,FOF-56|
+Gear10=Rappelling_Gloves_____________~10|-|-|always|70|1|SR3-295,FOF-56|
+Gear11=Rope_(50_meters)______________~10|-|1|always|125|1|SR3-295,FOF-56|
+Gear12=Dataline_Tap_Lv_6_____________~10|12|-|6/8days|6000|1.5|SR3-292|
+Gear13=Electronic_ToolKit____________~10|3|5|5/48hrs|1500|2|SR2-???|
+Gear14=__Flash-Pak_____________________~5|12|(Special)|0.2|3/36hrs|250|1|SR3-283|
+Gear15=Goggles_______________________~9|6|20x|-|4/48hrs|1500|1.5|SR3-290|
+Gear16=Flashlight,_large_____________~9|7|-|2|Always|25|1|SR3-290|
+Gear17=Laser_Microphone_Lv_5_________~21|5|5|1|5/48hrs|7500|1.5|SR3-292|
+Gear18=Basic_Pocket_Secretary________~14|3|0.5|Always|2000|1|SR3-285|
+Gear19=Respirator____________________~10|-|1|4/48hrs|500|2|SR3-298|
+Gear20=Pressure_Regulator_Resp.______~10|-|0.5|6/48hrs|250|2|SR3-298|
+Gear21=CUS:Scanner_6~11|1|10|600|1|CUS-GER|
+Gear22=Keypad_Sequencer_Rating_4_____~_______21|8|4|2|8/2wks|8000|3|SR3-294|
+Gear23=Stealth_Grapple_Line_(100m)___~10|-|3|6/72hrs|85|3|SR3-295|
+Gear24=Stealth_Line_Catalyst_Stick___~10|-|9|6/72|120|2|SR3-295|
+Gear25=Table_Top_PC__________________~14|-|10|Always|0|.75|SR3-285|
+Gear26=CUS:Computer_Memory_200MP~11|1|0|4000|1|CUS-GER|
+Gear27=[5]Tranq_Patch_5_________________~13|5|4/48hrs|-|100|2|SR3-304|
+Gear28=Tres_Chic_Clothing____________~8|-|-|-|1|Always|1000|1|SR3-284|
+Gear29=Tracking_Signal_Lv_6__________~10|8|-|6/72hrs|3000|2|SR3-292|
+Gear30=Signal_Locator_Lv_6___________~10|3|2|6/48hrs|1200|1.5|SR3-292|
+Gear31=Wrist_Phone_w/Flip-Up_Screen__~14|-|-|Always|150|1|SR3-285|
+TotalWeight=59
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods=0
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 0 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=No deck selected
+
+[Contacts]
+Contact0=Fixer~~~~_Fixer________________________~1~~~0
+Contact1=Lone_Star_Cop~~~~_Street_Cop___________________~1~~~0
+Contact2=Novatech_Suit~~~~Corporate_Wage_Slave~1~~~5000~X
+Contact3=Yamatetsu_Business_Manager~~~~Corporate_Official~1~~~5000~X
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=0
+KarmaPool=1

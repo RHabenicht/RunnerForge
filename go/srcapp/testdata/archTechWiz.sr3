@@ -1,0 +1,209 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 4 
+Priority2= 5 
+Priority3= 3 
+Priority4= 1 
+Priority5= 2 
+Magic= 5 
+Attributes= 24 
+Skills= 50 
+MaxMoney= 400000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 2 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Dwarf
+RaceDesc1=Thermographic_Vision
+RaceDesc2=Resist._to_Disease/Toxin_(+2)
+RunMult=2
+
+[General]
+CharName=Tech Wiz
+RealName=
+LifeStyle1=(2)_Mi:Middle_Lifestyle_(2_mo)~0~19~0~2~10000~01/64~Middle_Lifestyle_(2_mo)~~~~N
+LifeStyle2=(3)_Lo:Low_Lifestyle_(3_mo)~0~13~0~3~3000~01/64~Low_Lifestyle_(3_mo)~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Insufficient_Resources._Lowered_memory_on_Pocket_Computer.
+Archtype=Tech_Wiz
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 396870 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=24
+BeCKScost= 0 
+IFM= 0 
+Body=3|+1|0|0|4
+Quickness=5|0|0|0|5
+Strength=3|+2|0|0|5
+Charisma=3|0|0|0|3
+Intelligence=6|0|0|0|6
+Willpower=4|+1|0|0|5
+Essence=6|0|0|-1.28|4.72
+Magic=0|0|0|0|0
+Reaction=5|0|0|0|5
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=8
+Control=0
+Hacking=4
+Spell=0
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=50
+SkillsBeCKSKnowCost=39
+SkillsBeCKSActCost=50
+Skill0=Bike_B/R(INT)~[4]=4
+Skill1=Biotech(INT)~[3]=3
+Skill2=Car_B/R(INT)~[4]=4
+Skill3=Computer(INT)~[6]=6
+Skill4=Computer_B/R(INT)~[6]=6
+Skill5=Demolitions(INT)~[4]=4
+Skill6=Electronics(INT)~[5]=5
+Skill7=Electronics_B/R(INT)~[6]=6
+Skill8=Etiquette(CHA)/Matrix~[2/4]=3
+Skill9=Heavy_Weapons_B/R(INT)~[3]=3
+Skill10=Pistols(QCK)~[3]=3
+Skill11=Stealth(QCK)~[3]=3
+Skill12=English(LAN)~[6]=6
+Skill13=__English(LAN)__(RW)~[3]=0
+Skill14=Japanese(LAN)~[3]=3
+Skill15=__Japanese(LAN)__(RW)~[1]=0
+Skill16=IN:Conspiracy_Theories(KNO)~[4]=4
+Skill17=SW:Cybertechnology(KNO)~[5]=5
+Skill18=AC:Engineering(KNO)~[4]=4
+Skill19=SW:Matrix_Topography(KNO)~[4]=4
+Skill20=AC:Megacorporate_Research(KNO)~[4]=4
+Skill21=AC:Metallurgy(KNO)~[4]=4
+Skill22=SW:Military_Winged_Aircraft(KNO)~[5]=5
+MaxSkills= 50 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+Cyber0=Chipjack(A)~0.16~2000~sr3.298~~Legal~Holds_1_chip,_access_to_datasofts_and_knowsofts~~H~3~N
+Cyber1=Datajack(A)~0.16~2000~sr3.298~+1DJK~Legal~~~H~0~N
+Cyber2=Memory_(300_Mps)(A)~0.80~90000~sr3.298~~Legal~~~H~3~N
+Cyber3=+_Eyes,_Image_Link(A)~0.16~3200~sr3.300~~Legal~Display_text_and_images_in_field_of_vision~~E~4~N
+
+CurrentEssence=4.72
+
+BioIndex=0.00
+
+[Magic]
+MageType=Not Selected
+Adept=9
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+BoughtSpellPts=0
+TotemInfo=
+InitText=
+[Gear]
+Gear0=X:Remington_Roomsweeper__(HPist)_DwMod~3|6|8(m)|SA|9S(f)|2.5|3/24hrs|330|1|None|sr3.278|
+Gear1=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear2=X:Armor_Jacket_DwMod~8|6|5|3|2|3/36hrs|990|.75|sr3.284|
+Gear3=Computer_Shop_DwMod~10|-|-|8/72hrs|16500|3|sr3.288|
+Gear4=Computer_ToolKit_DwMod~10|3|5|5/48hrs|1650|2|sr3.288|
+Gear5=X:Dataline_Tap_Lv_[6]_~21|12|6|-|6/8days|6000|1.5|sr3.292|
+Gear6=Electronic_Shop_DwMod~10|-|-|8/72hrs|16500|3|sr3.288|
+Gear7=Electronic_ToolKit_DwMod~10|3|5|5/48hrs|1650|2|sr3.288|
+Gear8=X:Maglock_Passkey_[4]_~21|9|4|1|8/10days|40000|3|sr3.294|
+Gear9=X:Micro-Transceiver_[5]_~21|10|5|-|5/48hrs|5000|2|sr3.290|
+Gear10=X:Pocket_Computer_(100Mp)_~14|8|1|Always|10000|1|sr3.287|
+Gear11=Computer_Printer_~14|4|2|Always|100|1|sr3.287|
+Gear12=Scanner_[6]_~21|8|6|1|6/24hrs|600|2|sr3.290|
+Gear13=Keypad_Sequencer_Rating_[4]_~21|8|4|2|8/2wks|8000|3|sr3.294|
+Gear14=Vehicle_Kit_DwMod~10|3|5|5/48hrs|1100|2|sr3.288|
+Gear15=X:Wrist_Phone_~14|8|-|Always|100|.75|sr3.287|
+TotalWeight=9
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Deck0=Novatech_Hyperdeck-6__________~11|6|4|500|1000|240|1|4/7days|125000|1|sr3.304||Stock_Cyberdecks
+Deck1=Hitcher_Jack__________________~12|2/48hrs|250|1|Legal|sr3.304||Miscellaneous_Components
+Deck2=__Analyze_Rating_[4]__(48)~33|4/7days|9600|1.5|3|sr3.220||Analyze
+Deck3=__Browse_Rating_[4]__(16)~33|4/7days|3200|1.5|1|sr3.220||Browse
+Deck4=__Camo_Rating_[5]__(75)~33|4/7days|15000|1.5|3|mat.70|____|Camo
+Deck5=__Commlink_Rating_[6]__(36)~33|4/7days|7200|1.5|1|sr3.304||Commlink
+Deck6=__Deception_Rating_[4]__(32)~33|4/7days|6400|1.5|2|sr3.220||Deception
+Deck7=__Decrypt_Rating_[5]__(25)~33|4/7days|5000|1.5|1|sr3.220||Decrypt
+Deck8=__Read/Write_Rating_[4]__(32)~33|4/7days|6400|1.5|2|sr3.220||Read/Write
+Mod0=2
+Mod1=1
+HackingPoolMods= 0 
+DeckInfo0=6
+DeckInfo1=4
+DeckInfo2=500
+DeckInfo3=1000
+DeckInfo4=240
+DeckInfo5=1
+MPCP= 6 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=Novatech Hyperdeck-6
+Otaku=0
+
+[Contacts]
+Contact0=Deckmeister~~~~Deckmeister___________________~1~~~0
+Contact1=Fixer~~~~Fixer_________________________~1~~~0
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

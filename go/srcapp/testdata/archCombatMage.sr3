@@ -1,0 +1,199 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 2 
+Priority2= 3 
+Priority3= 1 
+Priority4= 5 
+Priority5= 4 
+Magic= 1 
+Attributes= 27 
+Skills= 27 
+MaxMoney= 20000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 4 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Troll
+RaceDesc1=Thermographic_Vision
+RaceDesc2=Dermal_Armor(+1BOD)
+RaceDesc3=Reach_(+1)
+RunMult=3
+
+[General]
+CharName=Combat Mage
+RealName=
+LifeStyle1=(7)_Lo:Low_Lifestyle~0~13~0~7~7000~01/64~Low_Lifestyle~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=Increased_Lifestyle_to_use_up_initial_resources.
+Archtype=Combat_Mage
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 19788 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=27
+BeCKScost= 0 
+IFM= 0 
+Body=1|+5|0|1|6(7)
+Quickness=6|-1|0|0|5
+Strength=2|+4|0|0|6
+Charisma=6|-2|0|0|4
+Intelligence=6|-2|0|0|4
+Willpower=6|0|0|0|6
+Essence=6|0|0|0.00|6.00
+Magic=6|0|0|0|6
+Reaction=4|0|0|0|4
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=0
+Hacking=0
+Spell=5
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=27
+SkillsBeCKSKnowCost=26
+SkillsBeCKSActCost=27
+Skill0=Conjuring(WIL)~[6]=6
+Skill1=Etiquette(CHA)/Street~[2/4]=3
+Skill2=Edged_Weapons(STR)/Sword~[4/6]=5
+Skill3=Intimidation(CHA)~[4]=4
+Skill4=Sorcery(WIL)/Spellcasting~[5/7]=6
+Skill5=Submachine_Guns(QCK)~[3]=3
+Skill6=ST:Gang_Identification(KNO)~[4]=4
+Skill7=BK:Magic_Background(KNO)~[4]=4
+Skill8=SW:Paranormal_Animals(KNO)/Urban~[1/3]=2
+Skill9=AK:Redmond_Barrens(KNO)~[4]=4
+Skill10=AK:Seattle_Ork_Underground(KNO)~[4]=4
+Skill11=ST:Triad_Politics(KNO)~[2]=2
+Skill12=English(LAN)/Cityspeak~[3/5]=4
+Skill13=__English(LAN)__(RW)~[1]=0
+Skill14=Chinese(LAN)/Triad~[1/3]=2
+MaxSkills= 27 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+CurrentEssence=6.00
+
+BioIndex=0.00
+
+[Magic]
+MageType=Full Mage
+Adept=9
+Magic=1
+PhysAdMagic= 0 
+Max_Spells=25
+Cur_Spells=25
+BoughtSpellPts=0
+TotemInfo=<P>Can_use_Sorcery_and_Conjuring_skills,_access_the_astral^`plane,_and_use_foci.</P>^`
+InitText=
+Tradition= 0 
+Mods0=6
+Mods1=0
+Mods2=0
+Mods3=0
+Mods4=6
+SpentMagic=0
+MagicLossPts=0
+DicePoolSpell=5
+DicePoolAstral=7
+ModGeasCnt= 0 
+Spell0=Heal~M~10-E(V)~P~T~(DL)~[04]~sr3.193~0~~0
+Spell1=Increased_Reaction~M~Rea(V)~S~T~+1(S)~[03]~sr3.194~0~~0
+Spell2=Lightning_Bolt~P~4(RC)~I~LOS~+1(DL+1)~[04]~sr3.197~0~~0
+Spell3=Manaball(E)~M~W(R)~I~LOS(A)~(DL+1)~[05]~sr3.191~0~~0
+Spell4=Manabolt~M~W(R)~I~LOS~(DL)~[04]~sr3.191~0~~0
+Spell5=Powerball(E)~P~B(R)~I~LOS(A)~+1(DL+1)~[05]~sr3.191~0~~0
+Spell6=Stunbolt~M~W(R)~I~LOS~-1(DL)~[04]~sr3.191~0~~0
+
+Cur_powers=0.00
+PhysAdMod=0
+
+MageGear0=Elem._Conj._Materials_5~15|0|5/24hrs|5000|1|sr3.305|__
+MageGear1=[2]Exp._Spell_Focus_2_Combat~15|0|3/36hrs|6000|1|sr3.305|
+[Gear]
+Gear0=X:Uzi_III__________________(SMG)_TrMod~3|5|24(c)|BF|6M|2|4/24hrs|750|.75|Laser_Sight,_Fold_Stock(1RC)|sr3.278|
+Gear1=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear2=X:Sword(EDG)_~1|4|1|(STR+2)M|1|3/24hrs|500|1|sr3.275|
+Gear3=X:Secure_Ultra-Vest_TrMod~8|14|3|2|2.5|3/36hrs|438|.9|sr3.284|
+TotalWeight=8
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Talismonger~~~~Talismonger~1~~~0
+Contact1=Triad_Enforcer~~~~Triad_Enforcer~1~~~0
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

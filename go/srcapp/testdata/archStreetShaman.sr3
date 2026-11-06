@@ -1,0 +1,197 @@
+[System]
+Generator=Priority
+Finalize=False
+VirtSeat=False
+Version=3.64-3/23/04 
+[Priorities]
+Priority1= 2 
+Priority2= 3 
+Priority3= 4 
+Priority4= 1 
+Priority5= 5 
+Magic= 1 
+Attributes= 27 
+Skills= 34 
+MaxMoney= 5000 
+ShapeShift= 0 
+Otaku= 0 
+Shapesel=0
+[Race]
+Rsel= 3 
+SelIndex=-1 
+chkAlbino=False
+RaceName=Ork
+RaceDesc1=Low_Light_Vision
+RunMult=3
+
+[General]
+CharName=Street Shaman
+RealName=
+LifeStyle1=Perm_St:Street_Lifestyle~0~0~1~1~0~01/64~Street_Lifestyle~~~~N
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Male
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=
+Archtype=Street_Shaman
+CreationDate=4/1/04
+ModDate=4/1/04 
+Creator=OurTeam
+CurMoney= 4650 
+ProgramMode= 0 
+GifFile=sr3logo.gif
+
+[Edges]
+
+[Attributes]
+MaxAttributes=27
+BeCKScost= 0 
+IFM= 0 
+Body=2|+3|0|0|5
+Quickness=5|0|0|0|5
+Strength=2|+2|0|0|4
+Charisma=6|-1|0|0|5
+Intelligence=6|-1|0|0|5
+Willpower=6|0|0|0|6
+Essence=6|0|0|0.00|6.00
+Magic=6|0|0|0|6
+Reaction=5|0|0|0|5
+Initiative=1|0|0|0|1
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+BodyRaceMaxMod=0
+QuicknessRaceMaxMod=0
+StrengthRaceMaxMod=0
+CharismaRaceMaxMod=0
+IntelligenceRaceMaxMod=0
+WillpowerRaceMaxMod=0
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=8
+Control=0
+Hacking=0
+Spell=5
+Task=0
+CombatPoolMod=0
+
+[Skills]
+SkillsBeCKScost=34
+SkillsBeCKSKnowCost=32
+SkillsBeCKSActCost=34
+Skill0=Conjuring(WIL)~[6]=6
+Skill1=Electronics_B/R(INT)~[4]=4
+Skill2=Etiquette(CHA)/Street~[4/6]=5
+Skill3=Pistols(QCK)~[3]=3
+Skill4=Sorcery(WIL)~[6]=6
+Skill5=Stealth(QCK)~[6]=7
+Skill6=Unarmed_Combat-SR3(STR)/Bite~[2/4]=3
+Skill7=AC:Ecology(KNO)/Sewers~[3/5]=4
+Skill8=BK:Magic_Background(KNO)~[5]=5
+Skill9=AC:Mechanical_Traps(KNO)~[4]=4
+Skill10=ST:Scrounging(KNO)~[5]=5
+Skill11=ST:Seattle_Ork_Underground(KNO)~[3]=3
+Skill12=ST:Toxic_Hazards(KNO)~[4]=4
+Skill13=English(LAN)/Cityspeak~[5/7]=7
+Skill14=__English(LAN)__(RW)~[2]=0
+MaxSkills= 34 
+
+[Cyberware]
+SensitiveSystem=0
+AllCostsDouble=0
+CurrentEssence=6.00
+
+BioIndex=0.00
+
+[Magic]
+MageType=Rat Shaman
+Adept=9
+Magic=1
+PhysAdMagic= 0 
+Max_Spells=25
+Cur_Spells=25
+BoughtSpellPts=0
+TotemInfo=<P>Can_use_Sorcery_and_Conjuring_skills,_access_the_astral^`plane,_and_use_foci.__Plus_the_benefits_and_disadvantages_of^`their_totem/tradition._</P>^`<P>ENV:_Urban</P>^`<P>DESC:_Rat_is_found_wherever_humans_are,_for_who_else's^`bounty_can_sustain_him?_Rat_is_stealthy_thief_too^`selfish_to_share_anything._He_is_coward_who_would^`rather_run_than_fight._Rat_shamans_tend_to_be^`dirty_and_unkempt._They_dislike_working_out_in_the^`open,_preferring_to_stick_to_the_shadows._Rat^`shamans_avoid_fights_whenever_they_can._When_the^`must_fight,_they_fight_to_kill.</P>^`<P>ADVAN:_+2_dice_for_detection_and_illusion_spells,_+2_dice^`for_city_spirits</P>^`<P>DISADVAN:_-1_die_for_combat_spells</P>^`
+InitText=
+Tradition= 0 
+Mods0=6
+Mods1=0
+Mods2=0
+Mods3=0
+Mods4=6
+SpentMagic=0
+MagicLossPts=0
+DicePoolSpell=5
+DicePoolAstral=8
+ModGeasCnt= 0 
+Spell0=Analyze_Device(F)~P~OR~S~T/D~+1(M)~[04]~sr3.192~0~~0
+Spell1=Chaotic_World~P~I(R)~S~LOS(A)~+1(D)~[05]~sr3.195~0~~0
+Spell2=Detect_Life~M~DT(R)~S~T/A~(L)~[04]~sr3.192~0~~0
+Spell3=Improved_Invisibility~P~4(R)~S~LOS~+1(M)~[05]~sr3.195~0~~0
+Spell4=Magic_Fingers~P~6~S~LOS~+2(M)~[04]~sr3.197~0~~0
+Spell5=Silence~P~4(R)~S~LOS(A)~+1(S)~[04]~sr3.196~0~~0
+
+Cur_powers=0.00
+PhysAdMod=0
+
+MageGear0=Shamanic_Lodge_Mat._6~15|0|6/24hrs|3000|1|sr3.305|
+MageGear1=Detection_fetish,_Reuse~15|0|3/24hrs|50|1|sr3.305|
+[Gear]
+Gear0=X:Remington_Roomsweeper__(HPist)_~3|6|8(m)|SA|9S(f)|2.5|3/24hrs|300|1|None|sr3.278|
+Gear1=X:__[50]Regular_Rnds_~5|8|-|2.5|2/24hrs|2|.75|sr3.281|
+Gear2=X:Lined_Coat_~8|8|4|2|1|2/24hrs|700|.75|sr3.284|
+Gear3=X:[2]Antidote_Patch_[5]_~13|5|6/72hrs|-|250|2|sr3.304|
+Gear4=X:CUS:Satchel_of_Scavenged_Junk_~11|1|2|0|1|0/0_days|CUS-GER|
+TotalWeight=8
+
+[Vech]
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods= 0 
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 1 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName=
+Otaku=0
+
+[Contacts]
+Contact0=Gang_Member~~~~Gang_Member___________________~1~~~0
+Contact1=Talismonger~~~~Talismonger___________________~1~~~0
+
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=
+KarmaPool=1
+AdvBeCKKarmaPoolMod=0
+AdvBeckState=False
+KarmaChange=False
+
+[GMInfo]
+NoRulesMoney=0

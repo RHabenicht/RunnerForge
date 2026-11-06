@@ -1,0 +1,173 @@
+[System]
+Generator=Priority
+Finalize=False
+Version=3.33 - 19 Mar 2001
+[Priorities]
+Priority1= 4 
+Priority2= 3 
+Priority3= 5 
+Priority4= 1 
+Priority5= 2 
+Magic= 5 
+Attributes= 27 
+Skills= 50 
+MaxMoney= 90000 
+[Race]
+Rsel= 3 
+SelIndex=-1 
+chkAlbino= 0 
+AlbinoSel= 0 
+RaceName=Ork
+RaceDesc1=Low_Light_Vision
+[General]
+CharName=archTheInvestigator
+RealName=
+LifeStyle1=(3)_Lo:_________________________~0~2~0~3~3000~~_________________________~~~~E
+LifeStyle2=(3)_Lo:_________________________~0~2~0~3~3000~~_________________________~~~~E
+BirthDate=
+BirthPlace=
+BirthNotes=
+Sex=Female
+Height=
+Weight=
+Hair=
+Eyes=
+Notes=unarmed_combat_-1?_,_underworld_politics_-1_(used_by_lang)
+CreationDate=3/27/01
+ModDate=3/27/01 
+CurMoney= 86025 
+ProgramMode= 0 
+GifFile=
+[Edges]
+
+[Attributes]
+Body=2|+3|0|0
+Quickness=5|0|0|0
+Strength=3|+2|0|0
+Charisma=6|-1|0|0
+Intelligence=6|-1|0|0
+Willpower=5|0|0|0
+Essence=6|0|0|0.00
+Magic=6|0|0|0
+Reaction=5|0|0|0
+Initiative=1|0|0|0
+
+BodyMax=6
+QuicknessMax=6
+StrengthMax=6
+CharismaMax=6
+IntelligenceMax=6
+WillpowerMax=6
+e_armor_impactArmorMod=0
+e_armor_ballisticArmorMod=0
+
+[Pools]
+Combat=7
+Control=5
+Hacking=1
+Spell=0
+Task=0
+CombatPoolMod=0
+[Skills]
+Skill0=Athletics(BOD)~[3]=3
+Skill1=Biotech(INT)~[3]=3
+Skill2=Car(REA)~[3]=3
+Skill3=Computer(INT)~[5]=5
+Skill4=Electronics(INT)~[5]=5
+Skill5=Etiquette(CHA)~[5]=5
+Skill6=Interrogation(CHA)~[5]=5
+Skill7=Intimidation(CHA)~[4]=4
+Skill8=Negotiations(CHA)~[5]=5
+Skill9=Pistols(QCK)~[4]=4
+Skill10=Stealth(QCK)~[5]=5
+Skill11=Unarmed_Combat-SR3(STR)~[3]=3
+Skill12=Chemistry_(KNO)/Pharmaceuticals~[2/4]=3
+Skill13=English(LAN)/Cityspeak~[4/6]=5
+Skill14=__English(LAN)/Cityspeak_(R/W)~[2]=0
+Skill15=Forensics_(KNO)~[4]=4
+Skill16=ST:Gang_Identification(KNO)~[4]=4
+Skill17=Magic_Background_(KNO)~[2]=2
+Skill18=AC:Medicine(KNO)~[4]=4
+Skill19=Police_Procedure_(KNO)~[4]=4
+Skill20=Spanish(LAN)~[3]=3
+Skill21=__Spanish(LAN)_(R/W)~[1]=0
+Skill22=Underworld_Politics_(KNO)~[3]=3
+MaxSkills= 50 
+[Cyberware]
+CurrentEssence=6.00
+BioIndex=0.00
+[Magic]
+MageType=Not Selected
+Adept=0
+Magic=5
+PhysAdMagic= 0 
+Max_Spells=0
+Cur_Spells=0
+TotemInfo=<P>_Do_not_use_magic_skills_(except_Astral_combat).__Cannot_astrally_^`project_and_cannot_use_astral_perception_unless_purchased._</P>^`
+InitText=
+GaesaText=
+GroupsText=
+[Gear]
+Gear0====Carried_Gear_below_======__~26|0|SR3-???|
+Gear1=Browning_Max-Power_____(HPist)~3|6|10(c)|SA|9M|2|3/24hrs|450|1|None|SR3-278|
+Gear2=__Laser_Sight___________________~6|Top/Under|(-1)|-|0.25|6/36hrs|500|.9|SR3-282|
+Gear3=__Concealable_Holster___________~6|-|(+2)|-|0.1|2/24hrs|100|.75|SR3-282|
+Gear4=__[5]Regular_Rnds_(10)_____________~5|8|-|2.5|2/24hrs|20|.75|SR3-281|
+Gear5=Secure_Long_Coat______________~8|10|4|2|2|3/24hrs|650|.9|SR3-284|
+Gear6=DocWagon:_Basic_Service_______~13|-|On_Payment|-|5000|-|SR3-304|
+Gear7=Bug_Scanner_Lv_6______________~10|3|1|6/48hrs|3000|1.5|SR3-292|
+Gear8=Electronic_ToolKit____________~10|3|5|5/48hrs|1500|2|SR2-???|
+Gear9=Dataline_Tap_Lv_6_____________~10|12|-|6/8days|6000|1.5|SR3-292|
+Gear10=Flashlight,_large_____________~9|7|-|2|Always|25|1|SR3-290|
+Gear11=Laser_Microphone_Lv_4_________~21|5|4|1|4/48hrs|6000|1.5|SR3-292|
+Gear12=Binoculars,_Low-Light_________~9|5|50x|1|4/48hrs|300|1.25|SR3-290|
+Gear13=Medkit________________________~13|3|2/24hrs|3|200|3|SR3-304|
+Gear14=Micro-Camcorder_______________~10|8|-|6/48hrs|2500|2|SR3-292|
+Gear15=[2]Restraints,_Plasteel__________~10|3|-|4/48hrs|50|1|SR3-294|
+Gear16=Basic_Pocket_Secretary________~14|3|0.5|Always|2000|1|SR3-285|
+Gear17=CUS:Scanner_Rating_6~11|1|0|600|1|CUS-GER|
+Gear18=Keypad_Sequencer_Rating_4_____~_______21|8|4|2|8/2wks|8000|3|SR3-294|
+Gear19=Shotgun_Microphone_Lv_5_______~10|5|1|5/36hrs|5000|1|SR3-292|
+Gear20=[2]Stimulant_Patch_4_____________~13|4|2/24hrs|-|100|1|SR3-304|
+Gear21=Tracking_Signal_Lv_5__________~10|7|-|5/72hrs|2500|2|SR3-292|
+Gear22=Signal_Locator_Lv_5___________~10|3|2|5/48hrs|1000|1.5|SR3-292|
+Gear23=[2]Tranq_Patch_5_________________~13|5|4/48hrs|-|100|2|SR3-304|
+Gear24=Wrist_Phone___________________~14|4|-|Always|100|.75|SR3-285|
+Gear25=Vidlink_Transmitter__Rating_2_~10|9|1|4/1week|4000|2|SR3-290|
+TotalWeight=26
+
+[Vech]
+Vech0=Ford_Americar_________________~24|4/8|105/8|3/0|2/2|-/1|10/110|4|20000|2/24hrs|.75||SR3-308||Cars
+Mod0=0
+Mod1=0
+ControlPoolMods=0
+VCR=0
+
+[Deck]
+Mod0=0
+Mod1=0
+HackingPoolMods=0
+DeckInfo0=0
+DeckInfo1=0
+DeckInfo2=0
+DeckInfo3=0
+DeckInfo4=0
+DeckInfo5=0
+MPCP= 0 
+Persona0=1
+Persona1=1
+Persona2=1
+Persona3=1
+DeckName= No deck selected
+
+[Contacts]
+Contact0=Bartender~~~~Bartender~1~~~0
+Contact1=Decker~~~~Decker~1~~~0
+Contact2=Lone_Star_Detective~~~~Lone_Star_Detective~2~~~10000~X
+[Karma]
+TotalKarma=0
+SpentKarma=0
+RemainKarma=0
+PropKarmaSpent=0
+LostKarmaPool=0
+KarmaPool=1

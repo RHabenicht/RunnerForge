@@ -1,0 +1,14 @@
+Development checkpoint, 2026-11-06
+Partial implementation, not a release.
+6,449 approved-source records. 2,633 quarantined records.
+Three additional skills have TSS citations in specialization fields.
+Existing IDs preserved during catalog rechecking.
+Reproduce with: python build_catalog.py --catalog go/srcapp/catalog.json
+This rechecks the existing catalog plus go/data/quarantine.json.
+Original-installation parsing has not yet been regenerated and compared.
+Four Python regression tests passed. Catalog regeneration was byte-identical.
+Go tests and go vet passed using Go 1.27.3.
+Previous Windows compilation passed; Windows runtime testing remains outstanding.
+Remaining work: import/export content enforcement, primary-book verification,
+Build Point creation, full rules, safe saves, complete exports, Windows GUI/PDF.
+Older reports describe earlier baseline work.
