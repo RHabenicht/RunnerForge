@@ -36,3 +36,12 @@ This reads both the embedded catalog and go/data/quarantine.json, preserving exi
 Four Python regression tests, Go tests, and go vet passed on November 6, 2026. Windows x86-64 cross-compilation succeeded. Native Windows GUI and PDF export testing remain outstanding.
 
 DEVELOPMENT_STATUS.txt describes the latest checkpoint. Other historical reports describe earlier development stages.
+
+## Acknowledgments
+
+Thanks to the maintainers of these projects for their work on Shadowrun Third Edition character tools.
+
+- **finsterdexter/sr3data** provided a reference for understanding the original NSRCG data formats and catalog structure. [sr3data repository](https://github.com/finsterdexter/sr3data)
+- **apampuch/PySRCG** provided an implementation reference for SR3 character creation and character data modeling. Calculations require verification against the primary sourcebooks. [PySRCG repository](https://github.com/apampuch/PySRCG)
+
+The November 5, 2026 project audit recorded PySRCG as MIT-licensed and found no declared repository license for sr3data. The audit and integration notes document how these references informed development.
