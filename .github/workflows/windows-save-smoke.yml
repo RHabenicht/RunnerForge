@@ -1,0 +1,37 @@
+name: Windows save smoke test
+on: [push]
+jobs:
+  windows:
+    runs-on: windows-2022
+    defaults:
+      run:
+        working-directory: go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go/go.mod
+          cache: false
+      - run: go test -v ./...
+      - run: go vet ./...
+      - run: go build -ldflags="-H windowsgui" -o NSRCG-II.exe ./cmd/nsrcgii
+      - name: Check native window startup
+        shell: pwsh
+        run: |
+          $p = Start-Process ./NSRCG-II.exe -PassThru
+          try {
+            for ($i = 0; $i -lt 20; $i++) {
+              Start-Sleep -Milliseconds 500
+              $p.Refresh()
+              if ($p.HasExited) { throw "Application exited before opening a window" }
+              if ($p.MainWindowHandle -ne 0) { break }
+            }
+            if ($p.MainWindowHandle -eq 0 -or $p.MainWindowTitle -notmatch 'NSRCG II') {
+              throw "NSRCG II main window did not open"
+            }
+            if (-not $p.CloseMainWindow() -or -not $p.WaitForExit(10000)) {
+              throw "Application did not close normally"
+            }
+          } finally {
+            if (-not $p.HasExited) { Stop-Process -Id $p.Id -Force }
+          }
