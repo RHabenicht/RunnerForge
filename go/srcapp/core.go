@@ -94,6 +94,7 @@ type Character struct {
 	Name           string                `json:"name"`
 	RealName       string                `json:"real_name,omitempty"`
 	Race           string                `json:"race"`
+	CustomRace     *RaceDefinition       `json:"custom_race,omitempty"`
 	MagicType      string                `json:"magic_type,omitempty"`
 	BuildPoints    *BuildPointAllocation `json:"build_points,omitempty"`
 	Priority       map[string]string     `json:"priority"`
@@ -176,7 +177,8 @@ func (ch *Character) SkillSpent() int {
 	return s
 } // allocation cost is approximate; specialization/knowledge rules separate
 func (ch *Character) EffectiveAttribute(name string) int {
-	return ch.Attributes[name] + raceMods[ch.Race][name]
+	race, _ := ch.raceDefinition()
+	return ch.Attributes[name] + race.Modifiers[name]
 }
 func (ch *Character) Awakened() bool {
 	if ch.BuildPoints != nil {
@@ -269,8 +271,16 @@ func (ch *Character) Validate() []string {
 			issues = append(issues, fmt.Sprintf("Skill points exceed priority budget (simple ratings): %d / %d", ch.SkillSpent(), ch.SkillBudget()))
 		}
 	}
-	if _, ok := raceMods[ch.Race]; !ok {
+	if _, ok := ch.raceDefinition(); !ok {
 		issues = append(issues, "Unknown race")
+	}
+	if _, standard := raceMods[ch.Race]; !standard && ch.BuildPoints == nil {
+		issues = append(issues, "Choose Build Points for Companion metavariants or custom races.")
+	}
+	if ch.CustomRace != nil {
+		if err := ch.CustomRace.validate(); err != nil {
+			issues = append(issues, err.Error())
+		}
 	}
 	for _, k := range attributeKeys {
 		if ch.Attributes[k] < 1 || ch.Attributes[k] > 6 {
@@ -299,6 +309,11 @@ func SaveJSON(path string, c *Character) error {
 	}
 	if c.Format != "" && c.Format != "nsrcgii.v2" {
 		return fmt.Errorf("unsupported character format %q", c.Format)
+	}
+	if c.CustomRace != nil {
+		if err := c.CustomRace.validate(); err != nil {
+			return err
+		}
 	}
 	c.Repair()
 	b, e := json.MarshalIndent(c, "", "  ")
@@ -346,6 +361,11 @@ func LoadJSON(path string) (*Character, error) {
 	if c.Format != "" && c.Format != "nsrcgii.v2" {
 		return nil, fmt.Errorf("unsupported character format %q", c.Format)
 	}
+	if c.CustomRace != nil {
+		if err := c.CustomRace.validate(); err != nil {
+			return nil, err
+		}
+	}
 	c.Repair()
 	return &c, nil
 }
@@ -385,7 +405,7 @@ func (ch *Character) AddItem(it Item) {
 	}
 }
 
-var htmlTemplate = template.Must(template.New("sheet").Parse(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>{{.Name}} — RunnerForge</title><style>body{font:15px Arial,sans-serif;max-width:900px;margin:auto;padding:1.5rem;color:#181b22}h1{border-bottom:2px solid #222}h2{margin-top:1.5rem}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;text-align:left;padding:.35rem}small{color:#555}.col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media print{body{margin:.3in;padding:0}h2{break-after:avoid}}</style></head><body><h1>{{.Name}}</h1><small>RunnerForge — Shadowrun Third Edition · {{.Race}} · Local HTML Export</small><div class="col"><section><h2>Attributes</h2><table>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table></section><section><h2>Derived</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr></table></section></div><h2>Character Creation</h2><table>{{range .Priorities}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table><h2>Skills</h2><table>{{range .Skills}}<tr><td>{{.Name}}</td><td>{{.Rating}}</td></tr>{{end}}</table><h2>Cyberware</h2><table>{{range .Cyberware}}<tr><td>{{.Name}}</td><td>{{.EssenceCost}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Gear</h2><table>{{range .Gear}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Bioware</h2><table>{{range .Bioware}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Spells</h2><table>{{range .Spells}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Adept Powers</h2><table>{{range .AdeptPowers}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Vehicles</h2><table>{{range .Vehicles}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Cyberdecks</h2><table>{{range .Decks}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Edges / Flaws</h2><table>{{range .EdgesFlaws}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Totems / Traditions</h2><table>{{range .Totems}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Contacts</h2><table>{{range .Contacts}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Notes</h2><p style="white-space:pre-wrap">{{.Notes}}</p><small>Generated character record. Verify all calculations against the official SR3 rules, especially imported legacy cyberware and advanced options.</small></body></html>`))
+var htmlTemplate = template.Must(template.New("sheet").Parse(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>{{.Name}} — RunnerForge</title><style>body{font:15px Arial,sans-serif;max-width:900px;margin:auto;padding:1.5rem;color:#181b22}h1{border-bottom:2px solid #222}h2{margin-top:1.5rem}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;text-align:left;padding:.35rem}small{color:#555}.col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media print{body{margin:.3in;padding:0}h2{break-after:avoid}}</style></head><body><h1>{{.Name}}</h1><small>RunnerForge — Shadowrun Third Edition · {{.Race}} · Local HTML Export</small>{{with .RacialTraits}}<p>Racial traits: {{.}}</p>{{end}}<div class="col"><section><h2>Attributes</h2><table>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table></section><section><h2>Derived</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr></table></section></div><h2>Character Creation</h2><table>{{range .Priorities}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table><h2>Skills</h2><table>{{range .Skills}}<tr><td>{{.Name}}</td><td>{{.Rating}}</td></tr>{{end}}</table><h2>Cyberware</h2><table>{{range .Cyberware}}<tr><td>{{.Name}}</td><td>{{.EssenceCost}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Gear</h2><table>{{range .Gear}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Bioware</h2><table>{{range .Bioware}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Spells</h2><table>{{range .Spells}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Adept Powers</h2><table>{{range .AdeptPowers}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Vehicles</h2><table>{{range .Vehicles}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Cyberdecks</h2><table>{{range .Decks}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Edges / Flaws</h2><table>{{range .EdgesFlaws}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Totems / Traditions</h2><table>{{range .Totems}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Contacts</h2><table>{{range .Contacts}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Notes</h2><p style="white-space:pre-wrap">{{.Notes}}</p><small>Generated character record. Verify all calculations against the official SR3 rules, especially imported legacy cyberware and advanced options.</small></body></html>`))
 
 type kv struct {
 	Key   string
@@ -429,6 +449,9 @@ func (ch *Character) SaveHTML(path string) error {
 func (ch *Character) Summary() string {
 	var sb strings.Builder
 	fmt.Fprintf(&sb, "Name: %s\r\nSR3 • %s\r\n", ch.Name, ch.Race)
+	if traits := ch.RacialTraits(); traits != "" {
+		fmt.Fprintf(&sb, "Racial traits: %s\r\n", traits)
+	}
 	for _, k := range attributeKeys {
 		fmt.Fprintf(&sb, "%s: %d (base %d)\r\n", k, ch.EffectiveAttribute(k), ch.Attributes[k])
 	}

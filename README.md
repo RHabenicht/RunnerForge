@@ -4,9 +4,27 @@ Standalone Shadowrun Third Edition character generator for Windows 10/11, curren
 
 The Go application supports basic Priority and Build Point character creation, local JSON saves, legacy .sr3 imports, and HTML export. Comprehensive rules validation, a finished installer, and Windows runtime acceptance testing remain pending.
 
-Build Point mode uses the revised Shadowrun Companion (pp. 13–14) for the standard metatypes, magic choices, resource tiers, and attribute costs. Active skill costs use linked attributes from the approved catalog. Optional adjustments, special metatypes, and full character eligibility checks remain pending.
+Build Point mode uses the revised Shadowrun Companion (pp. 13–14) for the standard metatypes, magic choices, resource tiers, and attribute costs. Active skill costs use linked attributes from the approved catalog. Optional point adjustments and full character eligibility checks remain pending.
 
 The embedded catalog contains 6,449 records citing approved sources. Another 2,633 records are preserved in a separate review file. Source filtering does not establish that each record has been verified against its book.
+
+
+## Metavariants and custom races
+
+Build Point mode includes the 14 metavariants in the revised Shadowrun Companion (pp. 38–43). The published cost is 5 BP above the parent metatype, for a total of 10 BP for dwarf and ork variants or 15 BP for elf and troll variants.
+
+To use house rules, save a race definition as a JSON file and select **Load custom race…**. Use a distinct name for a house-rule version of a built-in race. The example below prices a custom Night One at the same 10 BP as an elf.
+
+```json
+{
+  "name": "Night One (house rules)",
+  "build_point_cost": 10,
+  "modifiers": {"Quickness": 2, "Charisma": 2},
+  "traits": "Low-light vision, Mild sunlight allergy"
+}
+```
+
+Enter the complete racial modifiers as adjustments to base attributes. Omitted attributes have a zero adjustment. RunnerForge includes the chosen race cost in the BP total and stores the imported definition with the character. Racial traits appear as reference text in the summary and HTML sheet.
 
 ## Development
 

@@ -53,7 +53,8 @@ func (ch *Character) buildPointTotal() (int, []string) {
 		}
 		skillCost += skill.Rating + max(0, skill.Rating-ch.EffectiveAttribute(attribute))
 	}
-	total := buildRaceCosts[ch.Race] + magicCost + resourceCost + attributeCost + skillCost
+	race, _ := ch.raceDefinition()
+	total := race.BuildPointCost + magicCost + resourceCost + attributeCost + skillCost
 	if total > bp.Budget {
 		issues = append(issues, fmt.Sprintf("Build Point budget exceeded (%d / %d).", total, bp.Budget))
 	}
