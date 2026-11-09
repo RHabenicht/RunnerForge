@@ -9,6 +9,7 @@ import (
 	"html/template"
 	"io"
 	"os"
+	"path/filepath"
 	"regexp"
 	"sort"
 	"strconv"
@@ -275,12 +276,38 @@ func (ch *Character) Validate() []string {
 	return issues
 }
 func SaveJSON(path string, c *Character) error {
+	if c == nil {
+		return errors.New("cannot save a nil character")
+	}
+	if c.Edition != 3 {
+		return errors.New("file targets unsupported edition (SR3 only)")
+	}
+	if c.Format != "" && c.Format != "nsrcgii.v2" {
+		return fmt.Errorf("unsupported character format %q", c.Format)
+	}
 	c.Repair()
 	b, e := json.MarshalIndent(c, "", "  ")
 	if e != nil {
 		return e
 	}
-	return os.WriteFile(path, b, 0600)
+	// Stage beside the destination so a failed write leaves the existing save intact.
+	temp, e := os.CreateTemp(filepath.Dir(path), ".nsrcg-save-*")
+	if e != nil {
+		return e
+	}
+	defer os.Remove(temp.Name())
+	if _, e = temp.Write(b); e != nil {
+		temp.Close()
+		return e
+	}
+	if e = temp.Sync(); e != nil {
+		temp.Close()
+		return e
+	}
+	if e = temp.Close(); e != nil {
+		return e
+	}
+	return os.Rename(temp.Name(), path)
 }
 func LoadJSON(path string) (*Character, error) {
 	b, e := os.ReadFile(path)
@@ -289,11 +316,20 @@ func LoadJSON(path string) (*Character, error) {
 	}
 	var c Character
 	dec := json.NewDecoder(bytes.NewReader(b))
+	// Refuse fields this version cannot round-trip, including nested item fields.
+	dec.DisallowUnknownFields()
 	if e = dec.Decode(&c); e != nil {
 		return nil, e
 	}
+	var trailing interface{}
+	if e = dec.Decode(&trailing); e != io.EOF {
+		return nil, errors.New("character file must contain exactly one JSON object")
+	}
 	if c.Edition != 3 {
 		return nil, errors.New("file targets unsupported edition (SR3 only)")
+	}
+	if c.Format != "" && c.Format != "nsrcgii.v2" {
+		return nil, fmt.Errorf("unsupported character format %q", c.Format)
 	}
 	c.Repair()
 	return &c, nil
