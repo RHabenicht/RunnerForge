@@ -2,7 +2,9 @@
 
 Standalone Shadowrun Third Edition character generator for Windows 10/11, currently in development.
 
-The Go application supports basic Priority character creation, local JSON saves, legacy .sr3 imports, and HTML export. Build Point creation, comprehensive rules validation, a finished installer, and Windows runtime acceptance testing remain pending.
+The Go application supports basic Priority and Build Point character creation, local JSON saves, legacy .sr3 imports, and HTML export. Comprehensive rules validation, a finished installer, and Windows runtime acceptance testing remain pending.
+
+Build Point mode uses the revised Shadowrun Companion (pp. 13–14) for the standard metatypes, magic choices, resource tiers, and attribute costs. Active skill costs use linked attributes from the approved catalog. Optional adjustments, special metatypes, and full character eligibility checks remain pending.
 
 The embedded catalog contains 6,449 records citing approved sources. Another 2,633 records are preserved in a separate review file. Source filtering does not establish that each record has been verified against its book.
 

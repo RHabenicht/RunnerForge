@@ -78,6 +78,10 @@ const (
 	ID_SUMMARY          = 263
 	ID_SKILLNAME        = 264
 	ID_SKILLRATING      = 265
+	ID_METHOD           = 266
+	ID_BP_BUDGET        = 267
+	ID_BP_MAGIC         = 268
+	ID_BP_RESOURCES     = 269
 )
 
 var (
@@ -223,12 +227,17 @@ func comboVal(id int) string {
 	send(h, CB_GETLBTEXT, i, uintptr(unsafe.Pointer(&s[0])))
 	return syscall.UTF16ToString(s)
 }
+
+var creationMethods = []string{"Priority", "Build Points"}
+var buildMagicOptions = []string{"Mundane", "Full Magician", "Aspected Magician", "Adept"}
+var buildResourceOptions = []string{"500", "5000", "20000", "90000", "200000", "400000", "650000", "1000000"}
+
 func selectCombo(id int, selected string) {
 	h := app.controls[id]
 	if h == 0 {
 		return
 	}
-	values := map[int][]string{ID_RACE: {"Human", "Dwarf", "Elf", "Ork", "Troll"}}
+	values := map[int][]string{ID_RACE: {"Human", "Dwarf", "Elf", "Ork", "Troll"}, ID_METHOD: creationMethods, ID_BP_MAGIC: buildMagicOptions, ID_BP_RESOURCES: buildResourceOptions}
 	if id >= ID_PRIORITY && id < ID_PRIORITY+5 {
 		values[id] = []string{"A", "B", "C", "D", "E"}
 	}
@@ -284,7 +293,14 @@ func setupUI() {
 	button("Import .sr3", 694, 30, 100, 32, ID_IMPORT)
 	button("Export HTML", 800, 30, 108, 32, ID_HTML)
 	button("PDF", 914, 30, 70, 32, ID_PDF)
-	text("SR3 priorities (A–E, one per category)", 20, 75, 420, 18)
+	text("Priorities (A–E)", 20, 75, 135, 18)
+	combo(creationMethods, 155, 70, 125, 100, ID_METHOD, "Priority")
+	text("BP budget", 300, 75, 75, 18)
+	edit("120", 378, 70, 55, 24, ID_BP_BUDGET, false)
+	text("Magic", 454, 75, 55, 18)
+	combo(buildMagicOptions, 510, 70, 170, 140, ID_BP_MAGIC, "Mundane")
+	text("Resources (¥)", 700, 75, 108, 18)
+	combo(buildResourceOptions, 812, 70, 150, 190, ID_BP_RESOURCES, "5000")
 	for i, k := range pri {
 		xx := 20 + i*193
 		text(k, xx, 98, 155, 18)
@@ -320,6 +336,16 @@ func (a *application) populate() {
 	defer func() { a.loading = false; a.dirty = false }()
 	set(a.controls[ID_NAME], a.char.Name)
 	selectCombo(ID_RACE, a.char.Race)
+	method := "Priority"
+	allocation := srcapp.BuildPointAllocation{Budget: 120, Resources: 5000, Magic: "Mundane"}
+	if a.char.BuildPoints != nil {
+		method = "Build Points"
+		allocation = *a.char.BuildPoints
+	}
+	selectCombo(ID_METHOD, method)
+	set(a.controls[ID_BP_BUDGET], strconv.Itoa(allocation.Budget))
+	selectCombo(ID_BP_MAGIC, allocation.Magic)
+	selectCombo(ID_BP_RESOURCES, strconv.Itoa(allocation.Resources))
 	for i, k := range pri {
 		selectCombo(ID_PRIORITY+i, a.char.Priority[k])
 	}
@@ -332,6 +358,15 @@ func (a *application) populate() {
 func (a *application) sync() {
 	a.char.Name = get(a.controls[ID_NAME])
 	a.char.Race = comboVal(ID_RACE)
+	if comboVal(ID_METHOD) == "Build Points" {
+		budget, _ := strconv.Atoi(strings.TrimSpace(get(a.controls[ID_BP_BUDGET])))
+		resources, _ := strconv.Atoi(comboVal(ID_BP_RESOURCES))
+		a.char.BuildPoints = &srcapp.BuildPointAllocation{
+			Budget: budget, Resources: resources, Magic: comboVal(ID_BP_MAGIC),
+		}
+	} else {
+		a.char.BuildPoints = nil
+	}
 	for i, k := range pri {
 		a.char.Priority[k] = comboVal(ID_PRIORITY + i)
 	}

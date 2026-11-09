@@ -89,34 +89,35 @@ type Possession struct {
 	Raw         string  `json:"raw,omitempty"`
 }
 type Character struct {
-	Format         string            `json:"format"`
-	Edition        int               `json:"edition"`
-	Name           string            `json:"name"`
-	RealName       string            `json:"real_name,omitempty"`
-	Race           string            `json:"race"`
-	MagicType      string            `json:"magic_type,omitempty"`
-	Priority       map[string]string `json:"priority"`
-	Attributes     map[string]int    `json:"attributes"`
-	Skills         []Rated           `json:"skills"`
-	Gear           []Possession      `json:"gear"`
-	Cyberware      []Possession      `json:"cyberware"`
-	Bioware        []Possession      `json:"bioware,omitempty"`
-	Spells         []Possession      `json:"spells,omitempty"`
-	AdeptPowers    []Possession      `json:"adept_powers,omitempty"`
-	Vehicles       []Possession      `json:"vehicles,omitempty"`
-	Decks          []Possession      `json:"cyberdecks,omitempty"`
-	EdgesFlaws     []Possession      `json:"edges_flaws,omitempty"`
-	Contacts       []Possession      `json:"contacts,omitempty"`
-	Totems         []Possession      `json:"totems,omitempty"`
-	MagicGear      []Possession      `json:"magic_gear,omitempty"`
-	Karma          int               `json:"karma"`
-	KarmaPool      int               `json:"karma_pool"`
-	Notes          string            `json:"notes"`
-	LegacyText     string            `json:"legacy_text,omitempty"`
-	LegacyBytes    []byte            `json:"legacy_bytes,omitempty"`
-	LegacyWarnings []string          `json:"legacy_warnings,omitempty"`
-	LegacyEssence  *float64          `json:"legacy_essence,omitempty"`
-	LegacyMagic    *int              `json:"legacy_magic,omitempty"`
+	Format         string                `json:"format"`
+	Edition        int                   `json:"edition"`
+	Name           string                `json:"name"`
+	RealName       string                `json:"real_name,omitempty"`
+	Race           string                `json:"race"`
+	MagicType      string                `json:"magic_type,omitempty"`
+	BuildPoints    *BuildPointAllocation `json:"build_points,omitempty"`
+	Priority       map[string]string     `json:"priority"`
+	Attributes     map[string]int        `json:"attributes"`
+	Skills         []Rated               `json:"skills"`
+	Gear           []Possession          `json:"gear"`
+	Cyberware      []Possession          `json:"cyberware"`
+	Bioware        []Possession          `json:"bioware,omitempty"`
+	Spells         []Possession          `json:"spells,omitempty"`
+	AdeptPowers    []Possession          `json:"adept_powers,omitempty"`
+	Vehicles       []Possession          `json:"vehicles,omitempty"`
+	Decks          []Possession          `json:"cyberdecks,omitempty"`
+	EdgesFlaws     []Possession          `json:"edges_flaws,omitempty"`
+	Contacts       []Possession          `json:"contacts,omitempty"`
+	Totems         []Possession          `json:"totems,omitempty"`
+	MagicGear      []Possession          `json:"magic_gear,omitempty"`
+	Karma          int                   `json:"karma"`
+	KarmaPool      int                   `json:"karma_pool"`
+	Notes          string                `json:"notes"`
+	LegacyText     string                `json:"legacy_text,omitempty"`
+	LegacyBytes    []byte                `json:"legacy_bytes,omitempty"`
+	LegacyWarnings []string              `json:"legacy_warnings,omitempty"`
+	LegacyEssence  *float64              `json:"legacy_essence,omitempty"`
+	LegacyMagic    *int                  `json:"legacy_magic,omitempty"`
 }
 
 var attributeKeys = []string{"Body", "Quickness", "Strength", "Charisma", "Intelligence", "Willpower"}
@@ -152,7 +153,12 @@ var resourceLevels = map[string]int{"A": 1000000, "B": 400000, "C": 90000, "D": 
 var attrLevels = map[string]int{"A": 30, "B": 27, "C": 24, "D": 21, "E": 18}
 var skillLevels = map[string]int{"A": 50, "B": 40, "C": 34, "D": 30, "E": 27}
 
-func (ch *Character) ResourceBudget() int  { return resourceLevels[ch.Priority["Resources"]] }
+func (ch *Character) ResourceBudget() int {
+	if ch.BuildPoints != nil {
+		return ch.BuildPoints.Resources
+	}
+	return resourceLevels[ch.Priority["Resources"]]
+}
 func (ch *Character) AttributeBudget() int { return attrLevels[ch.Priority["Attributes"]] }
 func (ch *Character) SkillBudget() int     { return skillLevels[ch.Priority["Skills"]] }
 func (ch *Character) AttributeSpent() int {
@@ -173,6 +179,10 @@ func (ch *Character) EffectiveAttribute(name string) int {
 	return ch.Attributes[name] + raceMods[ch.Race][name]
 }
 func (ch *Character) Awakened() bool {
+	if ch.BuildPoints != nil {
+		cost, ok := buildMagicCosts[ch.BuildPoints.Magic]
+		return ok && cost > 0
+	}
 	return ch.Priority["Magic"] == "A" || ch.Priority["Magic"] == "B"
 }
 func (ch *Character) Essence() float64 {
@@ -230,29 +240,37 @@ func (ch *Character) Validate() []string {
 	if ch.Edition != 3 {
 		issues = append(issues, "Only Shadowrun Third Edition is supported")
 	}
-	found := map[string]string{}
-	for _, k := range priorityNames {
-		v := strings.ToUpper(strings.TrimSpace(ch.Priority[k]))
-		if _, ok := resourceLevels[v]; !ok {
-			issues = append(issues, k+" priority must be A–E")
-		} else if old, ok := found[v]; ok {
-			issues = append(issues, fmt.Sprintf("Priority %s assigned to %s and %s", v, old, k))
-		} else {
-			found[v] = k
+	if ch.BuildPoints != nil {
+		_, bpIssues := ch.buildPointTotal()
+		issues = append(issues, bpIssues...)
+	} else {
+		found := map[string]string{}
+		for _, k := range priorityNames {
+			v := strings.ToUpper(strings.TrimSpace(ch.Priority[k]))
+			if _, ok := resourceLevels[v]; !ok {
+				issues = append(issues, k+" priority must be A–E")
+			} else if old, ok := found[v]; ok {
+				issues = append(issues, fmt.Sprintf("Priority %s assigned to %s and %s", v, old, k))
+			} else {
+				found[v] = k
+			}
+		}
+		pr := ch.Priority["Race"]
+		if pr == "E" && ch.Race != "Human" {
+			issues = append(issues, "Race priority E only permits Human")
+		}
+		if pr == "D" && ch.Race != "Human" && ch.Race != "Ork" && ch.Race != "Dwarf" {
+			issues = append(issues, "Race priority D permits Human, Ork and Dwarf")
+		}
+		if ch.AttributeSpent() > ch.AttributeBudget() {
+			issues = append(issues, fmt.Sprintf("Attribute points exceed priority budget: %d / %d", ch.AttributeSpent(), ch.AttributeBudget()))
+		}
+		if ch.SkillSpent() > ch.SkillBudget() {
+			issues = append(issues, fmt.Sprintf("Skill points exceed priority budget (simple ratings): %d / %d", ch.SkillSpent(), ch.SkillBudget()))
 		}
 	}
 	if _, ok := raceMods[ch.Race]; !ok {
 		issues = append(issues, "Unknown race")
-	}
-	pr := ch.Priority["Race"]
-	if pr == "E" && ch.Race != "Human" {
-		issues = append(issues, "Race priority E only permits Human")
-	}
-	if pr == "D" && ch.Race != "Human" && ch.Race != "Ork" && ch.Race != "Dwarf" {
-		issues = append(issues, "Race priority D permits Human, Ork and Dwarf")
-	}
-	if ch.AttributeSpent() > ch.AttributeBudget() {
-		issues = append(issues, fmt.Sprintf("Attribute points exceed priority budget: %d / %d", ch.AttributeSpent(), ch.AttributeBudget()))
 	}
 	for _, k := range attributeKeys {
 		if ch.Attributes[k] < 1 || ch.Attributes[k] > 6 {
@@ -261,9 +279,6 @@ func (ch *Character) Validate() []string {
 		if ch.EffectiveAttribute(k) < 1 {
 			issues = append(issues, k+" racial-adjusted rating must be at least 1")
 		}
-	}
-	if ch.SkillSpent() > ch.SkillBudget() {
-		issues = append(issues, fmt.Sprintf("Skill points exceed priority budget (simple ratings): %d / %d", ch.SkillSpent(), ch.SkillBudget()))
 	}
 	for _, v := range ch.Skills {
 		if v.Rating < 1 || v.Rating > 6 {
@@ -370,7 +385,7 @@ func (ch *Character) AddItem(it Item) {
 	}
 }
 
-var htmlTemplate = template.Must(template.New("sheet").Parse(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>{{.Name}} — RunnerForge</title><style>body{font:15px Arial,sans-serif;max-width:900px;margin:auto;padding:1.5rem;color:#181b22}h1{border-bottom:2px solid #222}h2{margin-top:1.5rem}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;text-align:left;padding:.35rem}small{color:#555}.col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media print{body{margin:.3in;padding:0}h2{break-after:avoid}}</style></head><body><h1>{{.Name}}</h1><small>RunnerForge — Shadowrun Third Edition · {{.Race}} · Local HTML Export</small><div class="col"><section><h2>Attributes</h2><table>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table></section><section><h2>Derived</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr></table></section></div><h2>Priorities</h2><table>{{range .Priorities}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table><h2>Skills</h2><table>{{range .Skills}}<tr><td>{{.Name}}</td><td>{{.Rating}}</td></tr>{{end}}</table><h2>Cyberware</h2><table>{{range .Cyberware}}<tr><td>{{.Name}}</td><td>{{.EssenceCost}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Gear</h2><table>{{range .Gear}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Bioware</h2><table>{{range .Bioware}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Spells</h2><table>{{range .Spells}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Adept Powers</h2><table>{{range .AdeptPowers}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Vehicles</h2><table>{{range .Vehicles}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Cyberdecks</h2><table>{{range .Decks}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Edges / Flaws</h2><table>{{range .EdgesFlaws}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Totems / Traditions</h2><table>{{range .Totems}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Contacts</h2><table>{{range .Contacts}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Notes</h2><p style="white-space:pre-wrap">{{.Notes}}</p><small>Generated character record. Verify all calculations against the official SR3 rules, especially imported legacy cyberware and advanced options.</small></body></html>`))
+var htmlTemplate = template.Must(template.New("sheet").Parse(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>{{.Name}} — RunnerForge</title><style>body{font:15px Arial,sans-serif;max-width:900px;margin:auto;padding:1.5rem;color:#181b22}h1{border-bottom:2px solid #222}h2{margin-top:1.5rem}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;text-align:left;padding:.35rem}small{color:#555}.col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media print{body{margin:.3in;padding:0}h2{break-after:avoid}}</style></head><body><h1>{{.Name}}</h1><small>RunnerForge — Shadowrun Third Edition · {{.Race}} · Local HTML Export</small><div class="col"><section><h2>Attributes</h2><table>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table></section><section><h2>Derived</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr></table></section></div><h2>Character Creation</h2><table>{{range .Priorities}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table><h2>Skills</h2><table>{{range .Skills}}<tr><td>{{.Name}}</td><td>{{.Rating}}</td></tr>{{end}}</table><h2>Cyberware</h2><table>{{range .Cyberware}}<tr><td>{{.Name}}</td><td>{{.EssenceCost}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Gear</h2><table>{{range .Gear}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Bioware</h2><table>{{range .Bioware}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Spells</h2><table>{{range .Spells}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Adept Powers</h2><table>{{range .AdeptPowers}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Vehicles</h2><table>{{range .Vehicles}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Cyberdecks</h2><table>{{range .Decks}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Edges / Flaws</h2><table>{{range .EdgesFlaws}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Totems / Traditions</h2><table>{{range .Totems}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Contacts</h2><table>{{range .Contacts}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Notes</h2><p style="white-space:pre-wrap">{{.Notes}}</p><small>Generated character record. Verify all calculations against the official SR3 rules, especially imported legacy cyberware and advanced options.</small></body></html>`))
 
 type kv struct {
 	Key   string
@@ -383,8 +398,13 @@ func (ch *Character) ExportHTML(w io.Writer) error {
 		attrs = append(attrs, kv{k, ch.EffectiveAttribute(k)})
 	}
 	prs := []kv{}
-	for _, k := range priorityNames {
-		prs = append(prs, kv{k, ch.Priority[k]})
+	if ch.BuildPoints != nil {
+		total, _ := ch.buildPointTotal()
+		prs = []kv{{"Build Points used (known costs)", fmt.Sprintf("%d / %d", total, ch.BuildPoints.Budget)}, {"Magic type", ch.BuildPoints.Magic}, {"Resources", ch.BuildPoints.Resources}}
+	} else {
+		for _, k := range priorityNames {
+			prs = append(prs, kv{k, ch.Priority[k]})
+		}
 	}
 	v := struct {
 		*Character
@@ -413,12 +433,17 @@ func (ch *Character) Summary() string {
 		fmt.Fprintf(&sb, "%s: %d (base %d)\r\n", k, ch.EffectiveAttribute(k), ch.Attributes[k])
 	}
 	fmt.Fprintf(&sb, "\r\nReaction %d • Initiative %d + %dD6\r\nEssence %.2f • Magic %d\r\nCombat Pool %d • Spell Pool %d\r\n", ch.Reaction(), ch.Reaction(), ch.InitiativeDice(), ch.Essence(), ch.Magic(), ch.CombatPool(), ch.SpellPool())
-	fmt.Fprintf(&sb, "\r\nAttributes %d / %d points\r\nSkills %d / %d points (simple)\r\nResources: ¥%d\r\n", ch.AttributeSpent(), ch.AttributeBudget(), ch.SkillSpent(), ch.SkillBudget(), ch.ResourceBudget())
+	if ch.BuildPoints != nil {
+		total, _ := ch.buildPointTotal()
+		fmt.Fprintf(&sb, "\r\nBuild Points used: %d / %d (known costs)\r\nResources: ¥%d\r\n", total, ch.BuildPoints.Budget, ch.ResourceBudget())
+	} else {
+		fmt.Fprintf(&sb, "\r\nAttributes %d / %d points\r\nSkills %d / %d points (simple)\r\nResources: ¥%d\r\n", ch.AttributeSpent(), ch.AttributeBudget(), ch.SkillSpent(), ch.SkillBudget(), ch.ResourceBudget())
+	}
 	fmt.Fprintf(&sb, "Skills: %d • Gear: %d • Cyberware: %d\r\n", len(ch.Skills), len(ch.Gear), len(ch.Cyberware))
 	fmt.Fprintf(&sb, "Bioware %d • Spells %d • Adept powers %d • Vehicles %d • Decks %d\r\n", len(ch.Bioware), len(ch.Spells), len(ch.AdeptPowers), len(ch.Vehicles), len(ch.Decks))
 	issues := ch.Validate()
 	if len(issues) == 0 {
-		sb.WriteString("\r\nBasic priority/attribute checks passed. Advanced SR3 validation incomplete.")
+		sb.WriteString("\r\nBasic creation checks passed. Advanced SR3 validation incomplete.")
 	} else {
 		sb.WriteString("\r\nReview:\r\n - " + strings.Join(issues, "\r\n - "))
 	}
