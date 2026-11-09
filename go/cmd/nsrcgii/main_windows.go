@@ -102,7 +102,7 @@ var (
 	procUpdate    = user32.NewProc("UpdateWindow")
 	procModule    = kernel32.NewProc("GetModuleHandleW")
 	procStock     = gdi32.NewProc("GetStockObject")
-	title         = "NSRCG II — Shadowrun Third Edition"
+	title         = "RunnerForge — Shadowrun Third Edition"
 	window        uintptr
 	app           *application
 )
@@ -411,7 +411,7 @@ func (a *application) perform(id int) {
 		a.sync()
 		path := a.savePath
 		if path == "" {
-			path = pickFile(true, "NSRCG II Character (*.nsrcg2.json)\x00*.nsrcg2.json\x00JSON Files (*.json)\x00*.json\x00\x00", "json")
+			path = pickFile(true, "RunnerForge Character (*.nsrcg2.json)\x00*.nsrcg2.json\x00JSON Files (*.json)\x00*.json\x00\x00", "json")
 		}
 		if path == "" {
 			return
@@ -427,7 +427,7 @@ func (a *application) perform(id int) {
 		if !a.beforeReplace() {
 			return
 		}
-		path := pickFile(false, "NSRCG II Character (*.json)\x00*.json\x00All files (*.*)\x00*.*\x00\x00", "")
+		path := pickFile(false, "RunnerForge Character (*.json)\x00*.json\x00All files (*.*)\x00*.*\x00\x00", "")
 		if path == "" {
 			return
 		}

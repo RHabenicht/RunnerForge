@@ -5,5 +5,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("NSRCG II desktop GUI runs on Windows; run `go test ./...` to validate the core.")
+	fmt.Println("RunnerForge desktop GUI runs on Windows; run `go test ./...` to validate the core.")
 }

@@ -1,4 +1,4 @@
-# NSRCG II
+# RunnerForge
 
 Standalone Shadowrun Third Edition character generator for Windows 10/11, currently in development.
 
@@ -22,7 +22,7 @@ go vet ./...
 Build from the go directory on Windows.
 
 ```sh
-go build -ldflags="-H windowsgui" -o NSRCG-II.exe ./cmd/nsrcgii
+go build -ldflags="-H windowsgui" -o RunnerForge.exe ./cmd/nsrcgii
 ```
 
 Recheck the catalog from the repository root.
