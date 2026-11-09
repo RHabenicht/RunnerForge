@@ -1,5 +1,5 @@
 name: Windows save smoke test
-on: [push]
+on: [push, pull_request]
 jobs:
   windows:
     runs-on: windows-2022
