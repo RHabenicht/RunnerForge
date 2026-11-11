@@ -147,3 +147,23 @@ func TestCareerSnapshotIsStable(t *testing.T) {
 		t.Fatalf("career round trip: %v", err)
 	}
 }
+
+func TestLearningMultipleSpecializations(t *testing.T) {
+	ch := NewCharacter()
+	ch.Career = true
+	ch.Karma = 10
+	ch.Attributes["Quickness"] = 6
+	ch.Skills = []Rated{{Name: "Stealth", Rating: 5}}
+	if err := ch.LearnOrAdvanceSpecialization(0, "Sneaking"); err != nil {
+		t.Fatal(err)
+	}
+	if err := ch.LearnOrAdvanceSpecialization(0, "Awareness"); err != nil {
+		t.Fatal(err)
+	}
+	if ch.Karma != 4 || ch.Skills[0].Rating != 5 || len(ch.Skills[0].AdditionalSpecializations) != 2 {
+		t.Fatal("new specializations changed base or had incorrect costs")
+	}
+	if err := ch.LearnOrAdvanceSpecialization(0, "Sneaking"); err == nil {
+		t.Fatal("accepted advancement without enough karma")
+	}
+}

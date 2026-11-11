@@ -103,6 +103,9 @@ func (ch *Character) SkillAllocation() SkillAllocation {
 		if name == "" {
 			result.Issues = append(result.Issues, "Skill name is required")
 		}
+		if !ch.Career && len(skill.AdditionalSpecializations) > 0 {
+			result.Issues = append(result.Issues, "Only one specialization per skill at creation: "+name)
+		}
 		rating := skill.PurchasedRating()
 		if skill.Rating < 1 || (!ch.Career && rating > 6) {
 			result.Issues = append(result.Issues, "Creation skill ratings must be 1–6 before specialization: "+name)

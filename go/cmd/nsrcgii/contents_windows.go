@@ -75,8 +75,8 @@ func contentsRefresh() {
 	if contentsGroup == "Skills" {
 		for _, s := range app.char.Skills {
 			label := fmt.Sprintf("%s  %d", s.Name, s.Rating)
-			if s.Specialization != "" {
-				label += fmt.Sprintf(" (%s %d)", s.Specialization, s.SpecializationRating())
+			if specs := s.SpecializationText(); specs != "" {
+				label += " (" + specs + ")"
 			}
 			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(label))))
 		}
@@ -288,8 +288,22 @@ func contentsApply() error {
 				return fmt.Errorf("linked attribute must be Body, Quickness, Strength, Charisma, Intelligence, Willpower or Reaction")
 			}
 		}
+		if app.char.Career && contentsIndex >= 0 && app.char.Skills[contentsIndex].Specialization != s.Specialization {
+			return fmt.Errorf("use Learn / raise specialization to add a specialization during play")
+		}
 		if contentsIndex >= 0 && app.char.Skills[contentsIndex].Specialization == s.Specialization {
 			s.SpecializationValue = app.char.Skills[contentsIndex].SpecializationValue
+			s.AdditionalSpecializations = app.char.Skills[contentsIndex].AdditionalSpecializations
+		}
+		if contentsIndex < 0 && app.char.Career {
+			if s.Rating != 1 || s.Specialization != "" {
+				return fmt.Errorf("learn a new skill at rating 1, then advance it with karma")
+			}
+			if app.char.Karma < 1 {
+				return fmt.Errorf("learning a new skill costs 1 karma")
+			}
+			app.char.Karma--
+			app.char.Advancements = append(app.char.Advancements, srcapp.Advancement{Kind: "Skill", Name: s.Name, From: 0, To: 1, Karma: 1})
 		}
 		if contentsIndex < 0 {
 			app.char.Skills = append(app.char.Skills, s)
@@ -420,7 +434,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 			contentCtl(hwnd, "BUTTON", label, WS_TABSTOP, 15+i*180, 520, 165, 32, 100+i)
 		}
 		contentCtl(hwnd, "BUTTON", "Raise skill (karma)", WS_TABSTOP, 265, 475, 210, 30, 104)
-		contentCtl(hwnd, "BUTTON", "Raise specialization", WS_TABSTOP, 490, 475, 230, 30, 105)
+		contentCtl(hwnd, "BUTTON", "Learn / raise specialization", WS_TABSTOP, 490, 475, 230, 30, 105)
 		contentsRefresh()
 		return 0
 	case WM_COMMAND:
@@ -464,8 +478,21 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 				}
 				return 0
 			}
-			if contentsGroup == "Skills" && !contentsDirty {
-				if err := app.char.AdvanceSkill(contentsIndex, id == 105); err != nil {
+			if contentsGroup == "Skills" && (!contentsDirty || id == 105) {
+				var err error
+				if id == 105 {
+					if contentsIndex >= 0 && contentsIndex < len(app.char.Skills) {
+						selected := app.char.Skills[contentsIndex]
+						if get(contentsFields[10]) != selected.Name || get(contentsFields[11]) != strconv.Itoa(selected.Rating) || get(contentsFields[12]) != selected.Class() || get(contentsFields[14]) != selected.LinkedAttribute {
+							msgbox("Apply other skill edits before buying a specialization.", MB_ICONWARNING)
+							return 0
+						}
+					}
+					err = app.char.LearnOrAdvanceSpecialization(contentsIndex, get(contentsFields[13]))
+				} else {
+					err = app.char.AdvanceSkill(contentsIndex, false)
+				}
+				if err != nil {
 					msgbox(err.Error(), MB_ICONWARNING)
 				} else {
 					app.dirty = true

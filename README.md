@@ -12,7 +12,7 @@ Standalone Shadowrun Third Edition character generator for Windows 10/11. Versio
 - Cyberware grade price/Essence calculations and bioware's effect on starting Magic.
 - Equipment quantity and price accounting. Unknown prices remain unresolved rather than counting as free.
 
-Choose **Edit / remove…** to edit a selected skill or possession. The group selector also opens character notes, karma, tradition and extra-point settings. Select **Character**, apply any edits, and choose **Begin career** to preserve a creation snapshot and enable karma advancement. Existing skills, their named specialization and attributes can then be raised one step at a time. Each improvement records its cost.
+Choose **Edit / remove…** to edit a selected skill or possession. The group selector also opens character notes, karma, tradition and extra-point settings. Select **Character**, apply any edits, and choose **Begin career** to preserve a creation snapshot and enable karma advancement. Skills, specializations and attributes can then be raised one step at a time. New skills cost one karma at rating 1; additional specializations use the SR3 advancement costs. Each purchase records its cost.
 
 ## Files and Windows installation
 

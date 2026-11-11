@@ -75,12 +75,13 @@ func (c *Catalogue) Search(q, kind string, limit int) []Item {
 }
 
 type Rated struct {
-	SpecializationValue *int   `json:"specialization_rating,omitempty"`
-	Name                string `json:"name"`
-	Rating              int    `json:"rating"`
-	Category            string `json:"category,omitempty"`
-	Specialization      string `json:"specialization,omitempty"`
-	LinkedAttribute     string `json:"linked_attribute,omitempty"`
+	AdditionalSpecializations map[string]int `json:"additional_specializations,omitempty"`
+	SpecializationValue       *int           `json:"specialization_rating,omitempty"`
+	Name                      string         `json:"name"`
+	Rating                    int            `json:"rating"`
+	Category                  string         `json:"category,omitempty"`
+	Specialization            string         `json:"specialization,omitempty"`
+	LinkedAttribute           string         `json:"linked_attribute,omitempty"`
 }
 type Possession struct {
 	Grade             string   `json:"grade,omitempty"`

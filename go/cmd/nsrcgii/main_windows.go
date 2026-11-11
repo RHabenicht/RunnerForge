@@ -613,9 +613,12 @@ func wndProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		setupUI()
 		return 0
 	case 0x0024: // WM_GETMINMAXINFO
-		limits := (*minMaxInfo)(unsafe.Pointer(lp))
+		var limits minMaxInfo
+		copyMemory := kernel32.NewProc("RtlMoveMemory")
+		copyMemory.Call(uintptr(unsafe.Pointer(&limits)), lp, unsafe.Sizeof(limits))
 		bounds := workArea()
 		limits.MinTrackSize = point{int32(min(1000, int(bounds.Right-bounds.Left))), int32(min(500, int(bounds.Bottom-bounds.Top)))}
+		copyMemory.Call(lp, uintptr(unsafe.Pointer(&limits)), unsafe.Sizeof(limits))
 		return 0
 	case 0x0005: // WM_SIZE
 		if app != nil {

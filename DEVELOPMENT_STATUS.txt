@@ -8,7 +8,8 @@ Knowledge/Language pools; creation specialization and literacy ratings;
 selected skill/item editing and removal; equipment quantities and prices;
 Spell Point purchases/sales; Edge/Flaw cost accounting; cyberware grade costs;
 Bio Index and its effect on starting Magic; character notes and karma;
-career snapshots, existing-skill/specialization/attribute advancement history;
+career snapshots, skill/specialization/attribute advancement history;
+new skills and multiple specializations purchased with karma;
 all stored character groups in HTML/PDF; per-user Windows installer.
 
 Verification:
@@ -25,8 +26,7 @@ Still required for complete SR3 coverage:
   attribute modifiers, cultured bioware rules and equipment dependencies.
 - Full magical eligibility, foci bonding, spirits, initiation and tradition/
   aspect restrictions. Edge/Flaw effects beyond their point accounting.
-- Full advancement: new skills/specializations, multiple specializations,
-  spells/foci, training and automatic karma-pool progression.
+- Remaining advancement: spells/foci, training and automatic karma-pool progression.
 - Vehicle/deck customization and comprehensive availability/legality checks.
 - Book-by-book verification of catalog values and complete legacy field fidelity.
 - Direct Windows 10/11 desktop and visual/DPI acceptance.

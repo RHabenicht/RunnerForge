@@ -141,6 +141,22 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	if app.char.Attributes["Body"] != 2 || app.char.Karma != 20 {
 		t.Fatal("attribute advancement overwritten by form sync")
 	}
+	contentsGroup = "Skills"
+	contentsRefresh()
+	contentsIndex = 0
+	contentsLoad()
+	set(contentsFields[13], "Ares")
+	send(contentsWindow, WM_COMMAND, 105, 0)
+	if app.char.Karma != 15 || app.char.Skills[0].AdditionalSpecializations["Ares"] != 5 {
+		t.Fatal("new specialization purchase failed")
+	}
+	set(contentsFields[10], "Athletics")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if app.char.Karma != 14 || len(app.char.Skills) != 2 {
+		t.Fatal("new skill purchase failed")
+	}
 	contentsDirty = false
 	procDestroy.Call(contentsWindow)
 	resizeMain(1000, 550)

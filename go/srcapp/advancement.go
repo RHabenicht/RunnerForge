@@ -61,6 +61,9 @@ func (ch *Character) AdvanceSkill(index int, specialization bool) error {
 	if index < 0 || index >= len(ch.Skills) {
 		return fmt.Errorf("select a skill")
 	}
+	if specialization {
+		return ch.LearnOrAdvanceSpecialization(index, ch.Skills[index].Specialization)
+	}
 	skill := &ch.Skills[index]
 	link := skill.Link()
 	if link == "" {
@@ -73,26 +76,13 @@ func (ch *Character) AdvanceSkill(index int, specialization bool) error {
 	current := skill.Rating
 	name := skill.Name
 	kind := "Skill"
-	if specialization {
-		if skill.Specialization == "" {
-			return fmt.Errorf("select a named specialization first")
-		}
-		current = skill.SpecializationRating()
-		name += " (" + skill.Specialization + ")"
-		kind = "Specialization"
-		if current+1 > max(3, skill.Rating*2) {
-			return fmt.Errorf("raise the base skill before increasing this specialization")
-		}
-	}
 	next := current + 1
 	// Multipliers are represented in halves; integer division rounds down.
 	factor := 3
 	if skill.Class() != "Active" {
 		factor = 2
 	}
-	if specialization {
-		factor = 1
-	}
+
 	if next > attribute {
 		factor++
 	}
@@ -108,11 +98,7 @@ func (ch *Character) AdvanceSkill(index int, specialization bool) error {
 		value := skill.SpecializationRating()
 		skill.SpecializationValue = &value
 	}
-	if specialization {
-		skill.SpecializationValue = &next
-	} else {
-		skill.Rating = next
-	}
+	skill.Rating = next
 	ch.Karma -= cost
 	ch.Advancements = append(ch.Advancements, Advancement{kind, name, current, next, cost})
 	return nil
