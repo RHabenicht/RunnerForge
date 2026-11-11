@@ -258,6 +258,9 @@ func pickFile(save bool, filter string, def string) string {
 	var o ofn
 	o.Size = uint32(unsafe.Sizeof(o))
 	o.Owner = window
+	if raceWindow != 0 {
+		o.Owner = raceWindow
+	}
 	o.File = &buf[0]
 	o.MaxFile = uint32(len(buf))
 	o.Filter = &f[0]
@@ -660,6 +663,14 @@ func main() {
 		r, _, _ := procGetMsg.Call(uintptr(unsafe.Pointer(&m)), 0, 0, 0)
 		if int32(r) <= 0 {
 			break
+		}
+		dialog := window
+		if raceWindow != 0 {
+			dialog = raceWindow
+		}
+		handled, _, _ := user32.NewProc("IsDialogMessageW").Call(dialog, uintptr(unsafe.Pointer(&m)))
+		if handled != 0 {
+			continue
 		}
 		procTranslate.Call(uintptr(unsafe.Pointer(&m)))
 		procDispatch.Call(uintptr(unsafe.Pointer(&m)))

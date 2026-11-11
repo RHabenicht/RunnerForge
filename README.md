@@ -13,7 +13,7 @@ The embedded catalog contains 6,449 records citing approved sources. Another 2,6
 
 Build Point mode includes the 14 metavariants in the revised Shadowrun Companion (pp. 38–43). The published cost is 5 BP above the parent metatype, for a total of 10 BP for dwarf and ork variants or 15 BP for elf and troll variants.
 
-To use house rules, save a race definition as a JSON file and select **Load custom race…**. Use a distinct name for a house-rule version of a built-in race. The example below prices a custom Night One at the same 10 BP as an elf.
+To create a house-rule race, select a starting metatype and choose **Edit race…**. Change its name, Build Point cost, six attribute modifiers, and descriptive traits, then choose **Use race**. **Cancel** discards edits. **Export race…** saves a reusable JSON definition; **Load race…** imports one. Use a distinct name for a house-rule version of a built-in race. The example below prices a custom Night One at the same 10 BP as an elf.
 
 ```json
 {
@@ -53,7 +53,7 @@ python build_catalog.py --catalog go/srcapp/catalog.json
 
 This reads both the embedded catalog and go/data/quarantine.json, preserving existing record IDs.
 
-Four Python regression tests, Go tests, and go vet passed on November 6, 2026. Windows x86-64 cross-compilation succeeded. Native Windows GUI and PDF export testing remain outstanding.
+The Windows CI suite runs Go tests, vet, an executable build, and native window startup/close checks. It also exercises custom-race editing and character save/load through native Windows controls. These checks use Windows Server 2022; Windows 10/11 desktop acceptance and PDF export testing remain outstanding.
 
 DEVELOPMENT_STATUS.txt describes the latest checkpoint. Other historical reports describe earlier development stages.
 
