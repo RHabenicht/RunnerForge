@@ -44,6 +44,7 @@ const (
 	IDYES               = 6
 	IDCANCEL            = 2
 	CB_ADDSTRING        = 0x0143
+	CB_RESETCONTENT     = 0x014B
 	CB_SETCURSEL        = 0x014E
 	CB_GETCURSEL        = 0x0147
 	CB_GETLBTEXT        = 0x0148
@@ -68,6 +69,8 @@ const (
 	ID_ADD              = 108
 	ID_SKILL            = 109
 	ID_REMOVE           = 110
+	ID_CUSTOM_RACE      = 111
+	ID_EDIT_RACE        = 112
 	ID_NAME             = 201
 	ID_RACE             = 202
 	ID_ATTR             = 220
@@ -78,6 +81,10 @@ const (
 	ID_SUMMARY          = 263
 	ID_SKILLNAME        = 264
 	ID_SKILLRATING      = 265
+	ID_METHOD           = 266
+	ID_BP_BUDGET        = 267
+	ID_BP_MAGIC         = 268
+	ID_BP_RESOURCES     = 269
 )
 
 var (
@@ -223,12 +230,17 @@ func comboVal(id int) string {
 	send(h, CB_GETLBTEXT, i, uintptr(unsafe.Pointer(&s[0])))
 	return syscall.UTF16ToString(s)
 }
+
+var creationMethods = []string{"Priority", "Build Points"}
+var buildMagicOptions = []string{"Mundane", "Full Magician", "Aspected Magician", "Adept"}
+var buildResourceOptions = []string{"500", "5000", "20000", "90000", "200000", "400000", "650000", "1000000"}
+
 func selectCombo(id int, selected string) {
 	h := app.controls[id]
 	if h == 0 {
 		return
 	}
-	values := map[int][]string{ID_RACE: {"Human", "Dwarf", "Elf", "Ork", "Troll"}}
+	values := map[int][]string{ID_METHOD: creationMethods, ID_BP_MAGIC: buildMagicOptions, ID_BP_RESOURCES: buildResourceOptions}
 	if id >= ID_PRIORITY && id < ID_PRIORITY+5 {
 		values[id] = []string{"A", "B", "C", "D", "E"}
 	}
@@ -277,14 +289,21 @@ func setupUI() {
 	text("Character name", 20, 17, 150, 18)
 	edit("", 20, 36, 240, 25, ID_NAME, false)
 	text("Metatype", 280, 17, 130, 18)
-	combo([]string{"Human", "Dwarf", "Elf", "Ork", "Troll"}, 280, 34, 145, 150, ID_RACE, "Human")
+	combo(nil, 280, 34, 145, 260, ID_RACE, "")
 	button("New", 455, 30, 73, 32, ID_NEW)
 	button("Open", 535, 30, 73, 32, ID_OPEN)
 	button("Save", 615, 30, 73, 32, ID_SAVE)
 	button("Import .sr3", 694, 30, 100, 32, ID_IMPORT)
 	button("Export HTML", 800, 30, 108, 32, ID_HTML)
 	button("PDF", 914, 30, 70, 32, ID_PDF)
-	text("SR3 priorities (A–E, one per category)", 20, 75, 420, 18)
+	text("Priorities (A–E)", 20, 75, 135, 18)
+	combo(creationMethods, 155, 70, 125, 100, ID_METHOD, "Priority")
+	text("BP budget", 300, 75, 75, 18)
+	edit("120", 378, 70, 55, 24, ID_BP_BUDGET, false)
+	text("Magic", 454, 75, 55, 18)
+	combo(buildMagicOptions, 510, 70, 170, 140, ID_BP_MAGIC, "Mundane")
+	text("Resources (¥)", 700, 75, 108, 18)
+	combo(buildResourceOptions, 812, 70, 150, 190, ID_BP_RESOURCES, "5000")
 	for i, k := range pri {
 		xx := 20 + i*193
 		text(k, xx, 98, 155, 18)
@@ -303,6 +322,8 @@ func setupUI() {
 	text("Rating", 578, 250, 65, 19)
 	edit("1", 636, 246, 45, 27, ID_SKILLRATING, false)
 	button("Add skill", 692, 246, 100, 31, ID_SKILL)
+	button("Edit race…", 800, 246, 85, 31, ID_EDIT_RACE)
+	button("Load race…", 895, 246, 85, 31, ID_CUSTOM_RACE)
 	text("Reference catalogue — approved sources only", 20, 300, 410, 20)
 	edit("", 20, 325, 390, 25, ID_SEARCHTEXT, false)
 	combo([]string{"all", "gear", "cyberware", "bioware", "adept_powers", "skills", "spells", "vehicles", "cyberdecks", "edges_flaws", "totems", "magic_gear"}, 420, 325, 185, 180, ID_KIND, "all")
@@ -319,7 +340,17 @@ func (a *application) populate() {
 	a.loading = true
 	defer func() { a.loading = false; a.dirty = false }()
 	set(a.controls[ID_NAME], a.char.Name)
-	selectCombo(ID_RACE, a.char.Race)
+	a.populateRaces()
+	method := "Priority"
+	allocation := srcapp.BuildPointAllocation{Budget: 120, Resources: 5000, Magic: "Mundane"}
+	if a.char.BuildPoints != nil {
+		method = "Build Points"
+		allocation = *a.char.BuildPoints
+	}
+	selectCombo(ID_METHOD, method)
+	set(a.controls[ID_BP_BUDGET], strconv.Itoa(allocation.Budget))
+	selectCombo(ID_BP_MAGIC, allocation.Magic)
+	selectCombo(ID_BP_RESOURCES, strconv.Itoa(allocation.Resources))
 	for i, k := range pri {
 		selectCombo(ID_PRIORITY+i, a.char.Priority[k])
 	}
@@ -329,9 +360,35 @@ func (a *application) populate() {
 	set(a.controls[ID_SUMMARY], a.char.Summary())
 }
 
+func (a *application) populateRaces() {
+	control := a.controls[ID_RACE]
+	send(control, CB_RESETCONTENT, 0, 0)
+	names := srcapp.RaceNames()
+	if a.char.CustomRace != nil {
+		names = append(names, a.char.CustomRace.Name)
+	}
+	for _, name := range names {
+		index := send(control, CB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(name))))
+		if name == a.char.Race {
+			send(control, CB_SETCURSEL, index, 0)
+		}
+	}
+}
+
 func (a *application) sync() {
 	a.char.Name = get(a.controls[ID_NAME])
-	a.char.Race = comboVal(ID_RACE)
+	if race := comboVal(ID_RACE); race != "" {
+		a.char.Race = race
+	}
+	if comboVal(ID_METHOD) == "Build Points" {
+		budget, _ := strconv.Atoi(strings.TrimSpace(get(a.controls[ID_BP_BUDGET])))
+		resources, _ := strconv.Atoi(comboVal(ID_BP_RESOURCES))
+		a.char.BuildPoints = &srcapp.BuildPointAllocation{
+			Budget: budget, Resources: resources, Magic: comboVal(ID_BP_MAGIC),
+		}
+	} else {
+		a.char.BuildPoints = nil
+	}
 	for i, k := range pri {
 		a.char.Priority[k] = comboVal(ID_PRIORITY + i)
 	}
@@ -374,6 +431,25 @@ func (a *application) perform(id int) {
 		a.char = srcapp.NewCharacter()
 		a.savePath = ""
 		a.populate()
+	case ID_EDIT_RACE:
+		openRaceEditor()
+	case ID_CUSTOM_RACE:
+		path := pickFile(false, "Custom race (*.json)\x00*.json\x00\x00", "")
+		if path == "" {
+			return
+		}
+		race, err := srcapp.LoadRaceDefinition(path)
+		if err != nil {
+			msgbox("Could not load custom race: "+err.Error(), MB_OK|MB_ICONWARNING)
+			return
+		}
+		a.sync()
+		a.char.CustomRace = race
+		a.char.Race = race.Name
+		a.populateRaces()
+		selectCombo(ID_METHOD, "Build Points")
+		a.dirty = true
+		a.update()
 	case ID_CALC:
 		a.update()
 	case ID_SEARCH:
@@ -541,7 +617,7 @@ func wndProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		}
 		id := int(wp & 0xFFFF)
 		notif := int((wp >> 16) & 0xFFFF)
-		if id >= 100 && id <= 110 {
+		if id >= 100 && id <= ID_EDIT_RACE {
 			app.perform(id)
 		} else if !app.loading && (notif == EN_CHANGE || notif == CBN_SELCHANGE) && id != ID_SUMMARY && id != ID_SEARCHTEXT && id != ID_RESULTS {
 			app.dirty = true
