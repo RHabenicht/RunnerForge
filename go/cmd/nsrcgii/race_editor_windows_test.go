@@ -147,14 +147,14 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	contentsLoad()
 	set(contentsFields[13], "Ares")
 	send(contentsWindow, WM_COMMAND, 105, 0)
-	if app.char.Karma != 15 || app.char.Skills[0].AdditionalSpecializations["Ares"] != 5 {
+	if app.char.Karma != 18 || app.char.Skills[0].AdditionalSpecializations["Ares"] != 5 {
 		t.Fatal("new specialization purchase failed")
 	}
 	set(contentsFields[10], "Athletics")
 	if err := contentsApply(); err != nil {
 		t.Fatal(err)
 	}
-	if app.char.Karma != 14 || len(app.char.Skills) != 2 {
+	if app.char.Karma != 17 || len(app.char.Skills) != 2 {
 		t.Fatal("new skill purchase failed")
 	}
 	contentsDirty = false
