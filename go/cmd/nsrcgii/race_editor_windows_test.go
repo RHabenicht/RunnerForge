@@ -108,6 +108,39 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	if len(app.char.Skills) != 0 {
 		t.Fatal("selected skill not removed")
 	}
+	contentsGroup = "Character"
+	contentsRefresh()
+	set(contentsFields[10], "Test real name")
+	set(contentsFields[11], "30")
+	set(contentsFields[15], "Test character notes")
+	set(contentsFields[16], "2")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if app.char.RealName != "Test real name" || app.char.Notes != "Test character notes" || app.char.BuildPoints.ExtraKnowledge != 2 {
+		t.Fatal("character details were not saved")
+	}
+	app.char.Career = true
+	app.char.Attributes["Quickness"] = 4
+	app.char.Skills = []srcapp.Rated{{Name: "Pistols", Rating: 3, Specialization: "Beretta"}}
+	app.populate()
+	app.dirty = true
+	contentsGroup = "Skills"
+	contentsRefresh()
+	contentsIndex = 0
+	contentsLoad()
+	send(contentsWindow, WM_COMMAND, 104, 0)
+	if app.char.Karma != 24 || app.char.Skills[0].Rating != 4 || app.char.Skills[0].SpecializationRating() != 5 {
+		t.Fatal("native advancement action failed")
+	}
+	contentsGroup = "Attributes"
+	contentsRefresh()
+	contentsIndex = 0
+	contentsLoad()
+	send(contentsWindow, WM_COMMAND, 104, 0)
+	if app.char.Attributes["Body"] != 2 || app.char.Karma != 20 {
+		t.Fatal("attribute advancement overwritten by form sync")
+	}
 	contentsDirty = false
 	procDestroy.Call(contentsWindow)
 	resizeMain(1000, 550)

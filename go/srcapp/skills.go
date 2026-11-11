@@ -9,6 +9,9 @@ import (
 // Rating is the final base rating. At creation a specialization has Rating+2,
 // and the purchased rating (used for cost) is Rating+1. SR3 pp. 57–59.
 func (s Rated) SpecializationRating() int {
+	if s.SpecializationValue != nil {
+		return *s.SpecializationValue
+	}
 	if strings.TrimSpace(s.Specialization) == "" {
 		return 0
 	}
@@ -101,7 +104,7 @@ func (ch *Character) SkillAllocation() SkillAllocation {
 			result.Issues = append(result.Issues, "Skill name is required")
 		}
 		rating := skill.PurchasedRating()
-		if skill.Rating < 1 || rating > 6 {
+		if skill.Rating < 1 || (!ch.Career && rating > 6) {
 			result.Issues = append(result.Issues, "Creation skill ratings must be 1–6 before specialization: "+name)
 		}
 		if class == "Literacy" {
@@ -131,7 +134,7 @@ func (ch *Character) SkillAllocation() SkillAllocation {
 	}
 	// Unspent Knowledge points may pay for Language skills; the reverse is not allowed.
 	usedKnowledge := result.Knowledge + max(0, result.Language-result.LanguageBudget)
-	if usedKnowledge > result.KnowledgeBudget {
+	if !ch.Career && usedKnowledge > result.KnowledgeBudget {
 		result.Issues = append(result.Issues, fmt.Sprintf("Knowledge/Language points exceeded (%d / %d Knowledge points after Language allowance).", usedKnowledge, result.KnowledgeBudget))
 	}
 	return result

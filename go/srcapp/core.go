@@ -75,11 +75,12 @@ func (c *Catalogue) Search(q, kind string, limit int) []Item {
 }
 
 type Rated struct {
-	Name            string `json:"name"`
-	Rating          int    `json:"rating"`
-	Category        string `json:"category,omitempty"`
-	Specialization  string `json:"specialization,omitempty"`
-	LinkedAttribute string `json:"linked_attribute,omitempty"`
+	SpecializationValue *int   `json:"specialization_rating,omitempty"`
+	Name                string `json:"name"`
+	Rating              int    `json:"rating"`
+	Category            string `json:"category,omitempty"`
+	Specialization      string `json:"specialization,omitempty"`
+	LinkedAttribute     string `json:"linked_attribute,omitempty"`
 }
 type Possession struct {
 	Grade             string   `json:"grade,omitempty"`
@@ -99,6 +100,9 @@ type Possession struct {
 	Raw               string   `json:"raw,omitempty"`
 }
 type Character struct {
+	Career               bool                  `json:"career,omitempty"`
+	CreationSnapshot     json.RawMessage       `json:"creation_snapshot,omitempty"`
+	Advancements         []Advancement         `json:"advancements,omitempty"`
 	SpellPointsPurchased int                   `json:"spell_points_purchased,omitempty"`
 	SpellPointsSold      int                   `json:"spell_points_sold,omitempty"`
 	Tradition            string                `json:"tradition,omitempty"`
@@ -236,7 +240,7 @@ func (ch *Character) CombatPool() int {
 	return (ch.EffectiveAttribute("Quickness") + ch.EffectiveAttribute("Intelligence") + ch.EffectiveAttribute("Willpower")) / 2
 }
 func (ch *Character) SpellPool() int {
-	if !ch.Awakened() {
+	if !ch.Awakened() || ch.MagicChoice() == "Adept" {
 		return 0
 	}
 	return (ch.EffectiveAttribute("Intelligence") + ch.EffectiveAttribute("Willpower") + ch.Magic()) / 3
@@ -246,30 +250,32 @@ func (ch *Character) Validate() []string {
 	if ch.Edition != 3 {
 		issues = append(issues, "Only Shadowrun Third Edition is supported")
 	}
-	if ch.BuildPoints != nil {
-		_, bpIssues := ch.buildPointTotal()
-		issues = append(issues, bpIssues...)
-	} else {
-		found := map[string]string{}
-		for _, k := range priorityNames {
-			v := strings.ToUpper(strings.TrimSpace(ch.Priority[k]))
-			if _, ok := resourceLevels[v]; !ok {
-				issues = append(issues, k+" priority must be A–E")
-			} else if old, ok := found[v]; ok {
-				issues = append(issues, fmt.Sprintf("Priority %s assigned to %s and %s", v, old, k))
-			} else {
-				found[v] = k
+	if !ch.Career {
+		if ch.BuildPoints != nil {
+			_, bpIssues := ch.buildPointTotal()
+			issues = append(issues, bpIssues...)
+		} else {
+			found := map[string]string{}
+			for _, k := range priorityNames {
+				v := strings.ToUpper(strings.TrimSpace(ch.Priority[k]))
+				if _, ok := resourceLevels[v]; !ok {
+					issues = append(issues, k+" priority must be A–E")
+				} else if old, ok := found[v]; ok {
+					issues = append(issues, fmt.Sprintf("Priority %s assigned to %s and %s", v, old, k))
+				} else {
+					found[v] = k
+				}
 			}
-		}
-		expected := map[string]string{"Human": "E", "Dwarf": "D", "Ork": "D", "Elf": "C", "Troll": "C"}[ch.Race]
-		if expected != "" && ch.Priority["Race"] != expected {
-			issues = append(issues, ch.Race+" requires Race priority "+expected)
-		}
-		if ch.AttributeSpent() > ch.AttributeBudget() {
-			issues = append(issues, fmt.Sprintf("Attribute points exceed priority budget: %d / %d", ch.AttributeSpent(), ch.AttributeBudget()))
-		}
-		if ch.SkillSpent() > ch.SkillBudget() {
-			issues = append(issues, fmt.Sprintf("Skill points exceed priority budget: %d / %d", ch.SkillSpent(), ch.SkillBudget()))
+			expected := map[string]string{"Human": "E", "Dwarf": "D", "Ork": "D", "Elf": "C", "Troll": "C"}[ch.Race]
+			if expected != "" && ch.Priority["Race"] != expected {
+				issues = append(issues, ch.Race+" requires Race priority "+expected)
+			}
+			if ch.AttributeSpent() > ch.AttributeBudget() {
+				issues = append(issues, fmt.Sprintf("Attribute points exceed priority budget: %d / %d", ch.AttributeSpent(), ch.AttributeBudget()))
+			}
+			if ch.SkillSpent() > ch.SkillBudget() {
+				issues = append(issues, fmt.Sprintf("Skill points exceed priority budget: %d / %d", ch.SkillSpent(), ch.SkillBudget()))
+			}
 		}
 	}
 	if _, ok := ch.raceDefinition(); !ok {
@@ -284,7 +290,7 @@ func (ch *Character) Validate() []string {
 		}
 	}
 	for _, k := range attributeKeys {
-		if ch.Attributes[k] < 1 || ch.Attributes[k] > 6 {
+		if ch.Attributes[k] < 1 || (!ch.Career && ch.Attributes[k] > 6) {
 			issues = append(issues, k+" base rating outside 1–6 (before racial adjustment)")
 		}
 		if ch.EffectiveAttribute(k) < 1 {
@@ -293,10 +299,14 @@ func (ch *Character) Validate() []string {
 	}
 	issues = append(issues, ch.SkillAllocation().Issues...)
 	issues = append(issues, ch.ResourceAllocation().Issues...)
-	issues = append(issues, ch.MagicAllocation().Issues...)
+	if !ch.Career {
+		issues = append(issues, ch.MagicAllocation().Issues...)
+	}
 	issues = append(issues, ch.AugmentationIssues()...)
-	_, edgeIssues := ch.EdgeFlawPoints()
-	issues = append(issues, edgeIssues...)
+	if !ch.Career {
+		_, edgeIssues := ch.EdgeFlawPoints()
+		issues = append(issues, edgeIssues...)
+	}
 	if ch.Essence() < 0.01 && len(ch.Cyberware) > 0 {
 		issues = append(issues, "Essence depleted or below 0.01")
 	}

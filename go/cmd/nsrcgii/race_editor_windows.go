@@ -33,7 +33,7 @@ func openRaceEditor() {
 		}
 		raceClassRegistered = true
 	}
-	raceWindow, _, _ = procCreate.Call(0, uintptr(unsafe.Pointer(class)), uintptr(unsafe.Pointer(ptr("Custom race — RunnerForge"))), WS_OVERLAPPEDWINDOW|WS_VISIBLE, 100, 100, 560, 500, window, 0, inst, 0)
+	raceWindow, _, _ = procCreate.Call(0, uintptr(unsafe.Pointer(class)), uintptr(unsafe.Pointer(ptr("Custom race — RunnerForge"))), (WS_OVERLAPPEDWINDOW&^0x00050000)|WS_VISIBLE, 0, 0, 560, 500, window, 0, inst, 0)
 	if raceWindow != 0 {
 		user32.NewProc("EnableWindow").Call(window, 0)
 	}

@@ -85,7 +85,7 @@ func (ch *Character) ResourceAllocation() ResourceAllocation {
 			result.Spent += p.ChargedUnitCost() * p.Count()
 		}
 	}
-	if result.Spent > ch.ResourceBudget() {
+	if !ch.Career && result.Spent > ch.ResourceBudget() {
 		result.Issues = append(result.Issues, fmt.Sprintf("Resource budget exceeded (¥%d / ¥%d).", result.Spent, ch.ResourceBudget()))
 	}
 	return result

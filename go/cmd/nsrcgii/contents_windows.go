@@ -37,12 +37,18 @@ func openContents() {
 		}
 		contentsRegistered = true
 	}
-	contentsWindow, _, _ = procCreate.Call(0, uintptr(unsafe.Pointer(class)), uintptr(unsafe.Pointer(ptr("Character entries — RunnerForge"))), WS_OVERLAPPEDWINDOW|WS_VISIBLE, 80, 80, 760, 620, window, 0, inst, 0)
+	bounds := workArea()
+	height := min(620, int(bounds.Bottom-bounds.Top))
+	contentsWindow, _, _ = procCreate.Call(0, uintptr(unsafe.Pointer(class)), uintptr(unsafe.Pointer(ptr("Character entries — RunnerForge"))), (WS_OVERLAPPEDWINDOW&^0x00050000)|WS_VISIBLE, uintptr(bounds.Left), uintptr(bounds.Top), 760, uintptr(height), window, 0, inst, 0)
 	if contentsWindow != 0 {
 		user32.NewProc("EnableWindow").Call(window, 0)
 	}
 }
 func contentCtl(parent uintptr, class, label string, style uint32, x, y, w, h, id int) uintptr {
+	bounds := workArea()
+	height := min(620, int(bounds.Bottom-bounds.Top)) - 40
+	y = y * height / 580
+	h = max(18, h*height/580)
 	v, _, _ := procCreate.Call(0, uintptr(unsafe.Pointer(ptr(class))), uintptr(unsafe.Pointer(ptr(label))), uintptr(style|WS_CHILD|WS_VISIBLE), uintptr(x), uintptr(y), uintptr(w), uintptr(h), parent, uintptr(id), 0, 0)
 	font, _, _ := procStock.Call(17)
 	send(v, WM_SETFONT, font, 1)
@@ -74,6 +80,10 @@ func contentsRefresh() {
 			}
 			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(label))))
 		}
+	} else if contentsGroup == "Attributes" {
+		for _, name := range attrs {
+			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(name))))
+		}
 	} else if contentsGroup == "Character" {
 		send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr("Character details"))))
 	} else {
@@ -82,15 +92,52 @@ func contentsRefresh() {
 		}
 	}
 	contentsIndex = -1
+	if contentsGroup == "Character" {
+		set(contentsFields[100], "Begin career")
+	} else {
+		set(contentsFields[100], "New entry")
+	}
 	contentsLoad()
 }
 func contentsLoad() {
+	enable := user32.NewProc("EnableWindow")
+	for _, id := range []int{100, 101, 102} {
+		allowed := uintptr(1)
+		if contentsGroup == "Attributes" {
+			allowed = 0
+		}
+		enable.Call(contentsFields[id], allowed)
+	}
+	set(contentsFields[104], "Raise skill (karma)")
+	if contentsGroup == "Attributes" {
+		set(contentsFields[104], "Raise attribute (karma)")
+	}
+
 	contentsLoading = true
 	defer func() { contentsLoading = false; contentsDirty = false }()
 	for id := 10; id <= 17; id++ {
 		set(contentsFields[id], "")
 	}
 	labels := map[int]string{10: "Name", 11: "Rating / Force (0 if unused)", 12: "Source", 13: "Modifiers", 14: "Essence cost (cyberware)", 15: "Notes", 16: "Unit price ¥ (blank = unresolved)", 17: "Quantity"}
+	if contentsGroup == "Attributes" {
+		for id := 10; id <= 17; id++ {
+			show := uintptr(0)
+			if id <= 11 {
+				show = 5
+			}
+			procShow.Call(contentsLabels[id], show)
+			procShow.Call(contentsFields[id], show)
+		}
+		set(contentsLabels[10], "Attribute")
+		set(contentsLabels[11], "Current natural rating")
+		if contentsIndex >= 0 && contentsIndex < len(attrs) {
+			name := attrs[contentsIndex]
+			set(contentsFields[10], name)
+			set(contentsFields[11], strconv.Itoa(app.char.EffectiveAttribute(name)))
+		}
+		contentsDirty = false
+		return
+	}
 	if contentsGroup == "Character" {
 		labels = map[int]string{10: "Real name (optional)", 11: "Unspent karma", 12: "Karma pool", 13: "Spell Points purchased (¥25,000 each)", 14: "Spell Points sold (5 for 1 BP)", 15: "Character notes", 16: "Extra Knowledge BP (optional)", 17: "Tradition / aspect"}
 		for id, label := range labels {
@@ -226,7 +273,7 @@ func contentsApply() error {
 			return fmt.Errorf("choose Active, Knowledge or Language")
 		}
 		s := srcapp.Rated{Name: name, Rating: rating, Category: category, Specialization: strings.TrimSpace(get(contentsFields[13])), LinkedAttribute: strings.TrimSpace(get(contentsFields[14]))}
-		if s.Rating < 1 || s.PurchasedRating() > 6 {
+		if s.Rating < 1 || (!app.char.Career && s.PurchasedRating() > 6) {
 			return fmt.Errorf("creation rating must be 1–6; a specialized base must be 1–5")
 		}
 		if s.Class() == "Active" && s.Link() == "" {
@@ -240,6 +287,9 @@ func contentsApply() error {
 			if !valid {
 				return fmt.Errorf("linked attribute must be Body, Quickness, Strength, Charisma, Intelligence, Willpower or Reaction")
 			}
+		}
+		if contentsIndex >= 0 && app.char.Skills[contentsIndex].Specialization == s.Specialization {
+			s.SpecializationValue = app.char.Skills[contentsIndex].SpecializationValue
 		}
 		if contentsIndex < 0 {
 			app.char.Skills = append(app.char.Skills, s)
@@ -336,7 +386,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		contentsGroup = "Skills"
 		contentsIndex = -1
 		group := contentCtl(hwnd, "COMBOBOX", "", CBS_DROPDOWNLIST|WS_TABSTOP|WS_VSCROLL, 15, 15, 230, 300, 1)
-		for _, s := range append([]string{"Skills", "Character"}, srcapp.PossessionGroups...) {
+		for _, s := range append([]string{"Skills", "Character", "Attributes"}, srcapp.PossessionGroups...) {
 			send(group, CB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(s))))
 		}
 		send(group, CB_SETCURSEL, 0, 0)
@@ -369,6 +419,8 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		for i, label := range []string{"New entry", "Apply", "Remove", "Close"} {
 			contentCtl(hwnd, "BUTTON", label, WS_TABSTOP, 15+i*180, 520, 165, 32, 100+i)
 		}
+		contentCtl(hwnd, "BUTTON", "Raise skill (karma)", WS_TABSTOP, 265, 475, 210, 30, 104)
+		contentCtl(hwnd, "BUTTON", "Raise specialization", WS_TABSTOP, 490, 475, 230, 30, 105)
 		contentsRefresh()
 		return 0
 	case WM_COMMAND:
@@ -382,7 +434,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 				contentsGroup = contentComboValue(1)
 				contentsRefresh()
 			} else {
-				for i, g := range append([]string{"Skills", "Character"}, srcapp.PossessionGroups...) {
+				for i, g := range append([]string{"Skills", "Character", "Attributes"}, srcapp.PossessionGroups...) {
 					if g == contentsGroup {
 						send(contentsFields[1], CB_SETCURSEL, uintptr(i), 0)
 					}
@@ -401,7 +453,42 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 			}
 		}
 		switch id {
+		case 104, 105:
+			if contentsGroup == "Attributes" && id == 104 && contentsIndex >= 0 && contentsIndex < len(attrs) {
+				if err := app.char.AdvanceAttribute(attrs[contentsIndex]); err != nil {
+					msgbox(err.Error(), MB_ICONWARNING)
+				} else {
+					app.populate()
+					app.dirty = true
+					contentsRefresh()
+				}
+				return 0
+			}
+			if contentsGroup == "Skills" && !contentsDirty {
+				if err := app.char.AdvanceSkill(contentsIndex, id == 105); err != nil {
+					msgbox(err.Error(), MB_ICONWARNING)
+				} else {
+					app.dirty = true
+					app.update()
+					contentsRefresh()
+				}
+			} else {
+				msgbox("Select a saved skill entry before advancing it.", MB_ICONWARNING)
+			}
 		case 100:
+			if contentsGroup == "Character" {
+				if contentsDirty {
+					msgbox("Apply character edits before beginning career mode.", MB_ICONWARNING)
+					return 0
+				}
+				if err := app.char.BeginCareer(); err != nil {
+					msgbox(err.Error(), MB_ICONWARNING)
+				} else {
+					app.dirty = true
+					app.update()
+				}
+				return 0
+			}
 			if contentsMayDiscard(hwnd) {
 				contentsIndex = -1
 				contentsLoad()

@@ -86,3 +86,34 @@ func TestMagicAndAugmentationBudgets(t *testing.T) {
 		t.Fatal("missing bio index was silently accepted")
 	}
 }
+
+func TestAdvancementKeepsSpecializationIndependent(t *testing.T) {
+	ch := NewCharacter()
+	ch.Career = true
+	ch.Karma = 30
+	ch.Attributes["Quickness"] = 4
+	ch.Skills = []Rated{{Name: "Pistols", Rating: 3, Specialization: "Beretta"}}
+	if err := ch.AdvanceSkill(0, false); err != nil {
+		t.Fatal(err)
+	}
+	if ch.Karma != 24 || ch.Skills[0].Rating != 4 || ch.Skills[0].SpecializationRating() != 5 {
+		t.Fatal("base advancement changed specialization or wrong cost")
+	}
+	if err := ch.AdvanceSkill(0, true); err != nil {
+		t.Fatal(err)
+	}
+	if ch.Karma != 18 || ch.Skills[0].SpecializationRating() != 6 {
+		t.Fatal("specialization cost")
+	}
+	ch.Attributes["Strength"] = 6
+	if err := ch.AdvanceAttribute("Strength"); err == nil {
+		t.Fatal("spent more karma than available")
+	}
+	ch.Karma = 21
+	if err := ch.AdvanceAttribute("Strength"); err != nil {
+		t.Fatal(err)
+	}
+	if ch.Karma != 0 || ch.Attributes["Strength"] != 7 {
+		t.Fatal("attribute advancement above racial modified limit")
+	}
+}

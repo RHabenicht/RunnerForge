@@ -19,6 +19,7 @@
 {{end}}{{.Notes}}</td></tr>{{end}}
 {{with .Raw}}<tr><td colspan="5" class="details">Stored source details: {{.}}</td></tr>{{end}}
 {{end}}</tbody></table>{{end}}{{end}}
+<h2>Advancement record</h2><table>{{range .Advancements}}<tr><td>{{.Kind}}: {{.Name}}</td><td>{{.From}} → {{.To}}</td><td>{{.Karma}} karma</td></tr>{{end}}</table>
 <h2>Notes</h2><p class="notes">{{.Notes}}</p>
 {{with .LegacyWarnings}}<h2>Import review</h2><ul>{{range .}}<li>{{.}}</li>{{end}}</ul>{{end}}
 {{with .Issues}}<h2>Validation review</h2><ul>{{range .}}<li>{{.}}</li>{{end}}</ul>{{end}}

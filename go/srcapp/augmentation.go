@@ -68,7 +68,7 @@ func (ch *Character) AugmentationIssues() []string {
 		if !valid {
 			issues = append(issues, "Unknown or unavailable cyberware grade: "+p.Name)
 		}
-		if strings.Contains(strings.ToLower(p.Grade), "beta") || strings.Contains(strings.ToLower(p.Grade), "delta") {
+		if !ch.Career && (strings.Contains(strings.ToLower(p.Grade), "beta") || strings.Contains(strings.ToLower(p.Grade), "delta")) {
 			issues = append(issues, "Beta/delta cyberware is unavailable at standard character creation: "+p.Name)
 		}
 		if p.EssenceUnresolved {
