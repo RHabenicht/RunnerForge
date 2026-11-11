@@ -49,9 +49,9 @@ func (ch *Character) ReplacePossession(group string, index int, p *Possession) e
 		(*list)[index] = *p
 	}
 	if group == "Cyberware" && ch.LegacyEssence != nil {
-		change := old.EssenceCost
+		change := old.ChargedEssence()
 		if p != nil {
-			change -= p.EssenceCost
+			change -= p.ChargedEssence()
 		}
 		value := *ch.LegacyEssence + change
 		ch.LegacyEssence = &value
@@ -69,6 +69,9 @@ type ResourceAllocation struct {
 
 func (ch *Character) ResourceAllocation() ResourceAllocation {
 	var result ResourceAllocation
+	if ch.SpellPointsPurchased > 0 && ch.SpellPointsPurchased <= 50 {
+		result.Spent += 25000 * ch.SpellPointsPurchased
+	}
 	for _, group := range []string{"Gear", "Cyberware", "Bioware", "Vehicles", "Cyberdecks", "Magic gear"} {
 		for _, p := range *ch.Possessions(group) {
 			if p.UnitCost == nil {
@@ -79,7 +82,7 @@ func (ch *Character) ResourceAllocation() ResourceAllocation {
 				result.Issues = append(result.Issues, "Invalid price or quantity: "+p.Name)
 				continue
 			}
-			result.Spent += *p.UnitCost * p.Count()
+			result.Spent += p.ChargedUnitCost() * p.Count()
 		}
 	}
 	if result.Spent > ch.ResourceBudget() {

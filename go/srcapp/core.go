@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"math"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -81,49 +82,56 @@ type Rated struct {
 	LinkedAttribute string `json:"linked_attribute,omitempty"`
 }
 type Possession struct {
-	Name        string  `json:"name"`
-	UnitCost    *int    `json:"unit_cost,omitempty"`
-	Quantity    int     `json:"quantity,omitempty"`
-	Rating      int     `json:"rating,omitempty"`
-	CatalogID   int     `json:"catalog_id,omitempty"`
-	Kind        string  `json:"kind"`
-	Notes       string  `json:"notes,omitempty"`
-	EssenceCost float64 `json:"essence_cost,omitempty"`
-	Modifiers   string  `json:"modifiers,omitempty"`
-	Source      string  `json:"source,omitempty"`
-	Raw         string  `json:"raw,omitempty"`
+	Grade             string   `json:"grade,omitempty"`
+	BioIndex          *float64 `json:"bio_index,omitempty"`
+	EssenceUnresolved bool     `json:"essence_unresolved,omitempty"`
+	PointCost         *float64 `json:"point_cost,omitempty"`
+	Name              string   `json:"name"`
+	UnitCost          *int     `json:"unit_cost,omitempty"`
+	Quantity          int      `json:"quantity,omitempty"`
+	Rating            int      `json:"rating,omitempty"`
+	CatalogID         int      `json:"catalog_id,omitempty"`
+	Kind              string   `json:"kind"`
+	Notes             string   `json:"notes,omitempty"`
+	EssenceCost       float64  `json:"essence_cost,omitempty"`
+	Modifiers         string   `json:"modifiers,omitempty"`
+	Source            string   `json:"source,omitempty"`
+	Raw               string   `json:"raw,omitempty"`
 }
 type Character struct {
-	Format         string                `json:"format"`
-	Edition        int                   `json:"edition"`
-	Name           string                `json:"name"`
-	RealName       string                `json:"real_name,omitempty"`
-	Race           string                `json:"race"`
-	CustomRace     *RaceDefinition       `json:"custom_race,omitempty"`
-	MagicType      string                `json:"magic_type,omitempty"`
-	BuildPoints    *BuildPointAllocation `json:"build_points,omitempty"`
-	Priority       map[string]string     `json:"priority"`
-	Attributes     map[string]int        `json:"attributes"`
-	Skills         []Rated               `json:"skills"`
-	Gear           []Possession          `json:"gear"`
-	Cyberware      []Possession          `json:"cyberware"`
-	Bioware        []Possession          `json:"bioware,omitempty"`
-	Spells         []Possession          `json:"spells,omitempty"`
-	AdeptPowers    []Possession          `json:"adept_powers,omitempty"`
-	Vehicles       []Possession          `json:"vehicles,omitempty"`
-	Decks          []Possession          `json:"cyberdecks,omitempty"`
-	EdgesFlaws     []Possession          `json:"edges_flaws,omitempty"`
-	Contacts       []Possession          `json:"contacts,omitempty"`
-	Totems         []Possession          `json:"totems,omitempty"`
-	MagicGear      []Possession          `json:"magic_gear,omitempty"`
-	Karma          int                   `json:"karma"`
-	KarmaPool      int                   `json:"karma_pool"`
-	Notes          string                `json:"notes"`
-	LegacyText     string                `json:"legacy_text,omitempty"`
-	LegacyBytes    []byte                `json:"legacy_bytes,omitempty"`
-	LegacyWarnings []string              `json:"legacy_warnings,omitempty"`
-	LegacyEssence  *float64              `json:"legacy_essence,omitempty"`
-	LegacyMagic    *int                  `json:"legacy_magic,omitempty"`
+	SpellPointsPurchased int                   `json:"spell_points_purchased,omitempty"`
+	SpellPointsSold      int                   `json:"spell_points_sold,omitempty"`
+	Tradition            string                `json:"tradition,omitempty"`
+	Format               string                `json:"format"`
+	Edition              int                   `json:"edition"`
+	Name                 string                `json:"name"`
+	RealName             string                `json:"real_name,omitempty"`
+	Race                 string                `json:"race"`
+	CustomRace           *RaceDefinition       `json:"custom_race,omitempty"`
+	MagicType            string                `json:"magic_type,omitempty"`
+	BuildPoints          *BuildPointAllocation `json:"build_points,omitempty"`
+	Priority             map[string]string     `json:"priority"`
+	Attributes           map[string]int        `json:"attributes"`
+	Skills               []Rated               `json:"skills"`
+	Gear                 []Possession          `json:"gear"`
+	Cyberware            []Possession          `json:"cyberware"`
+	Bioware              []Possession          `json:"bioware,omitempty"`
+	Spells               []Possession          `json:"spells,omitempty"`
+	AdeptPowers          []Possession          `json:"adept_powers,omitempty"`
+	Vehicles             []Possession          `json:"vehicles,omitempty"`
+	Decks                []Possession          `json:"cyberdecks,omitempty"`
+	EdgesFlaws           []Possession          `json:"edges_flaws,omitempty"`
+	Contacts             []Possession          `json:"contacts,omitempty"`
+	Totems               []Possession          `json:"totems,omitempty"`
+	MagicGear            []Possession          `json:"magic_gear,omitempty"`
+	Karma                int                   `json:"karma"`
+	KarmaPool            int                   `json:"karma_pool"`
+	Notes                string                `json:"notes"`
+	LegacyText           string                `json:"legacy_text,omitempty"`
+	LegacyBytes          []byte                `json:"legacy_bytes,omitempty"`
+	LegacyWarnings       []string              `json:"legacy_warnings,omitempty"`
+	LegacyEssence        *float64              `json:"legacy_essence,omitempty"`
+	LegacyMagic          *int                  `json:"legacy_magic,omitempty"`
 }
 
 var attributeKeys = []string{"Body", "Quickness", "Strength", "Charisma", "Intelligence", "Willpower"}
@@ -180,11 +188,8 @@ func (ch *Character) EffectiveAttribute(name string) int {
 	return ch.Attributes[name] + race.Modifiers[name]
 }
 func (ch *Character) Awakened() bool {
-	if ch.BuildPoints != nil {
-		cost, ok := buildMagicCosts[ch.BuildPoints.Magic]
-		return ok && cost > 0
-	}
-	return ch.Priority["Magic"] == "A" || ch.Priority["Magic"] == "B"
+	cost, ok := buildMagicCosts[ch.MagicChoice()]
+	return ok && cost > 0
 }
 func (ch *Character) Essence() float64 {
 	if ch.LegacyEssence != nil {
@@ -192,7 +197,7 @@ func (ch *Character) Essence() float64 {
 	}
 	s := 6.0
 	for _, cy := range ch.Cyberware {
-		s -= cy.EssenceCost
+		s -= cy.ChargedEssence()
 	}
 	if s < 0 {
 		return 0
@@ -206,7 +211,7 @@ func (ch *Character) Magic() int {
 	if ch.LegacyMagic != nil {
 		return *ch.LegacyMagic
 	}
-	return int(ch.Essence())
+	return max(0, int(math.Floor(ch.Essence()-ch.BioIndex()/2+1e-9)))
 }
 func (ch *Character) Reaction() int {
 	return (ch.EffectiveAttribute("Quickness")+ch.EffectiveAttribute("Intelligence"))/2 + ch.CyberReactionMod()
@@ -256,12 +261,9 @@ func (ch *Character) Validate() []string {
 				found[v] = k
 			}
 		}
-		pr := ch.Priority["Race"]
-		if pr == "E" && ch.Race != "Human" {
-			issues = append(issues, "Race priority E only permits Human")
-		}
-		if pr == "D" && ch.Race != "Human" && ch.Race != "Ork" && ch.Race != "Dwarf" {
-			issues = append(issues, "Race priority D permits Human, Ork and Dwarf")
+		expected := map[string]string{"Human": "E", "Dwarf": "D", "Ork": "D", "Elf": "C", "Troll": "C"}[ch.Race]
+		if expected != "" && ch.Priority["Race"] != expected {
+			issues = append(issues, ch.Race+" requires Race priority "+expected)
 		}
 		if ch.AttributeSpent() > ch.AttributeBudget() {
 			issues = append(issues, fmt.Sprintf("Attribute points exceed priority budget: %d / %d", ch.AttributeSpent(), ch.AttributeBudget()))
@@ -291,6 +293,10 @@ func (ch *Character) Validate() []string {
 	}
 	issues = append(issues, ch.SkillAllocation().Issues...)
 	issues = append(issues, ch.ResourceAllocation().Issues...)
+	issues = append(issues, ch.MagicAllocation().Issues...)
+	issues = append(issues, ch.AugmentationIssues()...)
+	_, edgeIssues := ch.EdgeFlawPoints()
+	issues = append(issues, edgeIssues...)
 	if ch.Essence() < 0.01 && len(ch.Cyberware) > 0 {
 		issues = append(issues, "Essence depleted or below 0.01")
 	}
@@ -378,26 +384,44 @@ func (ch *Character) AddItem(it Item) {
 	}
 	switch it.Kind {
 	case "cyberware":
-		p.EssenceCost, _ = strconv.ParseFloat(fmt.Sprint(it.Fields["EssCost"]), 64)
+		var parseError error
+		p.EssenceCost, parseError = strconv.ParseFloat(fmt.Sprint(it.Fields["EssCost"]), 64)
+		p.EssenceUnresolved = parseError != nil
 		p.Modifiers = fmt.Sprint(it.Fields["Mods"])
 		ch.Cyberware = append(ch.Cyberware, p)
 		if ch.LegacyEssence != nil {
-			v := *ch.LegacyEssence - p.EssenceCost
+			v := *ch.LegacyEssence - p.ChargedEssence()
 			ch.LegacyEssence = &v
 		}
 	case "skills":
 		ch.Skills = append(ch.Skills, Rated{Name: it.Name, Category: it.Category, Rating: 1})
 	case "bioware":
+		if index, err := strconv.ParseFloat(fmt.Sprint(it.Fields["BioIndex"]), 64); err == nil {
+			p.BioIndex = &index
+		}
 		ch.Bioware = append(ch.Bioware, p)
 	case "spells":
+		p.Rating = 1
 		ch.Spells = append(ch.Spells, p)
 	case "adept_powers":
+		p.Rating = 1
+		if cost, err := strconv.ParseFloat(fmt.Sprint(it.Fields["AdeptCost"]), 64); err == nil {
+			p.PointCost = &cost
+		}
 		ch.AdeptPowers = append(ch.AdeptPowers, p)
 	case "vehicles":
 		ch.Vehicles = append(ch.Vehicles, p)
 	case "cyberdecks":
 		ch.Decks = append(ch.Decks, p)
 	case "edges_flaws":
+		if p.UnitCost != nil {
+			cost := float64(*p.UnitCost)
+			if fmt.Sprint(it.Fields["EorF"]) == "F" {
+				cost = -cost
+			}
+			p.PointCost = &cost
+			p.UnitCost = nil
+		}
 		ch.EdgesFlaws = append(ch.EdgesFlaws, p)
 	case "contacts":
 		ch.Contacts = append(ch.Contacts, p)
@@ -479,6 +503,8 @@ func (ch *Character) Summary() string {
 	fmt.Fprintf(&sb, "Knowledge %d / %d • Languages %d / %d (Knowledge may cover excess)\r\n", allocation.Knowledge, allocation.KnowledgeBudget, allocation.Language, allocation.LanguageBudget)
 	fmt.Fprintf(&sb, "Skills: %d • Gear: %d • Cyberware: %d\r\n", len(ch.Skills), len(ch.Gear), len(ch.Cyberware))
 	fmt.Fprintf(&sb, "Bioware %d • Spells %d • Adept powers %d • Vehicles %d • Decks %d\r\n", len(ch.Bioware), len(ch.Spells), len(ch.AdeptPowers), len(ch.Vehicles), len(ch.Decks))
+	magic := ch.MagicAllocation()
+	fmt.Fprintf(&sb, "Spell Points %d / %d; Power Points %.2f / %d\r\n", magic.SpellSpent, magic.SpellBudget, magic.PowerSpent, ch.Magic())
 	money := ch.ResourceAllocation()
 	fmt.Fprintf(&sb, "Resources spent (priced entries): ¥%d; remaining ¥%d\r\n", money.Spent, ch.ResourceBudget()-money.Spent)
 	issues := ch.Validate()

@@ -74,6 +74,8 @@ func contentsRefresh() {
 			}
 			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(label))))
 		}
+	} else if contentsGroup == "Character" {
+		send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr("Character details"))))
 	} else {
 		for _, p := range *app.char.Possessions(contentsGroup) {
 			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(p.Name))))
@@ -89,7 +91,36 @@ func contentsLoad() {
 		set(contentsFields[id], "")
 	}
 	labels := map[int]string{10: "Name", 11: "Rating / Force (0 if unused)", 12: "Source", 13: "Modifiers", 14: "Essence cost (cyberware)", 15: "Notes", 16: "Unit price ¥ (blank = unresolved)", 17: "Quantity"}
+	if contentsGroup == "Character" {
+		labels = map[int]string{10: "Real name (optional)", 11: "Unspent karma", 12: "Karma pool", 13: "Spell Points purchased (¥25,000 each)", 14: "Spell Points sold (5 for 1 BP)", 15: "Character notes", 16: "Extra Knowledge BP (optional)", 17: "Tradition / aspect"}
+		for id, label := range labels {
+			set(contentsLabels[id], label)
+			procShow.Call(contentsLabels[id], 5)
+			procShow.Call(contentsFields[id], 5)
+		}
+		set(contentsFields[10], app.char.RealName)
+		set(contentsFields[11], strconv.Itoa(app.char.Karma))
+		set(contentsFields[12], strconv.Itoa(app.char.KarmaPool))
+		set(contentsFields[13], strconv.Itoa(app.char.SpellPointsPurchased))
+		set(contentsFields[14], strconv.Itoa(app.char.SpellPointsSold))
+		set(contentsFields[15], app.char.Notes)
+		set(contentsFields[16], strconv.Itoa(extraKnowledge(app.char)))
+		set(contentsFields[17], app.char.Tradition)
+		return
+	}
 	skill := contentsGroup == "Skills"
+	pointEntry := contentsGroup == "Adept powers" || contentsGroup == "Edges / Flaws"
+	if contentsGroup == "Cyberware" {
+		labels[12] = "Grade: Basic, Alpha, Beta, Delta (used prefix)"
+		labels[14] = "Base Essence cost (before grade)"
+		labels[16] = "Base unit price (before grade)"
+	}
+	if contentsGroup == "Bioware" {
+		labels[14] = "Bio Index (blank = unresolved)"
+	}
+	if pointEntry {
+		labels[16] = "Total point cost (Flaws: negative)"
+	}
 	if skill {
 		labels[11] = "Base rating (after specialization)"
 		labels[12] = "Category: Active, Knowledge, Language"
@@ -124,16 +155,61 @@ func contentsLoad() {
 		set(contentsFields[10], p.Name)
 		set(contentsFields[11], strconv.Itoa(p.Rating))
 		set(contentsFields[12], p.Source)
+		if contentsGroup == "Cyberware" {
+			set(contentsFields[12], p.Grade)
+		}
 		set(contentsFields[13], p.Modifiers)
 		set(contentsFields[14], strconv.FormatFloat(p.EssenceCost, 'f', -1, 64))
+		if contentsGroup == "Bioware" {
+			set(contentsFields[14], "")
+			if p.BioIndex != nil {
+				set(contentsFields[14], strconv.FormatFloat(*p.BioIndex, 'f', -1, 64))
+			}
+		}
 		set(contentsFields[15], p.Notes)
 		set(contentsFields[17], strconv.Itoa(p.Count()))
-		if p.UnitCost != nil {
+		if pointEntry && p.PointCost != nil {
+			set(contentsFields[16], strconv.FormatFloat(*p.PointCost, 'f', -1, 64))
+		} else if p.UnitCost != nil {
 			set(contentsFields[16], strconv.Itoa(*p.UnitCost))
 		}
 	}
 }
+func extraKnowledge(ch *srcapp.Character) int {
+	if ch.BuildPoints != nil {
+		return ch.BuildPoints.ExtraKnowledge
+	}
+	return 0
+}
 func contentsApply() error {
+	if contentsGroup == "Character" {
+		numbers := map[int]int{}
+		for _, id := range []int{11, 12, 13, 14, 16} {
+			v, err := strconv.Atoi(strings.TrimSpace(get(contentsFields[id])))
+			if err != nil || v < 0 || v > 1000000 {
+				return fmt.Errorf("karma and point fields require nonnegative whole numbers")
+			}
+			numbers[id] = v
+		}
+		if app.char.BuildPoints == nil && numbers[16] > 0 {
+			return fmt.Errorf("extra Knowledge points require Build Point creation")
+		}
+		app.char.RealName = get(contentsFields[10])
+		app.char.Karma = numbers[11]
+		app.char.KarmaPool = numbers[12]
+		app.char.SpellPointsPurchased = numbers[13]
+		app.char.SpellPointsSold = numbers[14]
+		app.char.Notes = get(contentsFields[15])
+		app.char.Tradition = get(contentsFields[17])
+		if app.char.BuildPoints != nil {
+			app.char.BuildPoints.ExtraKnowledge = numbers[16]
+		}
+		app.dirty = true
+		app.update()
+		contentsRefresh()
+		return nil
+	}
+
 	name := strings.TrimSpace(get(contentsFields[10]))
 	if name == "" {
 		return fmt.Errorf("enter a name")
@@ -176,7 +252,11 @@ func contentsApply() error {
 		if contentsIndex >= 0 {
 			p = (*list)[contentsIndex]
 		}
-		essence, err := strconv.ParseFloat(strings.TrimSpace(get(contentsFields[14])), 64)
+		essenceText := strings.TrimSpace(get(contentsFields[14]))
+		if contentsGroup == "Bioware" && essenceText == "" {
+			essenceText = "0"
+		}
+		essence, err := strconv.ParseFloat(essenceText, 64)
 		if err != nil || math.IsNaN(essence) || math.IsInf(essence, 0) || essence < 0 || essence > 100 {
 			return fmt.Errorf("enter a nonnegative Essence cost")
 		}
@@ -185,24 +265,49 @@ func contentsApply() error {
 			return fmt.Errorf("quantity must be 1–1,000,000")
 		}
 		p.UnitCost = nil
+		p.PointCost = nil
 		if price := strings.TrimSpace(get(contentsFields[16])); price != "" {
-			v, err := strconv.Atoi(price)
-			if err != nil || v < 0 || v > 1000000000 {
-				return fmt.Errorf("enter a nonnegative whole-number unit price")
+			if contentsGroup == "Adept powers" || contentsGroup == "Edges / Flaws" {
+				value, err := strconv.ParseFloat(price, 64)
+				if err != nil || math.IsNaN(value) || math.IsInf(value, 0) || value < -1000000 || value > 1000000 {
+					return fmt.Errorf("enter a valid point cost")
+				}
+				p.PointCost = &value
+			} else {
+				value, err := strconv.Atoi(price)
+				if err != nil || value < 0 || value > 1000000000 {
+					return fmt.Errorf("enter a nonnegative whole-number unit price")
+				}
+				p.UnitCost = &value
 			}
-			p.UnitCost = &v
 		}
+
 		p.Name = name
 		p.Rating = rating
-		p.Source = get(contentsFields[12])
+		if contentsGroup == "Cyberware" {
+			p.Grade = strings.TrimSpace(get(contentsFields[12]))
+			if _, _, valid := p.CyberGrade(); !valid {
+				return fmt.Errorf("use Basic, Alpha, Beta, Delta, or Used Basic/Alpha/Beta")
+			}
+		} else {
+			p.Source = get(contentsFields[12])
+		}
 		p.Modifiers = get(contentsFields[13])
-		p.EssenceCost = essence
+		if contentsGroup == "Bioware" {
+			p.BioIndex = nil
+			if strings.TrimSpace(get(contentsFields[14])) != "" {
+				p.BioIndex = &essence
+			}
+		} else {
+			p.EssenceCost = essence
+			p.EssenceUnresolved = false
+		}
 		p.Notes = get(contentsFields[15])
 		p.Quantity = quantity
 		if contentsIndex < 0 {
 			*list = append(*list, p)
 			if contentsGroup == "Cyberware" && app.char.LegacyEssence != nil {
-				value := *app.char.LegacyEssence - essence
+				value := *app.char.LegacyEssence - p.ChargedEssence()
 				app.char.LegacyEssence = &value
 			}
 		} else {
@@ -231,7 +336,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		contentsGroup = "Skills"
 		contentsIndex = -1
 		group := contentCtl(hwnd, "COMBOBOX", "", CBS_DROPDOWNLIST|WS_TABSTOP|WS_VSCROLL, 15, 15, 230, 300, 1)
-		for _, s := range append([]string{"Skills"}, srcapp.PossessionGroups...) {
+		for _, s := range append([]string{"Skills", "Character"}, srcapp.PossessionGroups...) {
 			send(group, CB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(s))))
 		}
 		send(group, CB_SETCURSEL, 0, 0)
@@ -277,7 +382,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 				contentsGroup = contentComboValue(1)
 				contentsRefresh()
 			} else {
-				for i, g := range append([]string{"Skills"}, srcapp.PossessionGroups...) {
+				for i, g := range append([]string{"Skills", "Character"}, srcapp.PossessionGroups...) {
 					if g == contentsGroup {
 						send(contentsFields[1], CB_SETCURSEL, uintptr(i), 0)
 					}
@@ -306,7 +411,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 				procMessage.Call(hwnd, uintptr(unsafe.Pointer(ptr(err.Error()))), uintptr(unsafe.Pointer(ptr("Character entry"))), MB_ICONWARNING)
 			}
 		case 102:
-			if contentsIndex >= 0 && contentsMayDiscard(hwnd) {
+			if contentsGroup != "Character" && contentsIndex >= 0 && contentsMayDiscard(hwnd) {
 				if contentsGroup == "Skills" {
 					app.char.Skills = append(app.char.Skills[:contentsIndex], app.char.Skills[contentsIndex+1:]...)
 				} else {

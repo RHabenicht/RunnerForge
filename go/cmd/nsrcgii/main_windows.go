@@ -348,7 +348,7 @@ func (a *application) populate() {
 	set(a.controls[ID_NAME], a.char.Name)
 	a.populateRaces()
 	method := "Priority"
-	allocation := srcapp.BuildPointAllocation{Budget: 120, Resources: 5000, Magic: "Mundane"}
+	allocation := srcapp.BuildPointAllocation{Budget: 120, Resources: 5000, Magic: a.char.MagicChoice()}
 	if a.char.BuildPoints != nil {
 		method = "Build Points"
 		allocation = *a.char.BuildPoints
@@ -383,6 +383,7 @@ func (a *application) populateRaces() {
 
 func (a *application) sync() {
 	a.char.Name = get(a.controls[ID_NAME])
+	a.char.MagicType = comboVal(ID_BP_MAGIC)
 	if race := comboVal(ID_RACE); race != "" {
 		a.char.Race = race
 	}
@@ -390,7 +391,7 @@ func (a *application) sync() {
 		budget, _ := strconv.Atoi(strings.TrimSpace(get(a.controls[ID_BP_BUDGET])))
 		resources, _ := strconv.Atoi(comboVal(ID_BP_RESOURCES))
 		a.char.BuildPoints = &srcapp.BuildPointAllocation{
-			Budget: budget, Resources: resources, Magic: comboVal(ID_BP_MAGIC),
+			Budget: budget, Resources: resources, Magic: comboVal(ID_BP_MAGIC), ExtraKnowledge: extraKnowledge(a.char),
 		}
 	} else {
 		a.char.BuildPoints = nil

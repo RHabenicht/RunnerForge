@@ -6,9 +6,10 @@ import (
 
 // Shadowrun Companion, pp. 13–14. A nil allocation selects Priority creation.
 type BuildPointAllocation struct {
-	Budget    int    `json:"budget"`
-	Resources int    `json:"resources"`
-	Magic     string `json:"magic"`
+	ExtraKnowledge int    `json:"extra_knowledge,omitempty"`
+	Budget         int    `json:"budget"`
+	Resources      int    `json:"resources"`
+	Magic          string `json:"magic"`
 }
 
 var buildRaceCosts = map[string]int{"Human": 0, "Dwarf": 5, "Ork": 5, "Elf": 10, "Troll": 10}
@@ -20,7 +21,7 @@ func (ch *Character) buildPointTotal() (int, []string) {
 	issues := []string{}
 	resourceCost, resourceOK := buildResourceCosts[bp.Resources]
 	magicCost, magicOK := buildMagicCosts[bp.Magic]
-	if !resourceOK || !magicOK || bp.Budget < 1 {
+	if !resourceOK || !magicOK || bp.Budget < 1 || bp.ExtraKnowledge < 0 || bp.ExtraKnowledge > 1000000 {
 		issues = append(issues, "Choose a valid Build Point budget, resource tier and magic type.")
 	}
 	attributeCost := 2 * ch.AttributeSpent()
@@ -33,7 +34,8 @@ func (ch *Character) buildPointTotal() (int, []string) {
 		issues = append(issues, "Active skills exceed the Companion 60 BP cap.")
 	}
 	race, _ := ch.raceDefinition()
-	total := race.BuildPointCost + magicCost + resourceCost + attributeCost + skillCost
+	adjustment, _ := ch.EdgeFlawPoints()
+	total := race.BuildPointCost + magicCost + resourceCost + attributeCost + skillCost + int(adjustment) + bp.ExtraKnowledge - ch.SpellPointsSold/5
 	if total > bp.Budget {
 		issues = append(issues, fmt.Sprintf("Build Point budget exceeded (%d / %d).", total, bp.Budget))
 	}

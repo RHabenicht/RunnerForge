@@ -58,3 +58,31 @@ func TestSelectedInventoryAndCompleteExport(t *testing.T) {
 		}
 	}
 }
+
+func TestMagicAndAugmentationBudgets(t *testing.T) {
+	ch := NewCharacter()
+	ch.BuildPoints = &BuildPointAllocation{Budget: 120, Resources: 90000, Magic: "Full Magician"}
+	ch.SpellPointsPurchased = 2
+	ch.SpellPointsSold = 5
+	if ch.MagicAllocation().SpellBudget != 22 || ch.ResourceAllocation().Spent != 50000 {
+		t.Fatal("spell purchase/sale accounting")
+	}
+	index := 1.0
+	cost := 10000
+	ch.Cyberware = []Possession{{Name: "Test", EssenceCost: .25, UnitCost: &cost, Grade: "Alpha"}}
+	ch.Bioware = []Possession{{Name: "Test bio", BioIndex: &index, UnitCost: &cost}}
+	if ch.Essence() != 5.8 || ch.Magic() != 5 || ch.ResourceAllocation().Spent != 80000 {
+		t.Fatalf("augmentation calculation: Essence %v Magic %d resources %d", ch.Essence(), ch.Magic(), ch.ResourceAllocation().Spent)
+	}
+	edge, flaw := 2.0, -1.0
+	ch.EdgesFlaws = []Possession{{Name: "E", PointCost: &edge}, {Name: "F", PointCost: &flaw}}
+	total, _ := ch.buildPointTotal()
+	// 12 attributes +30 magic +10 resources +1 net Edge/Flaw -1 sold spell points.
+	if total != 52 {
+		t.Fatalf("BP total %d", total)
+	}
+	ch.Bioware[0].BioIndex = nil
+	if len(ch.AugmentationIssues()) == 0 {
+		t.Fatal("missing bio index was silently accepted")
+	}
+}
