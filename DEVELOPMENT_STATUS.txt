@@ -1,36 +1,37 @@
-RunnerForge development checkpoint — 2026-11-11
-Development build; not a finished release.
+RunnerForge 0.2.0 development checkpoint — 2026-11-11
+Development build, not a complete SR3 rules release.
 
-Implemented in this checkpoint:
-- Basic Priority and revised Companion Build Point creation.
-- Adjustable Build Point budget with overspend validation.
-- Fourteen Companion metavariants with their published point costs.
-- Native custom-race editor: clone a selected race, change name, cost,
-  six racial modifiers, and descriptive traits.
-- Custom-race JSON import/export and embedded definitions in character saves.
-- Keyboard tab navigation and owned custom-race file dialogs.
-- Safe character save replacement, legacy import, and basic HTML output.
+Implemented:
+Priority and adjustable Build Point creation; 14 Companion metavariants;
+custom-race editing and reusable definitions; linked-attribute skill costs;
+Knowledge/Language pools; creation specialization and literacy ratings;
+selected skill/item editing and removal; equipment quantities and prices;
+Spell Point purchases/sales; Edge/Flaw cost accounting; cyberware grade costs;
+Bio Index and its effect on starting Magic; character notes and karma;
+career snapshots, existing-skill/specialization/attribute advancement history;
+all stored character groups in HTML/PDF; per-user Windows installer.
 
 Verification:
-- Windows Server 2022 CI run 43061364473 passed Go tests, vet, executable
-  build, and native main-window startup/close.
-- Native UI regression exercised race editing, cancellation, character
-  save/load, and raising/lowering the Build Point budget.
-- Four Python catalogue regression tests passed locally.
-- Windows 10/11 desktop acceptance is not established by Server 2022 testing.
+Local Go tests/vet, Windows cross-build and four Python tests pass.
+Windows Server 2022 CI exercises native race and entry editors, save/load,
+point budgets, PDF creation, executable launch, installer build/install/launch,
+and uninstall while retaining a user-created save.
+The latest career-control changes are included in the current CI run.
+Windows Server testing does not establish Windows 10/11 desktop acceptance.
 
-Catalog:
-6,449 retained records citing approved sources; 2,633 quarantined.
-Source filtering does not verify individual book accuracy.
-Existing IDs are preserved when rechecking catalog plus quarantine.
+Still required for complete SR3 coverage:
+- Ghoul transformation, otaku and shapeshifter creation (including two forms).
+- Compound implants, cyberlimb/cybereye capacity, augmentation stacking,
+  attribute modifiers, cultured bioware rules and equipment dependencies.
+- Full magical eligibility, foci bonding, spirits, initiation and tradition/
+  aspect restrictions. Edge/Flaw effects beyond their point accounting.
+- Full advancement: new skills/specializations, multiple specializations,
+  spells/foci, training and automatic karma-pool progression.
+- Vehicle/deck customization and comprehensive availability/legality checks.
+- Book-by-book verification of catalog values and complete legacy field fidelity.
+- Direct Windows 10/11 desktop and visual/DPI acceptance.
+- Import of the user's recalculated race sheet, which has not been supplied here.
 
-Still outstanding for the complete application:
-Full creation-rule validation, knowledge/language/specialization accounting,
-optional point adjustments, augmentation and equipment calculations,
-advancement, comprehensive exports/PDF verification, legacy field fidelity,
-primary-book catalog verification, responsive/DPI layout, and installer.
-Custom traits are descriptive text; arbitrary trait rules are not automated.
-Special character types beyond the fourteen metavariants are not complete.
-The user's recalculated race sheet has not been imported.
-
+6,449 catalog entries cite approved sources; 2,633 remain quarantined.
+Do not treat a successful automated test as proof of complete book accuracy.
 The separate VB project is not part of RunnerForge.

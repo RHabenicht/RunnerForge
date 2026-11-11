@@ -23,3 +23,5 @@ func resizeMain(width, height int) {
 	move.Call(app.controls[ID_RESULTS], 20, 358, uintptr(left), uintptr(panelHeight), 1)
 	move.Call(app.controls[ID_SUMMARY], uintptr(rightX), 358, uintptr(max(100, width-rightX-20)), uintptr(panelHeight), 1)
 }
+
+type minMaxInfo struct{ Reserved, MaxSize, MaxPosition, MinTrackSize, MaxTrackSize point }

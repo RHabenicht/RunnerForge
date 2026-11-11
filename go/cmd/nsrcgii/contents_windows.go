@@ -118,7 +118,7 @@ func contentsLoad() {
 	for id := 10; id <= 17; id++ {
 		set(contentsFields[id], "")
 	}
-	labels := map[int]string{10: "Name", 11: "Rating / Force (0 if unused)", 12: "Source", 13: "Modifiers", 14: "Essence cost (cyberware)", 15: "Notes", 16: "Unit price ¥ (blank = unresolved)", 17: "Quantity"}
+	labels := map[int]string{10: "Name", 11: "Rating / Force (0 if unused)", 12: "Source", 13: "Modifiers (RCT / INI supported)", 14: "Essence cost (cyberware)", 15: "Notes", 16: "Unit price ¥ (blank = unresolved)", 17: "Quantity"}
 	if contentsGroup == "Attributes" {
 		for id := 10; id <= 17; id++ {
 			show := uintptr(0)

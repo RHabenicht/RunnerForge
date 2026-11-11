@@ -1,61 +1,52 @@
 # RunnerForge
 
-Standalone Shadowrun Third Edition character generator for Windows 10/11, currently in development.
+Standalone Shadowrun Third Edition character generator for Windows 10/11. Version 0.2.0 is a development build, with remaining rules work listed in DEVELOPMENT_STATUS.txt.
 
-The Go application supports basic Priority and Build Point character creation, local JSON saves, legacy .sr3 imports, and HTML export. Comprehensive rules validation, a finished installer, and Windows runtime acceptance testing remain pending.
+## Character creation
 
-Build Point mode uses the revised Shadowrun Companion (pp. 13–14) for the standard metatypes, magic choices, resource tiers, and attribute costs. Active skill costs use linked attributes from the approved catalog. Optional point adjustments and full character eligibility checks remain pending.
+- Priority and revised Companion Build Points, with an adjustable point budget.
+- Standard metatypes and 14 Companion metavariants at their published costs.
+- Custom races with editable names, point costs, six attribute modifiers and descriptive traits. Race definitions can be imported, exported and stored with a character.
+- Active skill costs based on linked natural attributes; Knowledge and Language allowances; creation specializations and derived read/write ratings.
+- Optional extra Knowledge points, Spell Point purchases/sales, and Edge/Flaw point accounting.
+- Cyberware grade price/Essence calculations and bioware's effect on starting Magic.
+- Equipment quantity and price accounting. Unknown prices remain unresolved rather than counting as free.
 
-The embedded catalog contains 6,449 records citing approved sources. Another 2,633 records are preserved in a separate review file. Source filtering does not establish that each record has been verified against its book.
+Choose **Edit / remove…** to edit a selected skill or possession. The group selector also opens character notes, karma, tradition and extra-point settings. Select **Character**, apply any edits, and choose **Begin career** to preserve a creation snapshot and enable karma advancement. Existing skills, their named specialization and attributes can then be raised one step at a time. Each improvement records its cost.
 
+## Files and Windows installation
 
-## Metavariants and custom races
+JSON character files retain custom definitions and legacy import bytes. HTML and PDF sheets include all stored possession groups, notes, sources, karma and validation findings. PDF export uses a separate local Microsoft Edge process. Character data stays on the computer.
 
-Build Point mode includes the 14 metavariants in the revised Shadowrun Companion (pp. 38–43). The published cost is 5 BP above the parent metatype, for a total of 10 BP for dwarf and ork variants or 15 BP for elf and troll variants.
+The Windows workflow builds the executable and a per-user Inno Setup installer. Download the **RunnerForge-Windows-development** artifact from a successful [Actions run](https://github.com/RHabenicht/RunnerForge/actions). The installer adds RunnerForge to the Start menu and offers an optional desktop shortcut. User-created files are preserved by uninstall.
 
-To create a house-rule race, select a starting metatype and choose **Edit race…**. Change its name, Build Point cost, six attribute modifiers, and descriptive traits, then choose **Use race**. **Cancel** discards edits. **Export race…** saves a reusable JSON definition; **Load race…** imports one. Use a distinct name for a house-rule version of a built-in race. The example below prices a custom Night One at the same 10 BP as an elf.
+CI tests use Windows Server 2022 and exercise native controls, PDF output, installer launch and uninstallation. Direct Windows 10/11 acceptance testing remains outstanding.
 
-```json
-{
-  "name": "Night One (house rules)",
-  "build_point_cost": 10,
-  "modifiers": {"Quickness": 2, "Charisma": 2},
-  "traits": "Low-light vision, Mild sunlight allergy"
-}
-```
+## Catalog and limits
 
-Enter the complete racial modifiers as adjustments to base attributes. Omitted attributes have a zero adjustment. RunnerForge includes the chosen race cost in the BP total and stores the imported definition with the character. Racial traits appear as reference text in the summary and HTML sheet.
+The embedded catalog contains 6,449 records citing approved sources. Another 2,633 records remain quarantined. Source filtering does not establish that each record was verified against its book.
+
+Custom racial traits and many catalog modifiers are reference text. Compound implants, augmentation stacking, advanced magic, special character types and full legacy-field fidelity still need implementation or verification. The application does not yet provide complete SR3 legality checking.
 
 ## Development
 
-Requires Go 1.23 or later and Python 3.
-
-Run tests from the repository root.
+Build with Go using the version in go/go.mod. Python 3 is required for catalog tools. Inno Setup 6 builds the installer on Windows.
 
 ```sh
 python -m unittest discover -s . -p 'test_*.py'
 cd go
 go test ./...
 go vet ./...
-```
-
-Build from the go directory on Windows.
-
-```sh
 go build -ldflags="-H windowsgui" -o RunnerForge.exe ./cmd/nsrcgii
 ```
 
-Recheck the catalog from the repository root.
+From the repository root, recheck the existing catalog and quarantine while preserving IDs:
 
 ```sh
 python build_catalog.py --catalog go/srcapp/catalog.json
 ```
 
-This reads both the embedded catalog and go/data/quarantine.json, preserving existing record IDs.
-
-The Windows CI suite runs Go tests, vet, an executable build, and native window startup/close checks. It also exercises custom-race editing and character save/load through native Windows controls. These checks use Windows Server 2022; Windows 10/11 desktop acceptance and PDF export testing remain outstanding.
-
-DEVELOPMENT_STATUS.txt describes the latest checkpoint. Other historical reports describe earlier development stages.
+Rules implemented in this checkpoint use SR3 pp. 54–59 and 244–245, revised Shadowrun Companion pp. 13–16 and 38–43, and Man & Machine pp. 44–45 and 78. See DEVELOPMENT_STATUS.txt for validation coverage and remaining work.
 
 ## Acknowledgments
 

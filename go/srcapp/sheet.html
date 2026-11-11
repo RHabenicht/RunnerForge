@@ -8,6 +8,7 @@
 <h2>Character creation</h2><table>{{range .Priorities}}<tr><th>{{.Key}}</th><td>{{.Value}}</td></tr>{{end}}</table>
 <p>Known resource spending: ¥{{.Resources.Spent}} of ¥{{.ResourceBudget}}.</p>
 <p>Active skill points: {{.Allocation.Active}}. Knowledge: {{.Allocation.Knowledge}} / {{.Allocation.KnowledgeBudget}}. Languages: {{.Allocation.Language}} / {{.Allocation.LanguageBudget}}. Excess Language costs use Knowledge points.</p>
+<p>Spell Points: {{.MagicAllocation.SpellSpent}} / {{.MagicAllocation.SpellBudget}}. Power Points: {{.MagicAllocation.PowerSpent}} / {{.Magic}}.</p>
 <h2>Skills</h2><table><thead><tr><th>Skill</th><th>Category</th><th>Base</th><th>Specialization</th><th>Read/write</th></tr></thead><tbody>{{range .SortedSkills}}<tr><td>{{.Name}}</td><td>{{.Class}}</td><td>{{.Rating}}</td><td>{{if .Specialization}}{{.Specialization}} {{.SpecializationRating}}{{end}}</td><td>{{if eq .Class "Language"}}{{.ReadWriteRating}}{{end}}</td></tr>{{end}}</tbody></table>
 {{range .Sections}}{{if .Items}}<h2>{{.Name}}</h2><table><thead><tr><th>Entry</th><th>Rating / Force</th><th>Quantity</th><th>Unit price</th><th>Source</th></tr></thead><tbody>{{range .Items}}
 <tr><td>{{.Name}}</td><td>{{if .Rating}}{{.Rating}}{{end}}</td><td>{{.Count}}</td><td>{{if ne .UnitCost nil}}¥{{.ChargedUnitCost}}{{else}}—{{end}}</td><td>{{.Source}}</td></tr>

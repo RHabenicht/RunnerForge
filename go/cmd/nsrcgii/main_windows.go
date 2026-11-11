@@ -612,6 +612,11 @@ func wndProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		app = &application{char: srcapp.NewCharacter(), catalogue: cat, controls: map[int]uintptr{}}
 		setupUI()
 		return 0
+	case 0x0024: // WM_GETMINMAXINFO
+		limits := (*minMaxInfo)(unsafe.Pointer(lp))
+		bounds := workArea()
+		limits.MinTrackSize = point{int32(min(1000, int(bounds.Right-bounds.Left))), int32(min(500, int(bounds.Bottom-bounds.Top)))}
+		return 0
 	case 0x0005: // WM_SIZE
 		if app != nil {
 			resizeMain(int(lp&0xffff), int((lp>>16)&0xffff))

@@ -2,6 +2,7 @@ package srcapp
 
 import (
 	"bytes"
+	"path/filepath"
 	"strings"
 	"testing"
 )
@@ -115,5 +116,34 @@ func TestAdvancementKeepsSpecializationIndependent(t *testing.T) {
 	}
 	if ch.Karma != 0 || ch.Attributes["Strength"] != 7 {
 		t.Fatal("attribute advancement above racial modified limit")
+	}
+}
+
+func TestCareerSnapshotIsStable(t *testing.T) {
+	ch := NewCharacter()
+	ch.Karma = 20
+	if err := ch.BeginCareer(); err != nil {
+		t.Fatal(err)
+	}
+	snapshot := string(ch.CreationSnapshot)
+	if err := ch.AdvanceAttribute("Body"); err != nil {
+		t.Fatal(err)
+	}
+	if string(ch.CreationSnapshot) != snapshot {
+		t.Fatal("advancement rewrote creation record")
+	}
+	if err := ch.BeginCareer(); err != nil {
+		t.Fatal(err)
+	}
+	if string(ch.CreationSnapshot) != snapshot {
+		t.Fatal("second begin career rewrote creation record")
+	}
+	path := filepath.Join(t.TempDir(), "career.json")
+	if err := SaveJSON(path, ch); err != nil {
+		t.Fatal(err)
+	}
+	saved, err := LoadJSON(path)
+	if err != nil || !saved.Career || len(saved.Advancements) != 1 || string(saved.CreationSnapshot) == "" {
+		t.Fatalf("career round trip: %v", err)
 	}
 }
