@@ -2,7 +2,6 @@ package srcapp
 
 import (
 	"fmt"
-	"strings"
 )
 
 // Shadowrun Companion, pp. 13–14. A nil allocation selects Priority creation.
@@ -28,30 +27,10 @@ func (ch *Character) buildPointTotal() (int, []string) {
 	if attributeCost > 60 {
 		issues = append(issues, "Attributes exceed the default 60 BP cap.")
 	}
-	skillCost := 0
-	catalog, err := LoadCatalogue()
-	if err != nil {
-		return 0, append(issues, "Cannot verify skill costs without the catalogue.")
-	}
-	links := make(map[string]string)
-	for _, entry := range catalog.Entries {
-		if entry.Kind == "skills" {
-			links[strings.ToLower(entry.Name)] = entry.Category
-		}
-	}
-	attributes := map[string]string{"BOD": "Body", "QCK": "Quickness", "STR": "Strength", "CHA": "Charisma", "INT": "Intelligence", "WIL": "Willpower"}
-	for _, skill := range ch.Skills {
-		code := links[strings.ToLower(strings.TrimSpace(skill.Name))]
-		group := strings.ToLower(skill.Category)
-		if code == "KNO" || strings.Contains(group, "knowledge") || strings.Contains(group, "language") {
-			continue
-		}
-		attribute, known := attributes[code]
-		if !known {
-			issues = append(issues, "Linked attribute unavailable for "+skill.Name+".")
-			continue
-		}
-		skillCost += skill.Rating + max(0, skill.Rating-ch.EffectiveAttribute(attribute))
+	skills := ch.SkillAllocation()
+	skillCost := skills.Active
+	if skillCost > 60 {
+		issues = append(issues, "Active skills exceed the Companion 60 BP cap.")
 	}
 	race, _ := ch.raceDefinition()
 	total := race.BuildPointCost + magicCost + resourceCost + attributeCost + skillCost

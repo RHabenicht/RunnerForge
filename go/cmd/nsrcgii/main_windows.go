@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"nsrcgii/srcapp"
 	"os"
 	"os/exec"
@@ -337,7 +338,7 @@ func setupUI() {
 	ctl("LISTBOX", "", WS_BORDER|LBS_NOTIFY|WS_VSCROLL, 20, 358, 610, 365, ID_RESULTS)
 	text("Character summary and validation", 651, 300, 340, 22)
 	edit("", 651, 358, 333, 365, ID_SUMMARY, true)
-	button("Remove last gear/cyber", 862, 323, 122, 30, ID_REMOVE)
+	button("Edit / remove…", 862, 323, 122, 30, ID_REMOVE)
 	app.search()
 	app.populate()
 }
@@ -399,9 +400,10 @@ func (a *application) sync() {
 	}
 	for i, k := range attrs {
 		n, e := strconv.Atoi(strings.TrimSpace(get(a.controls[ID_ATTR+i])))
-		if e == nil {
-			a.char.Attributes[k] = n
+		if e != nil {
+			n = 0
 		}
+		a.char.Attributes[k] = n
 	}
 }
 func (a *application) update() { a.sync(); set(a.controls[ID_SUMMARY], a.char.Summary()) }
@@ -480,14 +482,7 @@ func (a *application) perform(id int) {
 		a.dirty = true
 		a.update()
 	case ID_REMOVE:
-		a.sync()
-		if len(a.char.Cyberware) > 0 {
-			a.char.Cyberware = a.char.Cyberware[:len(a.char.Cyberware)-1]
-		} else if len(a.char.Gear) > 0 {
-			a.char.Gear = a.char.Gear[:len(a.char.Gear)-1]
-		}
-		a.dirty = true
-		a.update()
+		openContents()
 	case ID_SAVE:
 		a.sync()
 		path := a.savePath
@@ -562,23 +557,22 @@ func (a *application) perform(id int) {
 	}
 }
 func pdfFromHTML(c *srcapp.Character, target string) error {
-	f, e := os.CreateTemp("", "nsrcgii-*.html")
+	dir, e := os.MkdirTemp(filepath.Dir(target), ".runnerforge-print-*")
 	if e != nil {
 		return e
 	}
-	path := f.Name()
-	f.Close()
-	defer os.Remove(path)
+	defer os.RemoveAll(dir)
+	path := filepath.Join(dir, "sheet.html")
 	if e = c.SaveHTML(path); e != nil {
 		return e
 	}
 	candidates := []string{`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`, `C:\Program Files\Microsoft\Edge\Application\msedge.exe`}
-	if p, e := exec.LookPath("msedge.exe"); e == nil {
+	if p, err := exec.LookPath("msedge.exe"); err == nil {
 		candidates = append([]string{p}, candidates...)
 	}
 	var exe string
 	for _, p := range candidates {
-		if _, e := os.Stat(p); e == nil {
+		if _, err := os.Stat(p); err == nil {
 			exe = p
 			break
 		}
@@ -586,23 +580,24 @@ func pdfFromHTML(c *srcapp.Character, target string) error {
 	if exe == "" {
 		return fmt.Errorf("Microsoft Edge not found; HTML export is available")
 	}
-	abs, e := filepath.Abs(path)
+	absolute, e := filepath.Abs(path)
 	if e != nil {
 		return e
 	}
-	abs = strings.ReplaceAll(abs, "\\", "/")
-	url := "file:///" + strings.ReplaceAll(abs, " ", "%20")
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	uri := url.URL{Scheme: "file", Path: "/" + strings.ReplaceAll(absolute, "\\", "/")}
+	output := filepath.Join(dir, "sheet.pdf")
+	ctx, cancel := context.WithTimeout(context.Background(), 45*time.Second)
 	defer cancel()
-	args := []string{"--headless", "--disable-gpu", "--no-first-run", "--no-pdf-header-footer", "--print-to-pdf=" + target, url}
-	cmd := exec.CommandContext(ctx, exe, args...)
-	if b, e := cmd.CombinedOutput(); e != nil {
-		return fmt.Errorf("Edge printing: %v (%s)", e, string(b))
+	args := []string{"--headless", "--disable-gpu", "--no-first-run", "--no-pdf-header-footer", "--user-data-dir=" + filepath.Join(dir, "profile"), "--print-to-pdf=" + output, uri.String()}
+	command := exec.CommandContext(ctx, exe, args...)
+	if data, err := command.CombinedOutput(); err != nil {
+		return fmt.Errorf("Edge printing: %v (%s)", err, string(data))
 	}
-	if _, e := os.Stat(target); e != nil {
-		return fmt.Errorf("Edge did not create PDF")
+	data, e := os.ReadFile(output)
+	if e != nil || len(data) < 100 || !strings.HasPrefix(string(data), "%PDF-") {
+		return fmt.Errorf("Edge did not produce a valid PDF")
 	}
-	return nil
+	return os.Rename(output, target)
 }
 func wndProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 	switch ev {
@@ -615,6 +610,11 @@ func wndProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		}
 		app = &application{char: srcapp.NewCharacter(), catalogue: cat, controls: map[int]uintptr{}}
 		setupUI()
+		return 0
+	case 0x0005: // WM_SIZE
+		if app != nil {
+			resizeMain(int(lp&0xffff), int((lp>>16)&0xffff))
+		}
 		return 0
 	case WM_COMMAND:
 		if app == nil {
@@ -652,7 +652,10 @@ func main() {
 		fmt.Println("Register window class failed", e)
 		return
 	}
-	hwnd, _, e := procCreate.Call(0, uintptr(unsafe.Pointer(class)), uintptr(unsafe.Pointer(ptr(title))), WS_OVERLAPPEDWINDOW|WS_VISIBLE, 65, 65, 1025, 800, 0, 0, inst, 0)
+	bounds := workArea()
+	width := min(1025, int(bounds.Right-bounds.Left))
+	height := min(800, int(bounds.Bottom-bounds.Top))
+	hwnd, _, e := procCreate.Call(0, uintptr(unsafe.Pointer(class)), uintptr(unsafe.Pointer(ptr(title))), WS_OVERLAPPEDWINDOW|WS_VISIBLE, uintptr(bounds.Left), uintptr(bounds.Top), uintptr(width), uintptr(height), 0, 0, inst, 0)
 	if hwnd == 0 {
 		fmt.Println("Window creation failed", e)
 		return
@@ -669,6 +672,9 @@ func main() {
 		dialog := window
 		if raceWindow != 0 {
 			dialog = raceWindow
+		}
+		if contentsWindow != 0 {
+			dialog = contentsWindow
 		}
 		handled, _, _ := user32.NewProc("IsDialogMessageW").Call(dialog, uintptr(unsafe.Pointer(&m)))
 		if handled != 0 {

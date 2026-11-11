@@ -75,4 +75,46 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	if app.char.CustomRace.BuildPointCost != 10 {
 		t.Fatal("cancel modified character")
 	}
+	openContents()
+	if contentsWindow == 0 {
+		t.Fatal("contents editor did not open")
+	}
+	defer func() {
+		if contentsWindow != 0 {
+			contentsDirty = false
+			procDestroy.Call(contentsWindow)
+		}
+	}()
+	set(contentsFields[10], "Physics")
+	set(contentsFields[11], "3")
+	set(contentsFields[12], "Knowledge")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if len(app.char.Skills) != 1 || app.char.Skills[0].Class() != "Knowledge" {
+		t.Fatal("knowledge skill not added")
+	}
+	contentsIndex = 0
+	contentsLoad()
+	set(contentsFields[11], "4")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if len(app.char.Skills) != 1 || app.char.Skills[0].Rating != 4 {
+		t.Fatal("skill edit duplicated entry")
+	}
+	contentsIndex = 0
+	send(contentsWindow, WM_COMMAND, 102, 0)
+	if len(app.char.Skills) != 0 {
+		t.Fatal("selected skill not removed")
+	}
+	contentsDirty = false
+	procDestroy.Call(contentsWindow)
+	resizeMain(1000, 550)
+	var rect rectangle
+	user32.NewProc("GetWindowRect").Call(app.controls[ID_RESULTS], uintptr(unsafe.Pointer(&rect)))
+	if rect.Bottom-rect.Top > 180 {
+		t.Fatal("lower panel exceeds resized window")
+	}
+
 }

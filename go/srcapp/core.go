@@ -74,12 +74,17 @@ func (c *Catalogue) Search(q, kind string, limit int) []Item {
 }
 
 type Rated struct {
-	Name     string `json:"name"`
-	Rating   int    `json:"rating"`
-	Category string `json:"category,omitempty"`
+	Name            string `json:"name"`
+	Rating          int    `json:"rating"`
+	Category        string `json:"category,omitempty"`
+	Specialization  string `json:"specialization,omitempty"`
+	LinkedAttribute string `json:"linked_attribute,omitempty"`
 }
 type Possession struct {
 	Name        string  `json:"name"`
+	UnitCost    *int    `json:"unit_cost,omitempty"`
+	Quantity    int     `json:"quantity,omitempty"`
+	Rating      int     `json:"rating,omitempty"`
 	CatalogID   int     `json:"catalog_id,omitempty"`
 	Kind        string  `json:"kind"`
 	Notes       string  `json:"notes,omitempty"`
@@ -169,13 +174,7 @@ func (ch *Character) AttributeSpent() int {
 	}
 	return s
 }
-func (ch *Character) SkillSpent() int {
-	s := 0
-	for _, r := range ch.Skills {
-		s += r.Rating
-	}
-	return s
-} // allocation cost is approximate; specialization/knowledge rules separate
+func (ch *Character) SkillSpent() int { return ch.SkillAllocation().Active }
 func (ch *Character) EffectiveAttribute(name string) int {
 	race, _ := ch.raceDefinition()
 	return ch.Attributes[name] + race.Modifiers[name]
@@ -268,7 +267,7 @@ func (ch *Character) Validate() []string {
 			issues = append(issues, fmt.Sprintf("Attribute points exceed priority budget: %d / %d", ch.AttributeSpent(), ch.AttributeBudget()))
 		}
 		if ch.SkillSpent() > ch.SkillBudget() {
-			issues = append(issues, fmt.Sprintf("Skill points exceed priority budget (simple ratings): %d / %d", ch.SkillSpent(), ch.SkillBudget()))
+			issues = append(issues, fmt.Sprintf("Skill points exceed priority budget: %d / %d", ch.SkillSpent(), ch.SkillBudget()))
 		}
 	}
 	if _, ok := ch.raceDefinition(); !ok {
@@ -290,11 +289,8 @@ func (ch *Character) Validate() []string {
 			issues = append(issues, k+" racial-adjusted rating must be at least 1")
 		}
 	}
-	for _, v := range ch.Skills {
-		if v.Rating < 1 || v.Rating > 6 {
-			issues = append(issues, "Skill rating outside 1–6: "+v.Name)
-		}
-	}
+	issues = append(issues, ch.SkillAllocation().Issues...)
+	issues = append(issues, ch.ResourceAllocation().Issues...)
 	if ch.Essence() < 0.01 && len(ch.Cyberware) > 0 {
 		issues = append(issues, "Essence depleted or below 0.01")
 	}
@@ -370,7 +366,16 @@ func LoadJSON(path string) (*Character, error) {
 	return &c, nil
 }
 func (ch *Character) AddItem(it Item) {
-	p := Possession{Name: it.Name, CatalogID: it.ID, Kind: it.Kind, Source: strings.Join(it.Sources, ", ")}
+	p := Possession{Name: it.Name, CatalogID: it.ID, Kind: it.Kind, Source: strings.Join(it.Sources, ", "), Quantity: 1}
+	if price, err := strconv.Atoi(strings.ReplaceAll(fmt.Sprint(it.Fields["$Cost"]), ",", "")); err == nil && price >= 0 {
+		p.UnitCost = &price
+	}
+	if notes, ok := it.Fields["Notes"].(string); ok {
+		p.Notes = notes
+	}
+	if raw, err := json.Marshal(it.Fields); err == nil {
+		p.Raw = string(raw)
+	}
 	switch it.Kind {
 	case "cyberware":
 		p.EssenceCost, _ = strconv.ParseFloat(fmt.Sprint(it.Fields["EssCost"]), 64)
@@ -381,7 +386,7 @@ func (ch *Character) AddItem(it Item) {
 			ch.LegacyEssence = &v
 		}
 	case "skills":
-		ch.Skills = append(ch.Skills, Rated{Name: it.Name, Category: it.Group, Rating: 1})
+		ch.Skills = append(ch.Skills, Rated{Name: it.Name, Category: it.Category, Rating: 1})
 	case "bioware":
 		ch.Bioware = append(ch.Bioware, p)
 	case "spells":
@@ -405,7 +410,9 @@ func (ch *Character) AddItem(it Item) {
 	}
 }
 
-var htmlTemplate = template.Must(template.New("sheet").Parse(`<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>{{.Name}} — RunnerForge</title><style>body{font:15px Arial,sans-serif;max-width:900px;margin:auto;padding:1.5rem;color:#181b22}h1{border-bottom:2px solid #222}h2{margin-top:1.5rem}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;text-align:left;padding:.35rem}small{color:#555}.col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}@media print{body{margin:.3in;padding:0}h2{break-after:avoid}}</style></head><body><h1>{{.Name}}</h1><small>RunnerForge — Shadowrun Third Edition · {{.Race}} · Local HTML Export</small>{{with .RacialTraits}}<p>Racial traits: {{.}}</p>{{end}}<div class="col"><section><h2>Attributes</h2><table>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table></section><section><h2>Derived</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr></table></section></div><h2>Character Creation</h2><table>{{range .Priorities}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</table><h2>Skills</h2><table>{{range .Skills}}<tr><td>{{.Name}}</td><td>{{.Rating}}</td></tr>{{end}}</table><h2>Cyberware</h2><table>{{range .Cyberware}}<tr><td>{{.Name}}</td><td>{{.EssenceCost}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Gear</h2><table>{{range .Gear}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Bioware</h2><table>{{range .Bioware}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Spells</h2><table>{{range .Spells}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Adept Powers</h2><table>{{range .AdeptPowers}}<tr><td>{{.Name}}</td><td>{{.Source}}</td></tr>{{end}}</table><h2>Vehicles</h2><table>{{range .Vehicles}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Cyberdecks</h2><table>{{range .Decks}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Edges / Flaws</h2><table>{{range .EdgesFlaws}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Totems / Traditions</h2><table>{{range .Totems}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Contacts</h2><table>{{range .Contacts}}<tr><td>{{.Name}}</td></tr>{{end}}</table><h2>Notes</h2><p style="white-space:pre-wrap">{{.Notes}}</p><small>Generated character record. Verify all calculations against the official SR3 rules, especially imported legacy cyberware and advanced options.</small></body></html>`))
+//go:embed sheet.html
+var sheetTemplate string
+var htmlTemplate = template.Must(template.New("sheet").Parse(sheetTemplate))
 
 type kv struct {
 	Key   string
@@ -426,17 +433,23 @@ func (ch *Character) ExportHTML(w io.Writer) error {
 			prs = append(prs, kv{k, ch.Priority[k]})
 		}
 	}
+	type section struct {
+		Name  string
+		Items []Possession
+	}
+	sections := []section{}
+	for _, group := range PossessionGroups {
+		sections = append(sections, section{group, *ch.Possessions(group)})
+	}
 	v := struct {
 		*Character
 		AttributesList []kv
 		Priorities     []kv
-		Reaction       int
-		InitiativeDice int
-		Essence        string
-		Magic          int
-		CombatPool     int
-		SpellPool      int
-	}{ch, attrs, prs, ch.Reaction(), ch.InitiativeDice(), fmt.Sprintf("%.2f", ch.Essence()), ch.Magic(), ch.CombatPool(), ch.SpellPool()}
+		Sections       []section
+		Resources      ResourceAllocation
+		Allocation     SkillAllocation
+		Issues         []string
+	}{ch, attrs, prs, sections, ch.ResourceAllocation(), ch.SkillAllocation(), ch.Validate()}
 	return htmlTemplate.Execute(w, v)
 }
 func (ch *Character) SaveHTML(path string) error {
@@ -444,7 +457,7 @@ func (ch *Character) SaveHTML(path string) error {
 	if e := ch.ExportHTML(&b); e != nil {
 		return e
 	}
-	return os.WriteFile(path, b.Bytes(), 0600)
+	return atomicWrite(path, b.Bytes())
 }
 func (ch *Character) Summary() string {
 	var sb strings.Builder
@@ -460,10 +473,14 @@ func (ch *Character) Summary() string {
 		total, _ := ch.buildPointTotal()
 		fmt.Fprintf(&sb, "\r\nBuild Points used: %d / %d (known costs)\r\nResources: ¥%d\r\n", total, ch.BuildPoints.Budget, ch.ResourceBudget())
 	} else {
-		fmt.Fprintf(&sb, "\r\nAttributes %d / %d points\r\nSkills %d / %d points (simple)\r\nResources: ¥%d\r\n", ch.AttributeSpent(), ch.AttributeBudget(), ch.SkillSpent(), ch.SkillBudget(), ch.ResourceBudget())
+		fmt.Fprintf(&sb, "\r\nAttributes %d / %d points\r\nActive skills %d / %d points\r\nResources: ¥%d\r\n", ch.AttributeSpent(), ch.AttributeBudget(), ch.SkillSpent(), ch.SkillBudget(), ch.ResourceBudget())
 	}
+	allocation := ch.SkillAllocation()
+	fmt.Fprintf(&sb, "Knowledge %d / %d • Languages %d / %d (Knowledge may cover excess)\r\n", allocation.Knowledge, allocation.KnowledgeBudget, allocation.Language, allocation.LanguageBudget)
 	fmt.Fprintf(&sb, "Skills: %d • Gear: %d • Cyberware: %d\r\n", len(ch.Skills), len(ch.Gear), len(ch.Cyberware))
 	fmt.Fprintf(&sb, "Bioware %d • Spells %d • Adept powers %d • Vehicles %d • Decks %d\r\n", len(ch.Bioware), len(ch.Spells), len(ch.AdeptPowers), len(ch.Vehicles), len(ch.Decks))
+	money := ch.ResourceAllocation()
+	fmt.Fprintf(&sb, "Resources spent (priced entries): ¥%d; remaining ¥%d\r\n", money.Spent, ch.ResourceBudget()-money.Spent)
 	issues := ch.Validate()
 	if len(issues) == 0 {
 		sb.WriteString("\r\nBasic creation checks passed. Advanced SR3 validation incomplete.")

@@ -1,8 +1,9 @@
-name: Windows save smoke test
+name: Windows build and acceptance tests
 on: [push, pull_request]
 jobs:
   windows:
     runs-on: windows-2022
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: go
@@ -12,7 +13,7 @@ jobs:
         with:
           go-version-file: go/go.mod
           cache: false
-      - run: go test -v ./...
+      - run: go test -timeout 3m -v ./...
       - run: go vet ./...
       - run: go build -ldflags="-H windowsgui" -o RunnerForge.exe ./cmd/nsrcgii
       - name: Check native window startup
@@ -35,3 +36,20 @@ jobs:
           } finally {
             if (-not $p.HasExited) { Stop-Process -Id $p.Id -Force }
           }
+      - name: Build installer
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (!(Test-Path $iscc)) { choco install innosetup --yes --no-progress }
+          & $iscc ..\installer\RunnerForge.iss
+          if ($LASTEXITCODE -ne 0) { throw 'Installer compiler failed' }
+      - name: Test install, launch and uninstall
+        shell: pwsh
+        run: ..\installer\test-install.ps1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RunnerForge-Windows-development
+          path: |
+            dist/RunnerForge-Setup-0.2.0.exe
+            go/RunnerForge.exe
+          if-no-files-found: error
