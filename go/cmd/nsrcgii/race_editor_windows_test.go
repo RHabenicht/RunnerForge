@@ -6,6 +6,7 @@ import (
 	"nsrcgii/srcapp"
 	"path/filepath"
 	"runtime"
+	"strings"
 	"syscall"
 	"testing"
 	"unsafe"
@@ -49,6 +50,16 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	}
 	if app.char.CustomRace.BuildPointCost != 10 || app.char.EffectiveAttribute("Quickness") != 3 {
 		t.Fatal("custom mechanics not applied")
+	}
+	set(app.controls[ID_BP_BUDGET], "20")
+	app.update()
+	if !strings.Contains(get(app.controls[ID_SUMMARY]), "budget exceeded") {
+		t.Fatal("lowered budget did not flag overspend")
+	}
+	set(app.controls[ID_BP_BUDGET], "120")
+	app.update()
+	if strings.Contains(get(app.controls[ID_SUMMARY]), "budget exceeded") {
+		t.Fatal("raised budget retained overspend")
 	}
 	path := filepath.Join(t.TempDir(), "character.json")
 	if err := srcapp.SaveJSON(path, app.char); err != nil {

@@ -210,7 +210,9 @@ func edit(value string, x, y, w, h, id int, multiline bool) uintptr {
 	}
 	return ctl("EDIT", value, style, x, y, w, h, id)
 }
-func button(label string, x, y, w, h, id int) { ctl("BUTTON", label, BS_PUSHBUTTON, x, y, w, h, id) }
+func button(label string, x, y, w, h, id int) {
+	ctl("BUTTON", label, BS_PUSHBUTTON|WS_TABSTOP, x, y, w, h, id)
+}
 func combo(values []string, x, y, w, h, id int, selected string) {
 	c := ctl("COMBOBOX", "", CBS_DROPDOWNLIST|WS_VSCROLL|WS_TABSTOP, x, y, w, h, id)
 	for i, v := range values {
