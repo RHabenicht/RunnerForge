@@ -17,7 +17,7 @@ import (
 	"strings"
 )
 
-//go:embed catalog.json
+//go:embed catalog.json equipment_supplement.json
 var embeddedCatalog embed.FS
 
 type Book struct {
@@ -49,6 +49,9 @@ func LoadCatalogue() (*Catalogue, error) {
 	}
 	var x Catalogue
 	if e = json.Unmarshal(b, &x); e != nil {
+		return nil, e
+	}
+	if e = x.loadEquipmentSupplement(); e != nil {
 		return nil, e
 	}
 	return &x, nil
@@ -384,6 +387,9 @@ func LoadJSON(path string) (*Character, error) {
 }
 func (ch *Character) AddItem(it Item) {
 	p := Possession{Name: it.Name, CatalogID: it.ID, Kind: it.Kind, Source: strings.Join(it.Sources, ", "), Quantity: 1}
+	if rating, err := strconv.Atoi(fmt.Sprint(it.Fields["Rating"])); err == nil && rating > 0 {
+		p.Rating = rating
+	}
 	if price, err := strconv.Atoi(strings.ReplaceAll(fmt.Sprint(it.Fields["$Cost"]), ",", "")); err == nil && price >= 0 {
 		p.UnitCost = &price
 	}

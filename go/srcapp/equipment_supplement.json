@@ -1,0 +1,847 @@
+{
+  "books": [
+    {
+      "name": "Sprawl Survival Guide",
+      "code": "ssg",
+      "allowed": true
+    },
+    {
+      "name": "Target: Awakened Lands",
+      "code": "tal",
+      "allowed": true
+    }
+  ],
+  "entries": [
+    {
+      "name": "Altyerre",
+      "kind": "gear",
+      "group": "Drugs",
+      "category": "Drugs and Chemicals (per dose) / Magical Compounds",
+      "fields": {
+        "Addiction": "-",
+        "Tolerance": "-",
+        "Edge": "-",
+        "Availability": "Not specified",
+        "$Cost": "Not specified",
+        "Street Index": "-",
+        "Book.Page": "tal.109",
+        "Vector": "Contact",
+        "Notes": "Allows astral projection as Astral Gateway. Mundane users can reach the metaplanes with a spirit guide or initiate mage. Afterward: unresisted Deadly Stun. Price and availability are not specified in Target: Awakened Lands. Magical compound rules: Man & Machine p.122."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "GEAR.DAT:5953",
+      "id": 3774
+    },
+    {
+      "name": "Kuman-Nhepa",
+      "kind": "gear",
+      "group": "Drugs",
+      "category": "Drugs and Chemicals (per dose) / Magical Compounds",
+      "fields": {
+        "Addiction": "-",
+        "Tolerance": "-",
+        "Edge": "-",
+        "Availability": "Not specified",
+        "$Cost": "Not specified",
+        "Street Index": "-",
+        "Book.Page": "tal.109",
+        "Vector": "Ingestion",
+        "Notes": "Doubles resistance dice against non-magical Stun. Afterward: unresisted Serious Stun; halve Quickness and Strength (round down) for as long as the effect lasted. Price and availability are not specified in Target: Awakened Lands. Magical compound rules: Man & Machine p.122."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "GEAR.DAT:5956",
+      "id": 3777
+    },
+    {
+      "name": "Wudu'aku",
+      "kind": "gear",
+      "group": "Drugs",
+      "category": "Drugs and Chemicals (per dose) / Magical Compounds",
+      "fields": {
+        "Addiction": "-",
+        "Tolerance": "-",
+        "Edge": "-",
+        "Availability": "Not specified",
+        "$Cost": "Not specified",
+        "Street Index": "-",
+        "Book.Page": "tal.109",
+        "Vector": "Ingestion",
+        "Notes": "Ancestor spirits: +2 Conjuring dice and +2 effective Charisma. Other spirits: -2 Conjuring dice and -2 effective Charisma for 24 hours after use. Price and availability are not specified in Target: Awakened Lands. Magical compound rules: Man & Machine p.122."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "GEAR.DAT:5962",
+      "id": 3783
+    },
+    {
+      "name": "Mazda Dust Devil",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Wheeled Crawlers",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/0",
+        "Pilot/Sensor": "1/1",
+        "Cargo/Load": "0/0",
+        "Seating": "-",
+        "$Cost": "1500",
+        "Availability": "2/24hrs",
+        "Street Index": ".5",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Special Machinery (vacuum/wetvac/brushes/sprayer), Special Storage Area (liquid tanks-2l total)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Small wheeled crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:499",
+      "id": 5526
+    },
+    {
+      "name": "IFMU Mr. Green 3500",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Wheeled Crawlers",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/0",
+        "Pilot/Sensor": "1/1",
+        "Cargo/Load": "0/0",
+        "Seating": "-",
+        "$Cost": "3500",
+        "Availability": "2/24hrs",
+        "Street Index": ".5",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Autosoft Interpreter, Autosoft (Gardening 1), Special Machinery (lawnmower/sprinkler/shears/sprayer), Special Storage Area (liquid tanks/5l)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Small wheeled crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:500",
+      "id": 5527
+    },
+    {
+      "name": "IFMU Mr. Fireman 3500",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Wheeled Crawlers",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "1/4",
+        "Sig/Autonav": "8/0",
+        "Pilot/Sensor": "2/1",
+        "Cargo/Load": "0/4",
+        "Seating": "-",
+        "$Cost": "11000",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Autosoft Interpreter, Autosoft (Firefighting 2), Special Machinery (smoke/fire detector/sprayer), Special Storage Area (10l fire extinguisher)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Small wheeled crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:501",
+      "id": 5528
+    },
+    {
+      "name": "Renraku StreetCleaner",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Wheeled Crawlers",
+      "fields": {
+        "Handling": "4/6",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "2/0",
+        "Sig/Autonav": "7/-",
+        "Pilot/Sensor": "2/2",
+        "Cargo/Load": "0/5",
+        "Seating": "-",
+        "$Cost": "7000",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Special Machinery (sweep and brush system), Special Storage Area (10 liter water tank)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (75 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Medium wheeled crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:502",
+      "id": 5529
+    },
+    {
+      "name": "VOR Robotics House Helper",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Tracked Crawlers",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/0",
+        "Pilot/Sensor": "1/1",
+        "Cargo/Load": "0/0",
+        "Seating": "-",
+        "$Cost": "1500",
+        "Availability": "2/24hrs",
+        "Street Index": ".5",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Special Machinery (vacuum/wetvac/brushes/sprayer), Special Storage Area (liquid tanks-2l total)",
+        "Book.Page": "ssg.122",
+        "Aliases": "V.R. House Helper; Mitsuhama Floormaster; Dassault CleanBuddy",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Small tracked crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:504",
+      "id": 5530
+    },
+    {
+      "name": "Mitsuhama Butlerbot",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Tracked Crawlers",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "2/0",
+        "Sig/Autonav": "7/0",
+        "Pilot/Sensor": "2 (4)/2",
+        "Cargo/Load": "5/50",
+        "Seating": "-",
+        "$Cost": "25000",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Robotic Pilot, Adaptation Pool 2, Fuzzy Logic Augmentation, Mechanical Arm (Strength 4), Special Machinery (cleaning items), Special Storage Area (beverage/water/cleaning tanks/5l total)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (75 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Medium tracked crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:505",
+      "id": 5531
+    },
+    {
+      "name": "GM Mr. Fix-It",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Tracked Crawlers",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "10/2",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/0",
+        "Pilot/Sensor": "3/1",
+        "Cargo/Load": "3/170",
+        "Seating": "-",
+        "$Cost": "27000",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Autosoft Interpreter, Autosoft (any B/R skill at rating 3), Special Machinery (toolkit), 2 Mechanical Arms (Strength 4)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.75 km/PF",
+        "Chassis": "Small tracked crawler"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:506",
+      "id": 5532
+    },
+    {
+      "name": "IFMU Mr. Bright 3000",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Walkers/Anthroforms",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "2/-",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/-",
+        "Pilot/Sensor": "1/1",
+        "Cargo/Load": "4/2",
+        "Seating": "-",
+        "$Cost": "6500",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Special Machinery (window cleaning gear/foot suction system), Special Storage Area (5 liter water tank), Winch (25 kg)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.5 km/PF",
+        "Chassis": "Small walker"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:508",
+      "id": 5533
+    },
+    {
+      "name": "IFMU Mr. Bright (household)",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Walkers/Anthroforms",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "2/-",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/-",
+        "Pilot/Sensor": "1/1",
+        "Cargo/Load": "4/5",
+        "Seating": "-",
+        "$Cost": "6000",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Special Machinery (window cleaning gear/foot suction system), Special Storage Area (5 liter water tank)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.5 km/PF",
+        "Chassis": "Small walker"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:509",
+      "id": 5534
+    },
+    {
+      "name": "Renraku Barback",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Walkers/Anthroforms",
+      "fields": {
+        "Handling": "3",
+        "Speed/Accel": "10/-",
+        "Body/Armor": "2/0",
+        "Sig/Autonav": "6/0",
+        "Pilot/Sensor": "2 (4)/2",
+        "Cargo/Load": "0/20",
+        "Seating": "-",
+        "$Cost": "44000",
+        "Availability": "3/72hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Robotic Pilot, Adaptation Pool 2, Fuzzy Logic Augmentation, 2 Mechanical Arms (Strength 6)",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (40 PF)",
+        "Economy": "0.5 km/PF",
+        "Chassis": "Medium anthroform"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:510",
+      "id": 5535
+    },
+    {
+      "name": "Ares Felix the SynthCat",
+      "kind": "vehicles",
+      "group": "Cars2",
+      "category": "Vehicles / Remotes and drones / Household Drones / Walkers/Anthroforms",
+      "fields": {
+        "Handling": "4/4",
+        "Speed/Accel": "15/-",
+        "Body/Armor": "1/0",
+        "Sig/Autonav": "8/-",
+        "Pilot/Sensor": "1/1",
+        "Cargo/Load": "0/5",
+        "Seating": "-",
+        "$Cost": "9500",
+        "Availability": "2/24hrs",
+        "Street Index": "1",
+        "Notes": "Remote-Control Interface, Rigger Adaptation, Robotic Pilot, Improved Neural Network 1, Adaptation Pool 2; Includes recharging basket.",
+        "Book.Page": "ssg.122",
+        "Entry": "-",
+        "S/B": "-",
+        "L/T": "-",
+        "Fuel": "E (100 PF)",
+        "Economy": "0.5 km/PF",
+        "Chassis": "Small walker"
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "vehicles.dat:511",
+      "id": 5536
+    },
+    {
+      "name": "Counterfeiting Utility Rating [1]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "2/7days",
+        "$Cost": "1000",
+        "Street Index": "1",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "1",
+        "Size (Mp)": "10",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:565",
+      "id": 6540
+    },
+    {
+      "name": "Counterfeiting Utility Rating [2]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "2/7days",
+        "$Cost": "4000",
+        "Street Index": "1",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "2",
+        "Size (Mp)": "40",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:566",
+      "id": 6541
+    },
+    {
+      "name": "Counterfeiting Utility Rating [3]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "2/7days",
+        "$Cost": "9000",
+        "Street Index": "1",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "3",
+        "Size (Mp)": "90",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:567",
+      "id": 6542
+    },
+    {
+      "name": "Counterfeiting Utility Rating [4]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "4/7days",
+        "$Cost": "32000",
+        "Street Index": "1.5",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "4",
+        "Size (Mp)": "160",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:568",
+      "id": 6543
+    },
+    {
+      "name": "Counterfeiting Utility Rating [5]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "4/7days",
+        "$Cost": "50000",
+        "Street Index": "1.5",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "5",
+        "Size (Mp)": "250",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:569",
+      "id": 6544
+    },
+    {
+      "name": "Counterfeiting Utility Rating [6]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "4/7days",
+        "$Cost": "72000",
+        "Street Index": "1.5",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "6",
+        "Size (Mp)": "360",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:570",
+      "id": 6545
+    },
+    {
+      "name": "Counterfeiting Utility Rating [7]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "8/14days",
+        "$Cost": "245000",
+        "Street Index": "2",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "7",
+        "Size (Mp)": "490",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:571",
+      "id": 6546
+    },
+    {
+      "name": "Counterfeiting Utility Rating [8]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "8/14days",
+        "$Cost": "320000",
+        "Street Index": "2",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "8",
+        "Size (Mp)": "640",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:572",
+      "id": 6547
+    },
+    {
+      "name": "Counterfeiting Utility Rating [9]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "8/14days",
+        "$Cost": "405000",
+        "Street Index": "2",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "9",
+        "Size (Mp)": "810",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:573",
+      "id": 6548
+    },
+    {
+      "name": "Counterfeiting Utility Rating [10]",
+      "kind": "cyberdecks",
+      "group": "Cyberdeck Other2",
+      "category": "Programs / Special Utilities / Counterfeit",
+      "fields": {
+        "Availability": "16/30days",
+        "$Cost": "1000000",
+        "Street Index": "3",
+        "Multiplier": "10",
+        "Book.Page": "ssg.124-125; sr3.223; sr3.304",
+        "Rating": "10",
+        "Size (Mp)": "1000",
+        "Options": "J (optional; not included)",
+        "Notes": "Reduces the Computer (Programming) target number for fictional certified-credstick counterfeiting by its rating. Base version; optional utility modifications are not included."
+      },
+      "sources": [
+        "ssg",
+        "sr3"
+      ],
+      "origin": "DECK.dat:574",
+      "id": 6549
+    },
+    {
+      "id": 100001,
+      "name": "Electronic Paper (standard sheet, 20 Mp)",
+      "kind": "gear",
+      "group": "Lifestyle / Electronics",
+      "category": "Lifestyle / Electronics",
+      "fields": {
+        "Book.Page": "ssg.123",
+        "$Cost": "2",
+        "Capacity (Mp)": "20",
+        "Availability": "Always",
+        "Street Index": "0.5",
+        "Notes": "Reusable flexible electronic display sheet. Price is 0.1 nuyen per Mp; this entry is the 20 Mp standard sheet."
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100002,
+      "name": "Electronic Paper (tabloid, 50 Mp)",
+      "kind": "gear",
+      "group": "Lifestyle / Electronics",
+      "category": "Lifestyle / Electronics",
+      "fields": {
+        "Book.Page": "ssg.123",
+        "$Cost": "5",
+        "Capacity (Mp)": "50",
+        "Availability": "Always",
+        "Street Index": "0.5",
+        "Notes": "Reusable flexible electronic display sheet. Price is 0.1 nuyen per Mp; this entry is the 50 Mp tabloid sheet."
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100003,
+      "name": "ColorChange Paint (1 liter)",
+      "kind": "gear",
+      "group": "Lifestyle / Furnishings",
+      "category": "Lifestyle / Furnishings",
+      "fields": {
+        "Book.Page": "ssg.123",
+        "$Cost": "750",
+        "Coverage (square meters)": "10",
+        "Availability": "4/3 days",
+        "Street Index": "1.5",
+        "Notes": "Sold by the liter; approximately 10 square meters per liter at 75 nuyen per square meter. Requires conductive mesh base coat and controller. Continuous rigid coating; not suitable for flexible fabric. The printed table transposes availability and street-index cells for paint and controller; time-based values are recorded as availability."
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100004,
+      "name": "Paint Controller Unit",
+      "kind": "gear",
+      "group": "Lifestyle / Furnishings",
+      "category": "Lifestyle / Furnishings",
+      "fields": {
+        "Book.Page": "ssg.123",
+        "$Cost": "2000",
+        "Availability": "4/7 days",
+        "Street Index": "1",
+        "Notes": "Controls ColorChange paint; setup is included in the price. Usually connected to the home telecom. Printed availability/street-index cells are transposed; time-based value is recorded as availability."
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100005,
+      "name": "Telecom Drone-Control Package",
+      "kind": "gear",
+      "group": "Lifestyle / Electronics",
+      "category": "Lifestyle / Electronics",
+      "fields": {
+        "Book.Page": "ssg.120",
+        "$Cost": "Not specified",
+        "Notes": "Consumer package combining a wireless link, remote-control utility and remote-control emulation module, typically rating 1 or 2. Package price is not specified; enter the configured components total. A home telecom is separate."
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100006,
+      "name": "Credstick Beacon Signaler",
+      "kind": "gear",
+      "group": "Lifestyle / Electronics",
+      "category": "Lifestyle / Electronics",
+      "fields": {
+        "Book.Page": "ssg.123",
+        "$Cost": "Not specified",
+        "Flux": "0",
+        "Typical range (meters)": "10",
+        "Notes": "Queries nearby credstick beacons; typical range 10 meters. Price and availability are not specified."
+      },
+      "sources": [
+        "ssg"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100007,
+      "name": "Churinga (unenchanted)",
+      "kind": "magic_gear",
+      "group": "Magical supplies / Telesma",
+      "category": "Magical supplies / Telesma",
+      "fields": {
+        "Book.Page": "tal.108",
+        "$Cost": "Not specified",
+        "Notes": "Personal carved stone or wooden oval used as a fetish/telesma by koradji. No focus rating or magical bonus until enchanted. Price is not specified. Enchanting and focus costs must be assigned separately."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100008,
+      "name": "Australian plant material (raw unit)",
+      "kind": "magic_gear",
+      "group": "Magical supplies / Enchanting materials",
+      "category": "Magical supplies / Enchanting materials",
+      "fields": {
+        "Book.Page": "tal.108",
+        "$Cost": "Not specified",
+        "Weight": "2.5",
+        "Notes": "One unit of enchanting material. Weight in kilograms. Price is not specified in Target: Awakened Lands; this is not an alchemical radical."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100009,
+      "name": "Australian plant material (refined unit)",
+      "kind": "magic_gear",
+      "group": "Magical supplies / Enchanting materials",
+      "category": "Magical supplies / Enchanting materials",
+      "fields": {
+        "Book.Page": "tal.108",
+        "$Cost": "Not specified",
+        "Weight": "1.25",
+        "Notes": "One unit of enchanting material. Weight in kilograms. Price is not specified in Target: Awakened Lands; this is not an alchemical radical."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100010,
+      "name": "Animal enchanting material (raw unit)",
+      "kind": "magic_gear",
+      "group": "Magical supplies / Enchanting materials",
+      "category": "Magical supplies / Enchanting materials",
+      "fields": {
+        "Book.Page": "tal.108",
+        "$Cost": "Not specified",
+        "Weight": "5",
+        "Notes": "One unit of enchanting material. Weight in kilograms. Price is not specified in Target: Awakened Lands; this is not an alchemical radical."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    },
+    {
+      "id": 100011,
+      "name": "Animal enchanting material (refined unit)",
+      "kind": "magic_gear",
+      "group": "Magical supplies / Enchanting materials",
+      "category": "Magical supplies / Enchanting materials",
+      "fields": {
+        "Book.Page": "tal.108",
+        "$Cost": "Not specified",
+        "Weight": "2.5",
+        "Notes": "One unit of enchanting material. Weight in kilograms. Price is not specified in Target: Awakened Lands; this is not an alchemical radical."
+      },
+      "sources": [
+        "tal"
+      ],
+      "origin": "Book-verified supplement 2026-11-12"
+    }
+  ]
+}

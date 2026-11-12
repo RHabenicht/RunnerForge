@@ -16,19 +16,27 @@ func TestCatalogFilteredAndSearch(t *testing.T) {
 		t.Fatal(e)
 	}
 
- approved := map[string]bool{"sr3":true,"src":true,"cc":true,"mits":true,"mm":true,"mat":true,"sota":true,"sta2":true,"twl":true,"yotc":true}
- for _, book := range c.Books {
-  if book.Allowed != approved[book.Code] { t.Fatalf("incorrect approval for %s", book.Code) }
- }
- ids := map[int]bool{}
- for _, it := range c.Entries {
-  if it.ID <= 0 || ids[it.ID] { t.Fatalf("invalid or duplicated ID %d", it.ID) }
-  ids[it.ID] = true
-  if len(it.Sources)==0 { t.Fatalf("missing provenance: %s",it.Name) }
-  for _, source := range it.Sources {
-   if !approved[source] { t.Fatalf("unapproved source %s on %s",source,it.Name) }
-  }
- }
+	approved := map[string]bool{"sr3": true, "src": true, "cc": true, "mits": true, "mm": true, "mat": true, "sota": true, "sta2": true, "twl": true, "yotc": true, "ssg": true, "tal": true}
+	for _, book := range c.Books {
+		if book.Allowed != approved[book.Code] {
+			t.Fatalf("incorrect approval for %s", book.Code)
+		}
+	}
+	ids := map[int]bool{}
+	for _, it := range c.Entries {
+		if it.ID <= 0 || ids[it.ID] {
+			t.Fatalf("invalid or duplicated ID %d", it.ID)
+		}
+		ids[it.ID] = true
+		if len(it.Sources) == 0 {
+			t.Fatalf("missing provenance: %s", it.Name)
+		}
+		for _, source := range it.Sources {
+			if !approved[source] {
+				t.Fatalf("unapproved source %s on %s", source, it.Name)
+			}
+		}
+	}
 
 	if len(c.Search("Datajack", "cyberware", 100)) < 1 {
 		t.Fatal("datajack not found")

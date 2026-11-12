@@ -1,4 +1,4 @@
-RunnerForge 0.2.0 development checkpoint — 2026-11-11
+RunnerForge 0.2.0 development checkpoint — 2026-11-12
 Development build, not a complete SR3 rules release.
 
 Implemented:
@@ -11,13 +11,15 @@ Bio Index and its effect on starting Magic; character notes and karma;
 career snapshots, skill/specialization/attribute advancement history;
 new skills and multiple specializations purchased with karma;
 all stored character groups in HTML/PDF; per-user Windows installer.
+35 checked equipment entries from Sprawl Survival Guide and Target: Awakened
+Lands; 6,484 active entries. See docs/EQUIPMENT_REVIEW_2026-11-12.md.
 
 Verification:
 Local Go tests/vet, Windows cross-build and four Python tests pass.
 Windows Server 2022 CI exercises native race and entry editors, save/load,
 point budgets, PDF creation, executable launch, installer build/install/launch,
 and uninstall while retaining a user-created save.
-The latest career-control changes are included in the current CI run.
+The prior career-control Windows acceptance run passed.
 Windows Server testing does not establish Windows 10/11 desktop acceptance.
 
 Still required for complete SR3 coverage:
