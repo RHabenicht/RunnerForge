@@ -1,4 +1,4 @@
-RunnerForge 0.2.0 development checkpoint — 2026-11-12
+RunnerForge 0.2.0 development checkpoint — 2026-11-13
 Development build, not a complete SR3 rules release.
 
 Implemented:
@@ -19,7 +19,8 @@ Local Go tests/vet, Windows cross-build and four Python tests pass.
 Windows Server 2022 CI exercises native race and entry editors, save/load,
 point budgets, PDF creation, executable launch, installer build/install/launch,
 and uninstall while retaining a user-created save.
-The prior career-control Windows acceptance run passed.
+Equipment Windows acceptance run 43324415437 passed all steps, including
+installer build/install/launch/uninstall. See CODEX_HANDOFF.md.
 Windows Server testing does not establish Windows 10/11 desktop acceptance.
 
 Still required for complete SR3 coverage:
@@ -32,8 +33,10 @@ Still required for complete SR3 coverage:
 - Vehicle/deck customization and comprehensive availability/legality checks.
 - Book-by-book verification of catalog values and complete legacy field fidelity.
 - Direct Windows 10/11 desktop and visual/DPI acceptance.
-- Import of the user's recalculated race sheet, which has not been supplied here.
+- Locate/import the user's recalculated race sheet; it has not been imported.
 
-6,449 catalog entries cite approved sources; 2,633 remain quarantined.
+6,484 active catalog entries, including 35 checked equipment additions.
+The original quarantine archive has 2,633 rows; 24 now have checked active
+counterparts. Its raw count is not the number of unresolved records.
 Do not treat a successful automated test as proof of complete book accuracy.
 The separate VB project is not part of RunnerForge.
