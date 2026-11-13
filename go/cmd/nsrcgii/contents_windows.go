@@ -22,7 +22,7 @@ var contentsLoading bool
 var contentsDirty bool
 
 func editorGroups() []string {
-	return append([]string{"Skills", "Character", "Attributes", "Ghoul creation"}, srcapp.PossessionGroups...)
+	return append([]string{"Skills", "Character", "Attributes", "Ghoul creation", "Shapeshifter creation"}, srcapp.PossessionGroups...)
 }
 
 func openContents() {
@@ -88,6 +88,8 @@ func contentsRefresh() {
 		for _, name := range attrs {
 			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(name))))
 		}
+	} else if contentsGroup == "Shapeshifter creation" {
+		send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr("Shapeshifter forms and purchases"))))
 	} else if contentsGroup == "Ghoul creation" {
 		send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr("Starting ghoul settings"))))
 	} else if contentsGroup == "Character" {
@@ -109,7 +111,7 @@ func contentsLoad() {
 	enable := user32.NewProc("EnableWindow")
 	for _, id := range []int{100, 101, 102} {
 		allowed := uintptr(1)
-		if contentsGroup == "Attributes" || (contentsGroup == "Ghoul creation" && (id != 101 || app.char.Career)) {
+		if contentsGroup == "Attributes" || ((contentsGroup == "Ghoul creation" || contentsGroup == "Shapeshifter creation") && (id != 101 || (contentsGroup == "Ghoul creation" && app.char.Career))) {
 			allowed = 0
 		}
 		enable.Call(contentsFields[id], allowed)
@@ -132,6 +134,10 @@ func contentsLoad() {
 	if contentsGroup == "Lifestyles" {
 		labels[16] = "Price per paid period ¥ (blank = unresolved)"
 		labels[17] = "Paid periods (1 for a lump-sum purchase)"
+	}
+	if contentsGroup == "Shapeshifter creation" {
+		loadShapeshifterContents()
+		return
 	}
 	if contentsGroup == "Ghoul creation" {
 		send(contentsFields[15], 0x00CF, 1, 0)
@@ -169,6 +175,9 @@ func contentsLoad() {
 			procShow.Call(contentsFields[id], show)
 		}
 		set(contentsLabels[10], "Attribute")
+		if app.char.Shapeshifter != nil {
+			set(contentsLabels[10], "Attribute (active "+app.char.Shapeshifter.Form+" form)")
+		}
 		set(contentsLabels[11], "Current natural rating")
 		if contentsIndex >= 0 && contentsIndex < len(attrs) {
 			name := attrs[contentsIndex]
@@ -269,6 +278,9 @@ func extraKnowledge(ch *srcapp.Character) int {
 	return 0
 }
 func contentsApply() error {
+	if contentsGroup == "Shapeshifter creation" {
+		return applyShapeshifterContents()
+	}
 	if contentsGroup == "Ghoul creation" {
 		var g *srcapp.GhoulCreation
 		switch strings.ToLower(strings.TrimSpace(get(contentsFields[10]))) {

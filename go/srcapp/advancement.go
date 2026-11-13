@@ -50,8 +50,17 @@ func (ch *Character) AdvanceAttribute(name string) error {
 		return fmt.Errorf("requires %d unspent karma", cost)
 	}
 	ch.Karma -= cost
-	ch.Attributes[name]++
-	ch.Advancements = append(ch.Advancements, Advancement{"Attribute", name, current, next, cost})
+	label := name
+	if ch.Shapeshifter != nil && ch.Shapeshifter.Form == "Animal" && physicalAttribute(name) {
+		ch.Shapeshifter.AnimalAttributes[name]++
+		label = "Animal " + name
+	} else {
+		ch.Attributes[name]++
+		if ch.Shapeshifter != nil && physicalAttribute(name) {
+			label = "Human " + name
+		}
+	}
+	ch.Advancements = append(ch.Advancements, Advancement{"Attribute", label, current, next, cost})
 	return nil
 }
 func (ch *Character) AdvanceSkill(index int, specialization bool) error {
@@ -69,9 +78,9 @@ func (ch *Character) AdvanceSkill(index int, specialization bool) error {
 	if link == "" {
 		return fmt.Errorf("set the linked attribute first")
 	}
-	attribute := ch.EffectiveAttribute(link)
+	attribute := ch.skillAttribute(link)
 	if link == "Reaction" {
-		attribute = (ch.EffectiveAttribute("Quickness") + ch.EffectiveAttribute("Intelligence")) / 2
+		attribute = (ch.skillAttribute("Quickness") + ch.skillAttribute("Intelligence")) / 2
 	}
 	current := skill.Rating
 	name := skill.Name

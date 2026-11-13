@@ -3,6 +3,7 @@
 <body><h1>{{.Name}}</h1><p>RunnerForge — Shadowrun Third Edition · {{.Race}}</p>
 {{with .Tradition}}<p>Tradition / aspect: {{.}}</p>{{end}}
 {{with .GhoulDescription}}<p>{{.}}</p>{{end}}
+{{with .ShapeshifterDescription}}<p>{{.}}</p><p>{{$.ShapeFormSummary}}</p>{{end}}
 {{with .RealName}}<p>Real name: {{.}}</p>{{end}}{{with .RacialTraits}}<p>Racial traits: {{.}}</p>{{end}}
 <div class="col"><section><h2>Attributes</h2><table><thead><tr><th>Attribute</th><th>Rating</th></tr></thead><tbody>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</tbody></table></section>
 <section><h2>Derived values</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Bio Index</td><td>{{.BioIndex}}</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr><tr><td>Karma</td><td>{{.Karma}}</td></tr><tr><td>Karma Pool</td><td>{{.KarmaPool}}</td></tr></table></section></div>

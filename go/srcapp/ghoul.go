@@ -22,6 +22,9 @@ func (ch *Character) ConfigureGhoul(g *GhoulCreation) error {
 		return fmt.Errorf("starting-ghoul choices are locked after beginning a career")
 	}
 	if g != nil {
+		if ch.Shapeshifter != nil {
+			return fmt.Errorf("ghoul creation requires a metahuman, not a shapeshifter")
+		}
 		if ch.BuildPoints == nil {
 			return fmt.Errorf("choose Build Points before starting ghoul creation")
 		}
@@ -104,6 +107,9 @@ func (ch *Character) ghoulAttribute(name string) int {
 
 // Creation costs/pools are assigned before ghoul transformation (Companion p.14).
 func (ch *Character) skillAttribute(name string) int {
+	if ch.Shapeshifter != nil {
+		return ch.FormAttribute(name, "Human")
+	}
 	if ch.Ghoul != nil && !ch.Career {
 		return ch.ordinaryAttribute(name)
 	}
@@ -112,6 +118,9 @@ func (ch *Character) skillAttribute(name string) int {
 
 // Infection-test changes never change racial limits (Companion p.34).
 func (ch *Character) RacialModifiedLimit(name string) int {
+	if ch.Shapeshifter != nil {
+		return ch.formLimit(name, ch.Shapeshifter.Form)
+	}
 	race, _ := ch.raceDefinition()
 	n := 6 + race.Modifiers[name]
 	if ch.Ghoul != nil {
@@ -127,6 +136,9 @@ func (ch *Character) GhoulIssues() []string {
 		return nil
 	}
 	var issues []string
+	if ch.Shapeshifter != nil {
+		issues = append(issues, "Ghoul creation requires a metahuman, not a shapeshifter")
+	}
 	if !ch.Career {
 		for _, name := range attributeKeys {
 			if ch.ordinaryAttribute(name) < 1 {

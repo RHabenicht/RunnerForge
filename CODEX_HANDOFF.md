@@ -59,7 +59,7 @@ On Windows, run `go test -timeout 3m -v ./...` to include native controls and Ed
 
 ## Remaining work
 
-1. Special-character creation: otaku and shapeshifters with separate forms and their actual rules. Starting-ghoul creation is implemented; career-acquired infection remains.
+1. Otaku creation and career-acquired ghoul infection. Starting ghouls and seven shapeshifter species now have creation implementations; see docs/SPECIAL_CHARACTERS_2026-11-13.md for verified scope and remaining effects.
 2. Compound implants and capacities; augmentation stacking and effective attribute modifiers; cultured bioware; equipment dependencies.
 3. Magical eligibility, tradition/aspect restrictions, foci bonding, spirits, initiation and remaining edge/flaw effects.
 4. Advancement for spells/foci, training, earned-karma tracking and karma-pool progression.
@@ -68,7 +68,7 @@ On Windows, run `go test -timeout 3m -v ./...` to include native controls and Ed
 7. Locate/import the user's rebuilt-race sheet.
 8. Windows 10/11 manual visual and DPI acceptance, then final release packaging.
 
-Contacts/lifestyles now support explicit editable purchase prices and quantities in resource accounting, save/load, native editing and exports. Legacy contacts and lifestyle purchase totals are imported with original records retained; imported lifestyles use quantity 1 to avoid multiplying their saved total by prepaid months again. Missing prices require review. Automatic contact allowances, source-based prices, and detailed lifestyle rules remain unimplemented. Only RCT/INI equipment modifier strings currently affect derived calculations; other augmentation effects still need implementation. Custom race traits are descriptive. Advanced magic, otaku and shapeshifters remain unimplemented. Starting ghouls now have BP surcharge, recorded third-stage successes, explicit GM substitutions, pre-transformation skill costs/pools, common-only racial-limit changes, Essence/Magic loss, doubled post-transformation implant Essence, persistence, export and locked career choices. Companion printed pp.14 and 33–34 are verified from the attached PDF. Career infection, geasa and combat/condition effects remain unimplemented.
+Contacts/lifestyles now support explicit editable purchase prices and quantities in resource accounting, save/load, native editing and exports. Legacy contacts and lifestyle purchase totals are imported with original records retained; imported lifestyles use quantity 1 to avoid multiplying their saved total by prepaid months again. Missing prices require review. Automatic contact allowances, source-based prices, and detailed lifestyle rules remain unimplemented. Only RCT/INI equipment modifier strings currently affect derived calculations; other augmentation effects still need implementation. Custom race traits are descriptive. Advanced magic and otaku remain unimplemented. Shapeshifters now have separate forms, human-form skill costs, special budgets, conditional initiative, individual advancement and explicit GM seal-limit selection; combat/condition effects remain descriptive. Starting ghouls now have BP surcharge, recorded third-stage successes, explicit GM substitutions, pre-transformation skill costs/pools, common-only racial-limit changes, Essence/Magic loss, doubled post-transformation implant Essence, persistence, export and locked career choices. Companion printed pp.14 and 33–34 are verified from the attached PDF. Career infection, geasa and combat/condition effects remain unimplemented.
 
 ## Primary sources and access
 
@@ -95,7 +95,7 @@ Known Library file IDs:
 
 ## Special-character research to resume
 
-These are research leads, not completed behavior. Re-read the cited rules before implementation.
+The bullets below retain the earlier research leads. Starting ghoul and shapeshifter creation have since been verified against the attached Companion PDF and implemented within the scope documented in docs/SPECIAL_CHARACTERS_2026-11-13.md. Otaku remains research only.
 
 - Companion printed pp.33–34: starting ghouls use Build Points, +10 BP above base metatype; ordinary character built before transformation. Willpower TN6 with two extra dice determines additional changes; no Karma. Common adjustments +2 Body, +1 Strength, -1 Charisma, -1 Intelligence, -1 Essence, -1 Magic; running multiplier +1. Infection-test adjustments do not alter racial maxima. Cyberware installed after transformation costs double Essence. Handle attributes reduced to zero and explicit GM alternatives, rather than silently reallocating points.
 - Companion printed pp.34–37: seven shapeshifters; separate purchased physical attributes for animal/human forms and shared mental attributes. BP cost25; resources5,000. Knowledge Int*3; Language Int. Essence8 but awakened Magic6. No free contacts/cyberware. Skill costs use human form. Printed seal animal-form modifiers and racial-maxima table appear inconsistent; resolve rather than guessing. Form-specific adept effects and initiative must be modeled.

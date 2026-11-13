@@ -48,6 +48,17 @@ func RaceNames() []string {
 }
 
 func (ch *Character) raceDefinition() (RaceDefinition, bool) {
+	if ch.Shapeshifter != nil {
+		s, ok := shifterSpeciesTable[ch.Shapeshifter.Species]
+		mods := map[string]int{}
+		for name, n := range s.human {
+			mods[name] = n
+		}
+		for name, n := range s.mental {
+			mods[name] = n
+		}
+		return RaceDefinition{ch.Shapeshifter.Species + " shapeshifter", 25, mods, s.traits}, ok
+	}
 	if ch.CustomRace != nil && ch.CustomRace.Name == ch.Race {
 		return *ch.CustomRace, true
 	}

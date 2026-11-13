@@ -17,6 +17,8 @@ Choose **Edit / remove…** to edit a selected skill or possession. The group se
 
 Starting ghouls: choose Build Points, build the ordinary character, then open **Edit / remove… → Ghoul creation**. Enter the actual third-stage Willpower (6) test successes (two extra dice, no Karma). The editor offers the explicit GM-approved two-point attribute alternative. Purchases remain stored before transformation; final attributes, racial limits, Essence, Magic and skill costs use the applicable rules. Starting cyberware is assumed installed after transformation and costs double Essence. Choices lock when beginning a career. Career-acquired infection, geasa and combat/condition effects are not automated.
 
+Shapeshifters: open **Edit / remove… → Shapeshifter creation**, choose a species and buy its animal physical attributes separately. Main-window attributes are human-form purchases. Select the active form and movement there; both forms are saved and exported. Skill costs use human form. Resources are fixed at ¥5,000; cyberware and free starting contacts are disallowed. After career start, **Raise attribute** advances the active form only. Seals require an explicit GM interpretation of the conflicting printed tables. See [source decisions and implementation limits](docs/SPECIAL_CHARACTERS_2026-11-13.md).
+
 ## Files and Windows installation
 
 JSON character files retain custom definitions and legacy import bytes. HTML and PDF sheets include all stored possession groups, notes, sources, karma and validation findings. PDF export uses a separate local Microsoft Edge process. Character data stays on the computer.
@@ -31,7 +33,7 @@ CI tests use Windows Server 2022 and exercise native controls, PDF output, insta
 
 The embedded catalog contains 6,484 active records, including 35 individually checked additions. The original quarantine archive contains 2,633 records, of which 24 have reviewed active counterparts. Source filtering does not establish that each record was verified against its book.
 
-Custom racial traits and many catalog modifiers are reference text. Compound implants, augmentation stacking, advanced magic, special character types and full legacy-field fidelity still need implementation or verification. The application does not yet provide complete SR3 legality checking.
+Custom racial traits and many catalog modifiers are reference text. Compound implants, augmentation stacking, advanced magic, otaku and full legacy-field fidelity still need implementation or verification. The application does not yet provide complete SR3 legality checking.
 
 ## Development
 

@@ -104,6 +104,7 @@ type Possession struct {
 	Raw               string   `json:"raw,omitempty"`
 }
 type Character struct {
+	Shapeshifter         *ShapeshifterCreation `json:"shapeshifter_creation,omitempty"`
 	Ghoul                *GhoulCreation        `json:"ghoul_creation,omitempty"`
 	Career               bool                  `json:"career,omitempty"`
 	CreationSnapshot     json.RawMessage       `json:"creation_snapshot,omitempty"`
@@ -178,6 +179,9 @@ var attrLevels = map[string]int{"A": 30, "B": 27, "C": 24, "D": 21, "E": 18}
 var skillLevels = map[string]int{"A": 50, "B": 40, "C": 34, "D": 30, "E": 27}
 
 func (ch *Character) ResourceBudget() int {
+	if ch.Shapeshifter != nil {
+		return 5000
+	}
 	if ch.BuildPoints != nil {
 		return ch.BuildPoints.Resources
 	}
@@ -190,10 +194,18 @@ func (ch *Character) AttributeSpent() int {
 	for _, k := range attributeKeys {
 		s += ch.Attributes[k]
 	}
+	if ch.Shapeshifter != nil {
+		for _, name := range []string{"Body", "Quickness", "Strength"} {
+			s += ch.Shapeshifter.AnimalAttributes[name]
+		}
+	}
 	return s
 }
 func (ch *Character) SkillSpent() int { return ch.SkillAllocation().Active }
 func (ch *Character) EffectiveAttribute(name string) int {
+	if ch.Shapeshifter != nil {
+		return ch.FormAttribute(name, ch.Shapeshifter.Form)
+	}
 	n := ch.ghoulAttribute(name)
 	if ch.Ghoul != nil && ch.Ghoul.GMAlternative {
 		n += ch.ghoulPreventedLoss(name)
@@ -214,6 +226,9 @@ func (ch *Character) Essence() float64 {
 		return *ch.LegacyEssence
 	}
 	s := 6.0
+	if ch.Shapeshifter != nil {
+		s = 8
+	}
 	if ch.Ghoul != nil {
 		s--
 	}
@@ -232,9 +247,16 @@ func (ch *Character) Magic() int {
 	if ch.LegacyMagic != nil {
 		return *ch.LegacyMagic
 	}
-	return max(0, int(math.Floor(ch.Essence()-ch.BioIndex()/2+1e-9)))
+	essence := ch.Essence()
+	if ch.Shapeshifter != nil {
+		essence -= 2
+	}
+	return max(0, int(math.Floor(essence-ch.BioIndex()/2+1e-9)))
 }
 func (ch *Character) Reaction() int {
+	if ch.Shapeshifter != nil {
+		return ch.FormReaction(ch.Shapeshifter.Form)
+	}
 	return (ch.EffectiveAttribute("Quickness")+ch.EffectiveAttribute("Intelligence"))/2 + ch.CyberReactionMod()
 }
 
@@ -252,7 +274,12 @@ func totalMods(cys []Possession, re *regexp.Regexp) int {
 	return s
 }
 func (ch *Character) CyberReactionMod() int { return totalMods(ch.Cyberware, reMod) }
-func (ch *Character) InitiativeDice() int   { return 1 + totalMods(ch.Cyberware, reInit) }
+func (ch *Character) InitiativeDice() int {
+	if ch.Shapeshifter != nil {
+		return ch.FormInitiativeDice(ch.Shapeshifter.Form)
+	}
+	return 1 + totalMods(ch.Cyberware, reInit)
+}
 func (ch *Character) CombatPool() int {
 	return (ch.EffectiveAttribute("Quickness") + ch.EffectiveAttribute("Intelligence") + ch.EffectiveAttribute("Willpower")) / 2
 }
@@ -298,7 +325,7 @@ func (ch *Character) Validate() []string {
 	if _, ok := ch.raceDefinition(); !ok {
 		issues = append(issues, "Unknown race")
 	}
-	if _, standard := raceMods[ch.Race]; !standard && ch.BuildPoints == nil {
+	if _, standard := raceMods[ch.Race]; !standard && ch.BuildPoints == nil && ch.Shapeshifter == nil {
 		issues = append(issues, "Choose Build Points for Companion metavariants or custom races.")
 	}
 	if ch.CustomRace != nil {
@@ -321,6 +348,7 @@ func (ch *Character) Validate() []string {
 	}
 	issues = append(issues, ch.AugmentationIssues()...)
 	issues = append(issues, ch.GhoulIssues()...)
+	issues = append(issues, ch.ShapeshifterIssues()...)
 	if !ch.Career {
 		_, edgeIssues := ch.EdgeFlawPoints()
 		issues = append(issues, edgeIssues...)
@@ -522,6 +550,9 @@ func (ch *Character) Summary() string {
 	}
 	if description := ch.GhoulDescription(); description != "" {
 		fmt.Fprintf(&sb, "%s\r\n", description)
+	}
+	if description := ch.ShapeshifterDescription(); description != "" {
+		fmt.Fprintf(&sb, "%s\r\n%s\r\n", description, ch.ShapeFormSummary())
 	}
 	for _, k := range attributeKeys {
 		fmt.Fprintf(&sb, "%s: %d (base %d)\r\n", k, ch.EffectiveAttribute(k), ch.Attributes[k])

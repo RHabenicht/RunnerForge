@@ -88,6 +88,10 @@ type SkillAllocation struct {
 func (ch *Character) SkillAllocation() SkillAllocation {
 	intelligence := max(0, ch.skillAttribute("Intelligence"))
 	result := SkillAllocation{KnowledgeBudget: intelligence * 5, LanguageBudget: intelligence * 3 / 2}
+	if ch.Shapeshifter != nil {
+		result.KnowledgeBudget = intelligence * 3
+		result.LanguageBudget = intelligence
+	}
 	if ch.BuildPoints != nil && ch.BuildPoints.ExtraKnowledge > 0 {
 		result.KnowledgeBudget += ch.BuildPoints.ExtraKnowledge
 	}

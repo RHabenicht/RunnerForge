@@ -370,6 +370,9 @@ func (a *application) populateRaces() {
 	control := a.controls[ID_RACE]
 	send(control, CB_RESETCONTENT, 0, 0)
 	names := srcapp.RaceNames()
+	if a.char.Shapeshifter != nil {
+		names = append(names, a.char.Shapeshifter.Species+" shapeshifter")
+	}
 	if a.char.CustomRace != nil {
 		names = append(names, a.char.CustomRace.Name)
 	}

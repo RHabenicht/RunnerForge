@@ -207,6 +207,44 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	if err := contentsApply(); err == nil {
 		t.Fatal("native ghoul choices changed after career start")
 	}
+	app.char = srcapp.NewCharacter()
+	app.char.BuildPoints = &srcapp.BuildPointAllocation{Budget: 120, Resources: 5000, Magic: "Mundane"}
+	app.populate()
+	contentsGroup = "Shapeshifter creation"
+	contentsRefresh()
+	set(contentsFields[10], "Bear")
+	set(contentsFields[11], "Animal")
+	set(contentsFields[13], "2")
+	set(contentsFields[14], "3")
+	set(contentsFields[16], "4")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if app.char.Race != "Bear shapeshifter" || comboVal(ID_RACE) != app.char.Race || app.char.EffectiveAttribute("Body") != 6 || app.char.Attributes["Body"] != 1 || app.char.AttributeSpent() != 15 {
+		t.Fatal("native shapeshifter purchases or metatype selection")
+	}
+	if err := app.char.BeginCareer(); err != nil {
+		t.Fatal(err)
+	}
+	app.char.Karma = 100
+	app.populate()
+	contentsGroup = "Attributes"
+	contentsRefresh()
+	contentsIndex = 0
+	contentsLoad()
+	send(contentsWindow, WM_COMMAND, 104, 0)
+	if app.char.Shapeshifter.AnimalAttributes["Body"] != 3 || app.char.Attributes["Body"] != 1 || app.char.Karma != 86 {
+		t.Fatal("native animal advancement overwrote human form")
+	}
+	contentsGroup = "Shapeshifter creation"
+	contentsRefresh()
+	set(contentsFields[11], "Human")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if app.char.EffectiveAttribute("Body") != 3 || !app.char.AdeptPowersActive() {
+		t.Fatal("native form switch failed")
+	}
 	contentsDirty = false
 	procDestroy.Call(contentsWindow)
 	resizeMain(1000, 550)

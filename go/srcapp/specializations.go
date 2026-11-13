@@ -33,9 +33,9 @@ func (ch *Character) LearnOrAdvanceSpecialization(index int, name string) error 
 	if link == "" {
 		return fmt.Errorf("set the linked attribute first")
 	}
-	attr := ch.EffectiveAttribute(link)
+	attr := ch.skillAttribute(link)
 	if link == "Reaction" {
-		attr = (ch.EffectiveAttribute("Quickness") + ch.EffectiveAttribute("Intelligence")) / 2
+		attr = (ch.skillAttribute("Quickness") + ch.skillAttribute("Intelligence")) / 2
 	}
 	current := s.Rating
 	exists := false
