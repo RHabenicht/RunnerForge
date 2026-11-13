@@ -86,7 +86,7 @@ type SkillAllocation struct {
 }
 
 func (ch *Character) SkillAllocation() SkillAllocation {
-	intelligence := max(0, ch.EffectiveAttribute("Intelligence"))
+	intelligence := max(0, ch.skillAttribute("Intelligence"))
 	result := SkillAllocation{KnowledgeBudget: intelligence * 5, LanguageBudget: intelligence * 3 / 2}
 	if ch.BuildPoints != nil && ch.BuildPoints.ExtraKnowledge > 0 {
 		result.KnowledgeBudget += ch.BuildPoints.ExtraKnowledge
@@ -118,9 +118,9 @@ func (ch *Character) SkillAllocation() SkillAllocation {
 			result.Issues = append(result.Issues, "Choose a linked attribute for "+name)
 			continue
 		}
-		linked := ch.EffectiveAttribute(link)
+		linked := ch.skillAttribute(link)
 		if link == "Reaction" {
-			linked = (ch.EffectiveAttribute("Quickness") + ch.EffectiveAttribute("Intelligence")) / 2
+			linked = (ch.skillAttribute("Quickness") + ch.skillAttribute("Intelligence")) / 2
 		}
 		cost := rating + max(0, rating-linked)
 		switch class {

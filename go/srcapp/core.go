@@ -104,6 +104,7 @@ type Possession struct {
 	Raw               string   `json:"raw,omitempty"`
 }
 type Character struct {
+	Ghoul                *GhoulCreation        `json:"ghoul_creation,omitempty"`
 	Career               bool                  `json:"career,omitempty"`
 	CreationSnapshot     json.RawMessage       `json:"creation_snapshot,omitempty"`
 	Advancements         []Advancement         `json:"advancements,omitempty"`
@@ -193,8 +194,16 @@ func (ch *Character) AttributeSpent() int {
 }
 func (ch *Character) SkillSpent() int { return ch.SkillAllocation().Active }
 func (ch *Character) EffectiveAttribute(name string) int {
-	race, _ := ch.raceDefinition()
-	return ch.Attributes[name] + race.Modifiers[name]
+	n := ch.ghoulAttribute(name)
+	if ch.Ghoul != nil && ch.Ghoul.GMAlternative {
+		n += ch.ghoulPreventedLoss(name)
+		for _, sacrificed := range ch.Ghoul.Sacrifices {
+			if sacrificed == name {
+				n -= 2
+			}
+		}
+	}
+	return n
 }
 func (ch *Character) Awakened() bool {
 	cost, ok := buildMagicCosts[ch.MagicChoice()]
@@ -205,8 +214,11 @@ func (ch *Character) Essence() float64 {
 		return *ch.LegacyEssence
 	}
 	s := 6.0
+	if ch.Ghoul != nil {
+		s--
+	}
 	for _, cy := range ch.Cyberware {
-		s -= cy.ChargedEssence()
+		s -= ch.CyberwareEssence(cy)
 	}
 	if s < 0 {
 		return 0
@@ -308,6 +320,7 @@ func (ch *Character) Validate() []string {
 		issues = append(issues, ch.MagicAllocation().Issues...)
 	}
 	issues = append(issues, ch.AugmentationIssues()...)
+	issues = append(issues, ch.GhoulIssues()...)
 	if !ch.Career {
 		_, edgeIssues := ch.EdgeFlawPoints()
 		issues = append(issues, edgeIssues...)
@@ -506,6 +519,9 @@ func (ch *Character) Summary() string {
 	fmt.Fprintf(&sb, "Name: %s\r\nSR3 • %s\r\n", ch.Name, ch.Race)
 	if traits := ch.RacialTraits(); traits != "" {
 		fmt.Fprintf(&sb, "Racial traits: %s\r\n", traits)
+	}
+	if description := ch.GhoulDescription(); description != "" {
+		fmt.Fprintf(&sb, "%s\r\n", description)
 	}
 	for _, k := range attributeKeys {
 		fmt.Fprintf(&sb, "%s: %d (base %d)\r\n", k, ch.EffectiveAttribute(k), ch.Attributes[k])

@@ -20,6 +20,7 @@ func (ch *Character) BeginCareer() error {
 	if issues := ch.Validate(); len(issues) > 0 {
 		return fmt.Errorf("resolve creation review items before starting play: %s", issues[0])
 	}
+	ch.freezeGhoulCreation()
 	snapshot, err := json.Marshal(ch)
 	if err != nil {
 		return err
@@ -35,8 +36,7 @@ func (ch *Character) AdvanceAttribute(name string) error {
 	if !containsAttribute(name) {
 		return fmt.Errorf("only physical and mental attributes can be improved with karma")
 	}
-	race, _ := ch.raceDefinition()
-	limit := 6 + race.Modifiers[name]
+	limit := ch.RacialModifiedLimit(name)
 	current := ch.EffectiveAttribute(name)
 	next := current + 1
 	if next > (limit*3+1)/2 {

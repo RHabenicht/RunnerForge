@@ -21,6 +21,10 @@ var contentsIndex = -1
 var contentsLoading bool
 var contentsDirty bool
 
+func editorGroups() []string {
+	return append([]string{"Skills", "Character", "Attributes", "Ghoul creation"}, srcapp.PossessionGroups...)
+}
+
 func openContents() {
 	if contentsWindow != 0 {
 		return
@@ -84,6 +88,8 @@ func contentsRefresh() {
 		for _, name := range attrs {
 			send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(name))))
 		}
+	} else if contentsGroup == "Ghoul creation" {
+		send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr("Starting ghoul settings"))))
 	} else if contentsGroup == "Character" {
 		send(list, LB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr("Character details"))))
 	} else {
@@ -103,7 +109,7 @@ func contentsLoad() {
 	enable := user32.NewProc("EnableWindow")
 	for _, id := range []int{100, 101, 102} {
 		allowed := uintptr(1)
-		if contentsGroup == "Attributes" {
+		if contentsGroup == "Attributes" || (contentsGroup == "Ghoul creation" && (id != 101 || app.char.Career)) {
 			allowed = 0
 		}
 		enable.Call(contentsFields[id], allowed)
@@ -118,6 +124,7 @@ func contentsLoad() {
 	for id := 10; id <= 17; id++ {
 		set(contentsFields[id], "")
 	}
+	send(contentsFields[15], 0x00CF, 0, 0) // EM_SETREADONLY; reset when changing groups.
 	labels := map[int]string{10: "Name", 11: "Rating / Force (0 if unused)", 12: "Source", 13: "Modifiers (RCT / INI supported)", 14: "Essence cost (cyberware)", 15: "Notes", 16: "Unit price ¥ (blank = unresolved)", 17: "Quantity"}
 	if contentsGroup == "Contacts" {
 		labels[16] = "Purchase price ¥ (0 = free, blank = unresolved)"
@@ -125,6 +132,32 @@ func contentsLoad() {
 	if contentsGroup == "Lifestyles" {
 		labels[16] = "Price per paid period ¥ (blank = unresolved)"
 		labels[17] = "Paid periods (1 for a lump-sum purchase)"
+	}
+	if contentsGroup == "Ghoul creation" {
+		send(contentsFields[15], 0x00CF, 1, 0)
+		ghoulLabels := map[int]string{10: "Character type: Ghoul or None", 11: "Third-stage test successes (enter actual result)", 12: "GM attribute alternative approved: yes / no", 13: "Two-point sacrifices (comma-separated attributes)", 15: "Companion pp.33–34"}
+		for id := 10; id <= 17; id++ {
+			show := uintptr(0)
+			if label, ok := ghoulLabels[id]; ok {
+				set(contentsLabels[id], label)
+				show = 5
+			}
+			procShow.Call(contentsLabels[id], show)
+			procShow.Call(contentsFields[id], show)
+		}
+		set(contentsFields[10], "None")
+		set(contentsFields[11], "0")
+		set(contentsFields[12], "no")
+		if g := app.char.Ghoul; g != nil {
+			set(contentsFields[10], "Ghoul")
+			set(contentsFields[11], strconv.Itoa(g.Successes))
+			if g.GMAlternative {
+				set(contentsFields[12], "yes")
+			}
+			set(contentsFields[13], strings.Join(g.Sacrifices, ", "))
+		}
+		set(contentsFields[15], fmt.Sprintf("Build the ordinary character first. Roll %d dice against TN 6 (Willpower + 2); no Karma. Ghoul costs +10 BP. If Intelligence/Charisma fall below 1, the GM may permit a two-point sacrifice per lost point. Choices lock at career start. Starting implants are post-transformation.", app.char.GhoulTestDice()))
+		return
 	}
 	if contentsGroup == "Attributes" {
 		for id := 10; id <= 17; id++ {
@@ -236,6 +269,37 @@ func extraKnowledge(ch *srcapp.Character) int {
 	return 0
 }
 func contentsApply() error {
+	if contentsGroup == "Ghoul creation" {
+		var g *srcapp.GhoulCreation
+		switch strings.ToLower(strings.TrimSpace(get(contentsFields[10]))) {
+		case "none":
+		case "ghoul":
+			n, err := strconv.Atoi(strings.TrimSpace(get(contentsFields[11])))
+			if err != nil {
+				return fmt.Errorf("enter the actual third-stage test successes")
+			}
+			approved := strings.ToLower(strings.TrimSpace(get(contentsFields[12])))
+			if approved != "yes" && approved != "no" {
+				return fmt.Errorf("enter yes or no for GM permission")
+			}
+			g = &srcapp.GhoulCreation{Successes: n, GMAlternative: approved == "yes"}
+			for _, name := range strings.Split(get(contentsFields[13]), ",") {
+				name = strings.TrimSpace(name)
+				if name != "" {
+					g.Sacrifices = append(g.Sacrifices, name)
+				}
+			}
+		default:
+			return fmt.Errorf("choose Ghoul or None")
+		}
+		if err := app.char.ConfigureGhoul(g); err != nil {
+			return err
+		}
+		app.dirty = true
+		app.update()
+		contentsRefresh()
+		return nil
+	}
 	if contentsGroup == "Character" {
 		numbers := map[int]int{}
 		for _, id := range []int{11, 12, 13, 14, 16} {
@@ -407,7 +471,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 		contentsGroup = "Skills"
 		contentsIndex = -1
 		group := contentCtl(hwnd, "COMBOBOX", "", CBS_DROPDOWNLIST|WS_TABSTOP|WS_VSCROLL, 15, 15, 230, 300, 1)
-		for _, s := range append([]string{"Skills", "Character", "Attributes"}, srcapp.PossessionGroups...) {
+		for _, s := range editorGroups() {
 			send(group, CB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(s))))
 		}
 		send(group, CB_SETCURSEL, 0, 0)
@@ -455,7 +519,7 @@ func contentsProc(hwnd uintptr, ev uint32, wp, lp uintptr) uintptr {
 				contentsGroup = contentComboValue(1)
 				contentsRefresh()
 			} else {
-				for i, g := range append([]string{"Skills", "Character", "Attributes"}, srcapp.PossessionGroups...) {
+				for i, g := range editorGroups() {
 					if g == contentsGroup {
 						send(contentsFields[1], CB_SETCURSEL, uintptr(i), 0)
 					}

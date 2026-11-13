@@ -15,6 +15,8 @@ Standalone Shadowrun Third Edition character generator for Windows 10/11. Versio
 
 Choose **Edit / remove…** to edit a selected skill or possession. The group selector also opens character notes, karma, tradition and extra-point settings. Select **Character**, apply any edits, and choose **Begin career** to preserve a creation snapshot and enable karma advancement. Skills, specializations and attributes can then be raised one step at a time. New skills cost one karma at rating 1; additional specializations use the SR3 advancement costs. Each purchase records its cost.
 
+Starting ghouls: choose Build Points, build the ordinary character, then open **Edit / remove… → Ghoul creation**. Enter the actual third-stage Willpower (6) test successes (two extra dice, no Karma). The editor offers the explicit GM-approved two-point attribute alternative. Purchases remain stored before transformation; final attributes, racial limits, Essence, Magic and skill costs use the applicable rules. Starting cyberware is assumed installed after transformation and costs double Essence. Choices lock when beginning a career. Career-acquired infection, geasa and combat/condition effects are not automated.
+
 ## Files and Windows installation
 
 JSON character files retain custom definitions and legacy import bytes. HTML and PDF sheets include all stored possession groups, notes, sources, karma and validation findings. PDF export uses a separate local Microsoft Edge process. Character data stays on the computer.

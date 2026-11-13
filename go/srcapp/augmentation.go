@@ -42,6 +42,14 @@ func (p Possession) ChargedEssence() float64 {
 	}
 	return cost * float64(p.Count())
 }
+
+func (ch *Character) CyberwareEssence(p Possession) float64 {
+	cost := p.ChargedEssence()
+	if ch.Ghoul != nil {
+		cost *= 2
+	}
+	return cost
+}
 func (p Possession) ChargedUnitCost() int {
 	if p.UnitCost == nil {
 		return 0

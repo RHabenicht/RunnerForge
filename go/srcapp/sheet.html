@@ -2,6 +2,7 @@
 <style>body{font:15px Arial,sans-serif;max-width:1000px;margin:auto;padding:1.5rem;color:#181b22}h1{border-bottom:2px solid #222}h2{margin-top:1.5rem}table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #ddd;text-align:left;padding:.35rem;vertical-align:top;overflow-wrap:anywhere}small{color:#555}.col{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.notes{white-space:pre-wrap}.details{font-size:.85em;color:#444}thead{display:table-header-group}@media print{body{margin:.25in;padding:0;font-size:10pt}h2{break-after:avoid}tr{break-inside:avoid}.col{display:block}}@media(max-width:600px){.col{display:block}}</style></head>
 <body><h1>{{.Name}}</h1><p>RunnerForge — Shadowrun Third Edition · {{.Race}}</p>
 {{with .Tradition}}<p>Tradition / aspect: {{.}}</p>{{end}}
+{{with .GhoulDescription}}<p>{{.}}</p>{{end}}
 {{with .RealName}}<p>Real name: {{.}}</p>{{end}}{{with .RacialTraits}}<p>Racial traits: {{.}}</p>{{end}}
 <div class="col"><section><h2>Attributes</h2><table><thead><tr><th>Attribute</th><th>Rating</th></tr></thead><tbody>{{range .AttributesList}}<tr><td>{{.Key}}</td><td>{{.Value}}</td></tr>{{end}}</tbody></table></section>
 <section><h2>Derived values</h2><table><tr><td>Reaction</td><td>{{.Reaction}}</td></tr><tr><td>Initiative</td><td>{{.Reaction}} + {{.InitiativeDice}}D6</td></tr><tr><td>Bio Index</td><td>{{.BioIndex}}</td></tr><tr><td>Essence</td><td>{{.Essence}}</td></tr><tr><td>Magic</td><td>{{.Magic}}</td></tr><tr><td>Combat Pool</td><td>{{.CombatPool}}</td></tr><tr><td>Spell Pool</td><td>{{.SpellPool}}</td></tr><tr><td>Karma</td><td>{{.Karma}}</td></tr><tr><td>Karma Pool</td><td>{{.KarmaPool}}</td></tr></table></section></div>
@@ -10,12 +11,12 @@
 <p>Active skill points: {{.Allocation.Active}}. Knowledge: {{.Allocation.Knowledge}} / {{.Allocation.KnowledgeBudget}}. Languages: {{.Allocation.Language}} / {{.Allocation.LanguageBudget}}. Excess Language costs use Knowledge points.</p>
 <p>Spell Points: {{.MagicAllocation.SpellSpent}} / {{.MagicAllocation.SpellBudget}}. Power Points: {{.MagicAllocation.PowerSpent}} / {{.Magic}}.</p>
 <h2>Skills</h2><table><thead><tr><th>Skill</th><th>Category</th><th>Base</th><th>Specialization</th><th>Read/write</th></tr></thead><tbody>{{range .SortedSkills}}<tr><td>{{.Name}}</td><td>{{.Class}}</td><td>{{.Rating}}</td><td>{{.SpecializationText}}</td><td>{{if eq .Class "Language"}}{{.ReadWriteRating}}{{end}}</td></tr>{{end}}</tbody></table>
-{{range .Sections}}{{if .Items}}<h2>{{.Name}}</h2><table><thead><tr><th>Entry</th><th>Rating / Force</th><th>Quantity</th><th>Unit price</th><th>Source</th></tr></thead><tbody>{{range .Items}}
+{{range .Sections}}{{$section := .Name}}{{if .Items}}<h2>{{.Name}}</h2><table><thead><tr><th>Entry</th><th>Rating / Force</th><th>Quantity</th><th>Unit price</th><th>Source</th></tr></thead><tbody>{{range .Items}}
 <tr><td>{{.Name}}</td><td>{{if .Rating}}{{.Rating}}{{end}}</td><td>{{.Count}}</td><td>{{if ne .UnitCost nil}}¥{{.ChargedUnitCost}}{{else}}—{{end}}</td><td>{{.Source}}</td></tr>
 {{if or .Notes .Modifiers .EssenceCost .PointCost .BioIndex .Grade}}<tr><td colspan="5" class="notes details">{{with .Grade}}Grade: {{.}}
 {{end}}{{if ne .BioIndex nil}}Bio Index: {{.BioIndex}}
 {{end}}{{if ne .PointCost nil}}Point cost: {{.PointCost}}
-{{end}}{{if .EssenceCost}}Essence cost: {{.ChargedEssence}}
+{{end}}{{if .EssenceCost}}Essence cost: {{if eq $section "Cyberware"}}{{$.CyberwareEssence .}}{{else}}{{.ChargedEssence}}{{end}}
 {{end}}{{with .Modifiers}}Modifiers: {{.}}
 {{end}}{{.Notes}}</td></tr>{{end}}
 {{with .Raw}}<tr><td colspan="5" class="details">Stored source details: {{.}}</td></tr>{{end}}

@@ -59,7 +59,7 @@ On Windows, run `go test -timeout 3m -v ./...` to include native controls and Ed
 
 ## Remaining work
 
-1. Special-character creation: ghouls, otaku and shapeshifters with separate forms and their actual rules.
+1. Special-character creation: otaku and shapeshifters with separate forms and their actual rules. Starting-ghoul creation is implemented; career-acquired infection remains.
 2. Compound implants and capacities; augmentation stacking and effective attribute modifiers; cultured bioware; equipment dependencies.
 3. Magical eligibility, tradition/aspect restrictions, foci bonding, spirits, initiation and remaining edge/flaw effects.
 4. Advancement for spells/foci, training, earned-karma tracking and karma-pool progression.
@@ -68,7 +68,7 @@ On Windows, run `go test -timeout 3m -v ./...` to include native controls and Ed
 7. Locate/import the user's rebuilt-race sheet.
 8. Windows 10/11 manual visual and DPI acceptance, then final release packaging.
 
-Contacts/lifestyles now support explicit editable purchase prices and quantities in resource accounting, save/load, native editing and exports. Legacy contacts and lifestyle purchase totals are imported with original records retained; imported lifestyles use quantity 1 to avoid multiplying their saved total by prepaid months again. Missing prices require review. Automatic contact allowances, source-based prices, and detailed lifestyle rules remain unimplemented. Only RCT/INI equipment modifier strings currently affect derived calculations; other augmentation effects still need implementation. Custom race traits are descriptive. Advanced magic and special types were researched but NOT implemented.
+Contacts/lifestyles now support explicit editable purchase prices and quantities in resource accounting, save/load, native editing and exports. Legacy contacts and lifestyle purchase totals are imported with original records retained; imported lifestyles use quantity 1 to avoid multiplying their saved total by prepaid months again. Missing prices require review. Automatic contact allowances, source-based prices, and detailed lifestyle rules remain unimplemented. Only RCT/INI equipment modifier strings currently affect derived calculations; other augmentation effects still need implementation. Custom race traits are descriptive. Advanced magic, otaku and shapeshifters remain unimplemented. Starting ghouls now have BP surcharge, recorded third-stage successes, explicit GM substitutions, pre-transformation skill costs/pools, common-only racial-limit changes, Essence/Magic loss, doubled post-transformation implant Essence, persistence, export and locked career choices. Companion printed pp.14 and 33–34 are verified from the attached PDF. Career infection, geasa and combat/condition effects remain unimplemented.
 
 ## Primary sources and access
 

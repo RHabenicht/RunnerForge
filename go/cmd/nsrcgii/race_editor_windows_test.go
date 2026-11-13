@@ -185,6 +185,28 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	if got := app.char.ResourceAllocation(); got.Spent != 12000 || len(got.Issues) != 0 {
 		t.Fatalf("native purchase spending: %+v", got)
 	}
+	app.char = srcapp.NewCharacter()
+	app.char.BuildPoints = &srcapp.BuildPointAllocation{Budget: 120, Resources: 5000, Magic: "Mundane"}
+	for _, name := range attrs {
+		app.char.Attributes[name] = 4
+	}
+	app.populate()
+	contentsGroup = "Ghoul creation"
+	contentsRefresh()
+	set(contentsFields[10], "Ghoul")
+	set(contentsFields[11], "3")
+	if err := contentsApply(); err != nil {
+		t.Fatal(err)
+	}
+	if app.char.Ghoul == nil || app.char.EffectiveAttribute("Body") != 6 || app.char.Attributes["Body"] != 4 || app.char.Essence() != 5 {
+		t.Fatal("native ghoul creation did not preserve ordinary purchases")
+	}
+	if err := app.char.BeginCareer(); err != nil {
+		t.Fatal(err)
+	}
+	if err := contentsApply(); err == nil {
+		t.Fatal("native ghoul choices changed after career start")
+	}
 	contentsDirty = false
 	procDestroy.Call(contentsWindow)
 	resizeMain(1000, 550)

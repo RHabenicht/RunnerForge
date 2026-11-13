@@ -11,6 +11,10 @@ Bio Index and its effect on starting Magic; character notes and karma;
 career snapshots, skill/specialization/attribute advancement history;
 new skills and multiple specializations purchased with karma;
 all stored character groups in HTML/PDF; per-user Windows installer.
+Starting-ghoul BP creation, explicit infection results and GM substitutions,
+pre-transformation skill costs/pools, adjusted limits and doubled implant Essence.
+Career-acquired infection, geasa and condition/combat automation remain outside
+this implementation.
 Editable contact/lifestyle purchase accounting; legacy contacts and prepaid
 lifestyle totals mapped into editable/exported entries with raw data retained.
 Prices and free-contact eligibility remain user-reviewed rather than inferred.
@@ -27,7 +31,7 @@ installer build/install/launch/uninstall. See CODEX_HANDOFF.md.
 Windows Server testing does not establish Windows 10/11 desktop acceptance.
 
 Still required for complete SR3 coverage:
-- Ghoul transformation, otaku and shapeshifter creation (including two forms).
+- Career-acquired ghoul infection, otaku and shapeshifter creation (including two forms).
 - Compound implants, cyberlimb/cybereye capacity, augmentation stacking,
   attribute modifiers, cultured bioware rules and equipment dependencies.
 - Full magical eligibility, foci bonding, spirits, initiation and tradition/
