@@ -2,7 +2,7 @@ package srcapp
 
 import "fmt"
 
-var PossessionGroups = []string{"Gear", "Cyberware", "Bioware", "Spells", "Adept powers", "Vehicles", "Cyberdecks", "Edges / Flaws", "Contacts", "Totems", "Magic gear"}
+var PossessionGroups = []string{"Gear", "Cyberware", "Bioware", "Spells", "Adept powers", "Vehicles", "Cyberdecks", "Edges / Flaws", "Contacts", "Totems", "Magic gear", "Lifestyles"}
 
 func (ch *Character) Possessions(group string) *[]Possession {
 	switch group {
@@ -24,6 +24,8 @@ func (ch *Character) Possessions(group string) *[]Possession {
 		return &ch.EdgesFlaws
 	case "Contacts":
 		return &ch.Contacts
+	case "Lifestyles":
+		return &ch.Lifestyles
 	case "Totems":
 		return &ch.Totems
 	case "Magic gear":
@@ -72,7 +74,7 @@ func (ch *Character) ResourceAllocation() ResourceAllocation {
 	if ch.SpellPointsPurchased > 0 && ch.SpellPointsPurchased <= 50 {
 		result.Spent += 25000 * ch.SpellPointsPurchased
 	}
-	for _, group := range []string{"Gear", "Cyberware", "Bioware", "Vehicles", "Cyberdecks", "Magic gear"} {
+	for _, group := range []string{"Gear", "Cyberware", "Bioware", "Vehicles", "Cyberdecks", "Magic gear", "Contacts", "Lifestyles"} {
 		for _, p := range *ch.Possessions(group) {
 			if p.UnitCost == nil {
 				result.Issues = append(result.Issues, "Price not set: "+p.Name)

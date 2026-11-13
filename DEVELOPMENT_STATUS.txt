@@ -11,6 +11,9 @@ Bio Index and its effect on starting Magic; character notes and karma;
 career snapshots, skill/specialization/attribute advancement history;
 new skills and multiple specializations purchased with karma;
 all stored character groups in HTML/PDF; per-user Windows installer.
+Editable contact/lifestyle purchase accounting; legacy contacts and prepaid
+lifestyle totals mapped into editable/exported entries with raw data retained.
+Prices and free-contact eligibility remain user-reviewed rather than inferred.
 35 checked equipment entries from Sprawl Survival Guide and Target: Awakened
 Lands; 6,484 active entries. See docs/EQUIPMENT_REVIEW_2026-11-12.md.
 

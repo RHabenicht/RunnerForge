@@ -119,6 +119,13 @@ func contentsLoad() {
 		set(contentsFields[id], "")
 	}
 	labels := map[int]string{10: "Name", 11: "Rating / Force (0 if unused)", 12: "Source", 13: "Modifiers (RCT / INI supported)", 14: "Essence cost (cyberware)", 15: "Notes", 16: "Unit price ¥ (blank = unresolved)", 17: "Quantity"}
+	if contentsGroup == "Contacts" {
+		labels[16] = "Purchase price ¥ (0 = free, blank = unresolved)"
+	}
+	if contentsGroup == "Lifestyles" {
+		labels[16] = "Price per paid period ¥ (blank = unresolved)"
+		labels[17] = "Paid periods (1 for a lump-sum purchase)"
+	}
 	if contentsGroup == "Attributes" {
 		for id := 10; id <= 17; id++ {
 			show := uintptr(0)

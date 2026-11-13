@@ -149,6 +149,35 @@ func ParseLegacy(text string) (*Character, error) {
 		c.Cyberware = append(c.Cyberware, p)
 	}
 	c.Notes = decUnderscore(g["Notes"])
+	// These saved prices are purchase totals, not catalog unit prices. Import
+	// each lifestyle as one lump sum so prepaid months are not charged twice.
+	for _, k := range sortedKeys(g, "LifeStyle") {
+		if _, err := strconv.Atoi(strings.TrimPrefix(k, "LifeStyle")); err != nil {
+			continue
+		}
+		fields := strings.Split(g[k], "~")
+		if strings.TrimSpace(fields[0]) == "" {
+			continue
+		}
+		p := Possession{Name: decUnderscore(fields[0]), Kind: "lifestyle", Quantity: 1, Raw: g[k], Notes: "Imported as one purchase total; original duration and details retained below."}
+		p.UnitCost = legacyPrice(fields, 5)
+		c.Lifestyles = append(c.Lifestyles, p)
+	}
+	for _, k := range sortedKeys(m["Contacts"], "Contact") {
+		if _, err := strconv.Atoi(strings.TrimPrefix(k, "Contact")); err != nil {
+			continue
+		}
+		fields := strings.Split(m["Contacts"][k], "~")
+		if strings.TrimSpace(fields[0]) == "" {
+			continue
+		}
+		p := Possession{Name: decUnderscore(fields[0]), Kind: "contact", Quantity: 1, Raw: m["Contacts"][k]}
+		p.UnitCost = legacyPrice(fields, 8)
+		if len(fields) > 5 {
+			p.Rating, _ = strconv.Atoi(strings.TrimSpace(fields[5]))
+		}
+		c.Contacts = append(c.Contacts, p)
+	}
 	if v, e := strconv.Atoi(m["Karma"]["RemainKarma"]); e == nil {
 		c.Karma = v
 	}
@@ -162,6 +191,19 @@ func ParseLegacy(text string) (*Character, error) {
 		c.Name = "Imported Character"
 	}
 	return c, nil
+}
+
+// Missing or malformed prices must stay unresolved, including negative values.
+// Explicit zero prices in the save represent free entries and remain zero.
+func legacyPrice(fields []string, index int) *int {
+	if index >= len(fields) {
+		return nil
+	}
+	value, err := strconv.Atoi(strings.TrimSpace(fields[index]))
+	if err != nil || value < 0 || value > 1000000000 {
+		return nil
+	}
+	return &value
 }
 func decUnderscore(s string) string { return strings.ReplaceAll(s, "_", " ") }
 func ParseLeadingInt(s string) int {

@@ -157,6 +157,34 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 	if app.char.Karma != 17 || len(app.char.Skills) != 2 {
 		t.Fatal("new skill purchase failed")
 	}
+	for _, group := range []string{"Contacts", "Lifestyles"} {
+		contentsGroup = group
+		contentsRefresh()
+		contentsIndex = -1
+		contentsLoad()
+		set(contentsFields[10], "Test "+group)
+		set(contentsFields[16], "1000")
+		set(contentsFields[17], "3")
+		if err := contentsApply(); err != nil {
+			t.Fatal(err)
+		}
+		list := app.char.Possessions(group)
+		if len(*list) != 1 || (*list)[0].Count() != 3 || *(*list)[0].UnitCost != 1000 {
+			t.Fatalf("%s purchase not applied", group)
+		}
+		contentsIndex = 0
+		contentsLoad()
+		set(contentsFields[16], "2000")
+		if err := contentsApply(); err != nil {
+			t.Fatal(err)
+		}
+		if len(*list) != 1 || *(*list)[0].UnitCost != 2000 {
+			t.Fatalf("%s edit did not replace entry", group)
+		}
+	}
+	if got := app.char.ResourceAllocation(); got.Spent != 12000 || len(got.Issues) != 0 {
+		t.Fatalf("native purchase spending: %+v", got)
+	}
 	contentsDirty = false
 	procDestroy.Call(contentsWindow)
 	resizeMain(1000, 550)

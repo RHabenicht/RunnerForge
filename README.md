@@ -11,6 +11,7 @@ Standalone Shadowrun Third Edition character generator for Windows 10/11. Versio
 - Optional extra Knowledge points, Spell Point purchases/sales, and Edge/Flaw point accounting.
 - Cyberware grade price/Essence calculations and bioware's effect on starting Magic.
 - Equipment quantity and price accounting. Unknown prices remain unresolved rather than counting as free.
+- Editable contact purchases and prepaid lifestyles count toward resources. Set a contact's price to zero for an explicitly free contact; a blank price requires review. Lifestyles use price per paid period and quantity, or quantity 1 for a lump-sum purchase. Prices and free-contact eligibility require source/GM review; no automatic allowance is applied.
 
 Choose **Edit / remove…** to edit a selected skill or possession. The group selector also opens character notes, karma, tradition and extra-point settings. Select **Character**, apply any edits, and choose **Begin career** to preserve a creation snapshot and enable karma advancement. Skills, specializations and attributes can then be raised one step at a time. New skills cost one karma at rating 1; additional specializations use the SR3 advancement costs. Each purchase records its cost.
 
@@ -18,13 +19,15 @@ Choose **Edit / remove…** to edit a selected skill or possession. The group se
 
 JSON character files retain custom definitions and legacy import bytes. HTML and PDF sheets include all stored possession groups, notes, sources, karma and validation findings. PDF export uses a separate local Microsoft Edge process. Character data stays on the computer.
 
+Legacy contacts and lifestyles are available in **Edit / remove…** and on exported sheets. Imported lifestyles retain their saved total as one purchase, avoiding a second multiplication by prepaid months. Missing or invalid saved prices remain unresolved. Original records remain attached to each imported entry.
+
 The Windows workflow builds the executable and a per-user Inno Setup installer. Download the **RunnerForge-Windows-development** artifact from a successful [Actions run](https://github.com/RHabenicht/RunnerForge/actions). The installer adds RunnerForge to the Start menu and offers an optional desktop shortcut. User-created files are preserved by uninstall.
 
 CI tests use Windows Server 2022 and exercise native controls, PDF output, installer launch and uninstallation. Direct Windows 10/11 acceptance testing remains outstanding.
 
 ## Catalog and limits
 
-The embedded catalog contains 6,449 records citing approved sources. Another 2,633 records remain quarantined. Source filtering does not establish that each record was verified against its book.
+The embedded catalog contains 6,484 active records, including 35 individually checked additions. The original quarantine archive contains 2,633 records, of which 24 have reviewed active counterparts. Source filtering does not establish that each record was verified against its book.
 
 Custom racial traits and many catalog modifiers are reference text. Compound implants, augmentation stacking, advanced magic, special character types and full legacy-field fidelity still need implementation or verification. The application does not yet provide complete SR3 legality checking.
 

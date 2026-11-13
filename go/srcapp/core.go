@@ -130,6 +130,7 @@ type Character struct {
 	Decks                []Possession          `json:"cyberdecks,omitempty"`
 	EdgesFlaws           []Possession          `json:"edges_flaws,omitempty"`
 	Contacts             []Possession          `json:"contacts,omitempty"`
+	Lifestyles           []Possession          `json:"lifestyles,omitempty"`
 	Totems               []Possession          `json:"totems,omitempty"`
 	MagicGear            []Possession          `json:"magic_gear,omitempty"`
 	Karma                int                   `json:"karma"`

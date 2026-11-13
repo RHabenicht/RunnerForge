@@ -68,7 +68,7 @@ On Windows, run `go test -timeout 3m -v ./...` to include native controls and Ed
 7. Locate/import the user's rebuilt-race sheet.
 8. Windows 10/11 manual visual and DPI acceptance, then final release packaging.
 
-Contacts/lifestyles cost accounting is also incomplete. Only RCT/INI equipment modifier strings currently affect derived calculations; other augmentation effects still need implementation. Custom race traits are descriptive. Advanced magic and special types were researched but NOT implemented.
+Contacts/lifestyles now support explicit editable purchase prices and quantities in resource accounting, save/load, native editing and exports. Legacy contacts and lifestyle purchase totals are imported with original records retained; imported lifestyles use quantity 1 to avoid multiplying their saved total by prepaid months again. Missing prices require review. Automatic contact allowances, source-based prices, and detailed lifestyle rules remain unimplemented. Only RCT/INI equipment modifier strings currently affect derived calculations; other augmentation effects still need implementation. Custom race traits are descriptive. Advanced magic and special types were researched but NOT implemented.
 
 ## Primary sources and access
 
