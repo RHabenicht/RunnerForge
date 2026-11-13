@@ -6,7 +6,7 @@ Prepared November 13, 2026. Repository: https://github.com/RHabenicht/RunnerForg
 
 Continue this existing Go/Win32 project. Read this file, DEVELOPMENT_STATUS.txt, README.md, README_TESTING.txt and docs/EQUIPMENT_REVIEW_2026-11-12.md, then inspect the code and run the existing tests. Work until the requested features are complete; do not stop after each small increment to ask whether to continue. Report concrete blockers and actual test results. Do not claim complete SR3 coverage from a passing build.
 
-The latest tested implementation commit is `2d38a8ed5bb859a2dceaf2516dcb7273f93ae63c`, now on main. This handoff is a later documentation-only commit. Clone main rather than rebuilding from a chat transcript. The former name was NSRCG-II; the product is RunnerForge. The separate VB project, NSRCG maintenance project, and The Shop are not this project and must not be edited.
+The latest tested implementation commit is `95460acaa89bc5ed8df46cdb724c66c83a904494`, now on main, following starting-ghoul commit `0295ff39027beb0646107a5fe8f7eb468be4ce55`. Windows run https://github.com/RHabenicht/RunnerForge/actions/runs/43444144321 passed native tests, vet, GUI startup, installer build/install/launch/uninstall and artifact upload. The older equipment checkpoint was `2d38a8ed5bb859a2dceaf2516dcb7273f93ae63c`. Clone main rather than rebuilding from a chat transcript. The former name was NSRCG-II; the product is RunnerForge. The separate VB project, NSRCG maintenance project, and The Shop are not this project and must not be edited.
 
 ## User requirements
 
@@ -34,7 +34,17 @@ Equipment update: 35 book-checked entries from Sprawl Survival Guide and Target:
 
 `equipment_supplement.json` is embedded alongside `catalog.json`; LoadCatalogue merges them and rejects ID collisions. Do not blindly enable all source codes in build_catalog.py. The original quarantine archive has 2,633 records; 24 now have reviewed active counterparts. Its raw size is not the unresolved count. Preserve old IDs. Missing prices remain validation issues rather than zero-cost gear.
 
-## Verified build and installer
+## Latest verified build and installer
+
+Special-character acceptance run: https://github.com/RHabenicht/RunnerForge/actions/runs/43444144321
+
+Artifact: https://github.com/RHabenicht/RunnerForge/actions/runs/43444144321/artifacts/14046137955
+
+Artifact name: RunnerForge-Windows-development. Includes RunnerForge.exe and RunnerForge-Setup-0.2.0.exe. Expires February 11, 2027. SHA256: `9489615f07fd3fd9cc422877042a0e2a0990bdaf3e2028c5adca54d06bc72a32`. This remains a development build. Direct Windows 10/11 visual/DPI acceptance is still outstanding.
+
+The Companion attachment is available and was used for the verified scope in docs/SPECIAL_CHARACTERS_2026-11-13.md. Both Matrix attachment attempts exceeded this executor’s 32 MiB download limit; a smaller extract of the otaku section is needed. This is a transfer limitation, not a claim that the book is absent from Library.
+
+## Previous equipment build and installer
 
 GitHub Actions run: https://github.com/RHabenicht/RunnerForge/actions/runs/43324415437
 

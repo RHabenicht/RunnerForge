@@ -26,7 +26,10 @@ Prices and free-contact eligibility remain user-reviewed rather than inferred.
 Lands; 6,484 active entries. See docs/EQUIPMENT_REVIEW_2026-11-12.md.
 
 Verification:
-Local Go tests/vet, Windows cross-build and four Python tests pass.
+Local Go tests/vet, Windows cross-vet/build and four Python tests pass.
+Special-character commit 95460ac passed Windows acceptance run 43444144321,
+including native ghoul/shapeshifter editors, animal advancement, PDF export,
+GUI startup, installer build/install/launch/uninstall and artifact upload.
 Windows Server 2022 CI exercises native race and entry editors, save/load,
 point budgets, PDF creation, executable launch, installer build/install/launch,
 and uninstall while retaining a user-created save.
