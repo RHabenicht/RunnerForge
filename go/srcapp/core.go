@@ -311,6 +311,9 @@ func (ch *Character) Validate() []string {
 				}
 			}
 			expected := map[string]string{"Human": "E", "Dwarf": "D", "Ork": "D", "Elf": "C", "Troll": "C"}[ch.Race]
+			if ch.CustomRace != nil && ch.CustomRace.Name == ch.Race {
+				expected = ch.CustomRace.Priority
+			}
 			if expected != "" && ch.Priority["Race"] != expected {
 				issues = append(issues, ch.Race+" requires Race priority "+expected)
 			}
@@ -325,7 +328,7 @@ func (ch *Character) Validate() []string {
 	if _, ok := ch.raceDefinition(); !ok {
 		issues = append(issues, "Unknown race")
 	}
-	if _, standard := raceMods[ch.Race]; !standard && ch.BuildPoints == nil && ch.Shapeshifter == nil {
+	if _, standard := raceMods[ch.Race]; !standard && ch.BuildPoints == nil && !(ch.CustomRace != nil && ch.CustomRace.Name == ch.Race && ch.CustomRace.Priority != "") && ch.Shapeshifter == nil {
 		issues = append(issues, "Choose Build Points for Companion metavariants or custom races.")
 	}
 	if ch.CustomRace != nil {

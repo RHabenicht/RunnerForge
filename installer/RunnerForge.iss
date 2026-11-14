@@ -23,6 +23,8 @@ Source: "..\go\RunnerForge.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\README.md"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\DEVELOPMENT_STATUS.txt"; DestDir: "{app}"; Flags: ignoreversion
 
+Source: "..\race-packs\*"; DestDir: "{app}\race-packs"; Flags: ignoreversion
+
 [Tasks]
 Name: desktopicon; Description: "Create a desktop shortcut"; Flags: unchecked
 

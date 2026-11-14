@@ -366,6 +366,8 @@ func (a *application) populate() {
 	set(a.controls[ID_SUMMARY], a.char.Summary())
 }
 
+var loadedRaces []srcapp.RaceDefinition
+
 func (a *application) populateRaces() {
 	control := a.controls[ID_RACE]
 	send(control, CB_RESETCONTENT, 0, 0)
@@ -373,8 +375,19 @@ func (a *application) populateRaces() {
 	if a.char.Shapeshifter != nil {
 		names = append(names, a.char.Shapeshifter.Species+" shapeshifter")
 	}
+	for _, r := range loadedRaces {
+		names = append(names, r.Name)
+	}
 	if a.char.CustomRace != nil {
-		names = append(names, a.char.CustomRace.Name)
+		found := false
+		for _, name := range names {
+			if name == a.char.CustomRace.Name {
+				found = true
+			}
+		}
+		if !found {
+			names = append(names, a.char.CustomRace.Name)
+		}
 	}
 	for _, name := range names {
 		index := send(control, CB_ADDSTRING, 0, uintptr(unsafe.Pointer(ptr(name))))
@@ -388,6 +401,18 @@ func (a *application) sync() {
 	a.char.Name = get(a.controls[ID_NAME])
 	a.char.MagicType = comboVal(ID_BP_MAGIC)
 	if race := comboVal(ID_RACE); race != "" {
+		if race != a.char.Race {
+			for _, r := range loadedRaces {
+				if r.Name == race {
+					if err := a.char.SelectPackRace(r); err != nil {
+						msgbox(err.Error(), MB_ICONWARNING)
+						a.populateRaces()
+						return
+					}
+					break
+				}
+			}
+		}
 		a.char.Race = race
 	}
 	if comboVal(ID_METHOD) == "Build Points" {
@@ -445,20 +470,31 @@ func (a *application) perform(id int) {
 	case ID_EDIT_RACE:
 		openRaceEditor()
 	case ID_CUSTOM_RACE:
-		path := pickFile(false, "Custom race (*.json)\x00*.json\x00\x00", "")
+		path := pickFile(false, "Race files (*.dat;*.json)\x00*.dat;*.json\x00\x00", "")
 		if path == "" {
+			return
+		}
+		if pack, err := srcapp.LoadRacePack(path); err == nil {
+			a.sync()
+			loadedRaces = pack.Races
+			a.populateRaces()
+			msgbox("Loaded "+pack.Name+". Select a custom race from the Race list. Default races are unchanged.", MB_OK)
 			return
 		}
 		race, err := srcapp.LoadRaceDefinition(path)
 		if err != nil {
-			msgbox("Could not load custom race: "+err.Error(), MB_OK|MB_ICONWARNING)
+			msgbox("Could not load race file: "+err.Error(), MB_OK|MB_ICONWARNING)
 			return
 		}
 		a.sync()
-		a.char.CustomRace = race
-		a.char.Race = race.Name
+		if err := a.char.SelectPackRace(*race); err != nil {
+			msgbox(err.Error(), MB_ICONWARNING)
+			return
+		}
 		a.populateRaces()
-		selectCombo(ID_METHOD, "Build Points")
+		if race.Priority == "" {
+			selectCombo(ID_METHOD, "Build Points")
+		}
 		a.dirty = true
 		a.update()
 	case ID_CALC:

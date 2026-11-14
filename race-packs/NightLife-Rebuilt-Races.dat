@@ -1,0 +1,201 @@
+{
+  "format": "runnerforge.race-pack.v1",
+  "name": "NightLife Rebuilt Races",
+  "races": [
+    {
+      "name": "Halfling (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Strength": -1,
+        "Quickness": 1,
+        "Charisma": 2
+      },
+      "traits": "Thermographic Vision. Running multiplier ×2 (instead of ×3)."
+    },
+    {
+      "name": "Cyclops (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Body": 5,
+        "Quickness": -1,
+        "Strength": 6,
+        "Intelligence": -2,
+        "Willpower": -1,
+        "Charisma": -2
+      },
+      "traits": "Thermographic Vision. +1 Reach for melee combat. +1 to all ranged activities due to lack of depth perception. Running multiplier ×2."
+    },
+    {
+      "name": "Koborkuru (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 1,
+        "Quickness": -1,
+        "Strength": 2,
+        "Willpower": 1
+      },
+      "traits": "Thermographic Vision. +2 Body versus toxins only. Running multiplier ×2."
+    },
+    {
+      "name": "Formori (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Body": 4,
+        "Quickness": -1,
+        "Strength": 3,
+        "Intelligence": -2,
+        "Willpower": -1
+      },
+      "traits": "Thermographic Vision. +1 Reach for melee combat. Dermal Armor (+1 Body)."
+    },
+    {
+      "name": "Menehene (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 2,
+        "Quickness": -1,
+        "Strength": 2,
+        "Charisma": -1,
+        "Willpower": 1
+      },
+      "traits": "Thermographic Vision. +2 Body versus disease only. Running multiplier ×2."
+    },
+    {
+      "name": "Hobgoblin (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 3,
+        "Strength": 2,
+        "Charisma": -1,
+        "Intelligence": -1
+      },
+      "traits": "Low Light Vision."
+    },
+    {
+      "name": "Giant (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Body": 4,
+        "Quickness": -1,
+        "Strength": 5,
+        "Intelligence": -2,
+        "Willpower": -1,
+        "Charisma": -2
+      },
+      "traits": "Thermographic Vision. +1 Reach for melee combat. Mild uncommon allergy of choice grants no points; choose another allergy for extra points. Running multiplier ×2."
+    },
+    {
+      "name": "Gnome (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 1,
+        "Strength": 1,
+        "Willpower": 2
+      },
+      "traits": "Thermographic Vision. Running multiplier ×2."
+    },
+    {
+      "name": "Oni (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 2,
+        "Strength": 2,
+        "Charisma": -1,
+        "Intelligence": -1,
+        "Willpower": 1
+      },
+      "traits": "Low Light Vision."
+    },
+    {
+      "name": "Wakyambi (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Charisma": 2,
+        "Willpower": 1
+      },
+      "traits": "Low Light Vision."
+    },
+    {
+      "name": "Ogre (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 2,
+        "Strength": 2,
+        "Intelligence": -1
+      },
+      "traits": "Low Light Vision."
+    },
+    {
+      "name": "Minotaur (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Body": 4,
+        "Quickness": -1,
+        "Strength": 3,
+        "Intelligence": -1,
+        "Willpower": -1,
+        "Charisma": -1
+      },
+      "traits": "Thermographic Vision. +1 Reach for melee combat. Dermal Armor (+1 Body). Running multiplier ×2."
+    },
+    {
+      "name": "Satyr (NightLife)",
+      "build_point_cost": 5,
+      "priority": "D",
+      "modifiers": {
+        "Body": 2,
+        "Quickness": -1,
+        "Strength": 2,
+        "Charisma": -1,
+        "Intelligence": -1,
+        "Willpower": 1
+      },
+      "traits": "Low Light Vision."
+    },
+    {
+      "name": "Night Ones (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Quickness": 2,
+        "Charisma": 2
+      },
+      "traits": "Low Light Vision. Mild allergy to sunlight grants no bonus points; choose another allergy for extra points."
+    },
+    {
+      "name": "Dryad (NightLife)",
+      "build_point_cost": 10,
+      "priority": "C",
+      "modifiers": {
+        "Quickness": 1,
+        "Strength": -1,
+        "Charisma": 3
+      },
+      "traits": "Low Light Vision. Limited Animal Empathy. Mild allergy to urban areas grants no bonus points."
+    },
+    {
+      "name": "Sasquatch (NightLife)",
+      "build_point_cost": 15,
+      "priority": "B",
+      "modifiers": {
+        "Body": 5,
+        "Strength": 4,
+        "Charisma": -1,
+        "Willpower": -1
+      },
+      "traits": "+1 Reach for melee combat. Sound Mimicry. Essence loss ×2. No speech; must communicate with Sign Language. Dual Natured. Severe allergy to pollutants grants no bonus points; choose another allergy for extra points. Running multiplier ×4."
+    }
+  ]
+}

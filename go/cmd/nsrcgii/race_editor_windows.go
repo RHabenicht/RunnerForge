@@ -54,7 +54,7 @@ func editorRace() (*srcapp.RaceDefinition, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Build Point cost must be a whole number")
 	}
-	r := &srcapp.RaceDefinition{Name: strings.TrimSpace(get(raceFields[1])), BuildPointCost: cost, Modifiers: map[string]int{}, Traits: get(raceFields[3])}
+	r := &srcapp.RaceDefinition{Name: strings.TrimSpace(get(raceFields[1])), BuildPointCost: cost, Modifiers: map[string]int{}, Traits: get(raceFields[3]), Priority: app.char.RaceTemplate().Priority}
 	for i, k := range attrs {
 		n, err := strconv.Atoi(strings.TrimSpace(get(raceFields[10+i])))
 		if err != nil {

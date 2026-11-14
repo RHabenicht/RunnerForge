@@ -27,6 +27,30 @@ func TestNativeCustomRaceEditor(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer procDestroy.Call(hwnd)
+	pack, packErr := srcapp.LoadRacePack("../../../race-packs/NightLife-Rebuilt-Races.dat")
+	if packErr != nil {
+		t.Fatal(packErr)
+	}
+	loadedRaces = pack.Races
+	app.populateRaces()
+	selectCombo(ID_RACE, "Halfling (NightLife)")
+	app.sync()
+	if app.char.CustomRace == nil || app.char.CustomRace.BuildPointCost != 5 || app.char.CustomRace.Priority != "D" {
+		t.Fatal("pack selection failed")
+	}
+	selectCombo(ID_RACE, "Sasquatch (NightLife)")
+	app.sync()
+	if app.char.CustomRace.BuildPointCost != 15 || app.char.CustomRace.Priority != "B" {
+		t.Fatal("Sasquatch selection failed")
+	}
+	selectCombo(ID_RACE, "Elf")
+	app.sync()
+	if app.char.RaceTemplate().BuildPointCost != 10 {
+		t.Fatal("default race changed")
+	}
+	loadedRaces = nil
+	app.char = srcapp.NewCharacter()
+	app.populate()
 	app.char.Race = "Night One"
 	app.populateRaces()
 	openRaceEditor()

@@ -13,6 +13,7 @@ import (
 
 // RaceDefinition is a self-contained house rule stored with the character.
 type RaceDefinition struct {
+	Priority       string         `json:"priority,omitempty"`
 	Name           string         `json:"name"`
 	BuildPointCost int            `json:"build_point_cost"`
 	Modifiers      map[string]int `json:"modifiers"`
@@ -57,7 +58,7 @@ func (ch *Character) raceDefinition() (RaceDefinition, bool) {
 		for name, n := range s.mental {
 			mods[name] = n
 		}
-		return RaceDefinition{ch.Shapeshifter.Species + " shapeshifter", 25, mods, s.traits}, ok
+		return RaceDefinition{Name: ch.Shapeshifter.Species + " shapeshifter", BuildPointCost: 25, Modifiers: mods, Traits: s.traits}, ok
 	}
 	if ch.CustomRace != nil && ch.CustomRace.Name == ch.Race {
 		return *ch.CustomRace, true
@@ -67,10 +68,10 @@ func (ch *Character) raceDefinition() (RaceDefinition, bool) {
 		if mods == nil {
 			mods = raceMods[variant.base]
 		}
-		return RaceDefinition{ch.Race, buildRaceCosts[variant.base] + 5, mods, variant.traits}, true
+		return RaceDefinition{Name: ch.Race, BuildPointCost: buildRaceCosts[variant.base] + 5, Modifiers: mods, Traits: variant.traits}, true
 	}
 	mods, ok := raceMods[ch.Race]
-	return RaceDefinition{ch.Race, buildRaceCosts[ch.Race], mods, ""}, ok
+	return RaceDefinition{Name: ch.Race, BuildPointCost: buildRaceCosts[ch.Race], Modifiers: mods}, ok
 }
 
 func (ch *Character) RacialTraits() string {
@@ -79,6 +80,9 @@ func (ch *Character) RacialTraits() string {
 }
 
 func (race RaceDefinition) validate() error {
+	if race.Priority != "" && !strings.Contains("ABCDE", race.Priority) || len(race.Priority) > 1 {
+		return errors.New("custom race priority must be A–E or empty")
+	}
 	if race.Name == "" || strings.TrimSpace(race.Name) != race.Name ||
 		len([]rune(race.Name)) > 80 || strings.ContainsFunc(race.Name, unicode.IsControl) {
 		return errors.New("race name must be 1–80 characters with no control characters or surrounding spaces")
