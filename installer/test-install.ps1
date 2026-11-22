@@ -5,6 +5,14 @@ $p = Start-Process $setup -ArgumentList @('/VERYSILENT', '/SUPPRESSMSGBOXES', '/
 if ($p.ExitCode -ne 0) { throw "Installer failed: $($p.ExitCode)" }
 $exe = Join-Path $root 'RunnerForge.exe'
 if (!(Test-Path $exe)) { throw 'Installed executable missing' }
+foreach ($relative in @('race-packs\NightLife-Rebuilt-Races.dat', 'race-packs\README.md')) {
+  $installed = Join-Path $root $relative
+  $source = Join-Path (Split-Path $PSScriptRoot -Parent) $relative
+  if (!(Test-Path $installed)) { throw "Installed race pack file missing: $relative" }
+  if ((Get-FileHash $installed -Algorithm SHA256).Hash -ne (Get-FileHash $source -Algorithm SHA256).Hash) {
+    throw "Installed race pack file differs from source: $relative"
+  }
+}
 $p = Start-Process $exe -PassThru
 try {
   for ($i=0; $i -lt 30; $i++) {

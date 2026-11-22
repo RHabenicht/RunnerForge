@@ -49,6 +49,7 @@ const (
 	CB_SETCURSEL        = 0x014E
 	CB_GETCURSEL        = 0x0147
 	CB_GETLBTEXT        = 0x0148
+	CB_FINDSTRINGEXACT  = 0x0158
 	LB_ADDSTRING        = 0x0180
 	LB_RESETCONTENT     = 0x0184
 	LB_GETCURSEL        = 0x0188
@@ -243,15 +244,9 @@ func selectCombo(id int, selected string) {
 	if h == 0 {
 		return
 	}
-	values := map[int][]string{ID_METHOD: creationMethods, ID_BP_MAGIC: buildMagicOptions, ID_BP_RESOURCES: buildResourceOptions}
-	if id >= ID_PRIORITY && id < ID_PRIORITY+5 {
-		values[id] = []string{"A", "B", "C", "D", "E"}
-	}
-	for i, v := range values[id] {
-		if v == selected {
-			send(h, CB_SETCURSEL, uintptr(i), 0)
-			return
-		}
+	index := send(h, CB_FINDSTRINGEXACT, ^uintptr(0), uintptr(unsafe.Pointer(ptr(selected))))
+	if int32(index) != -1 {
+		send(h, CB_SETCURSEL, index, 0)
 	}
 }
 
