@@ -1,9 +1,12 @@
-RunnerForge 0.2.0 development checkpoint — 2026-11-13
+RunnerForge 0.2.0 development checkpoint — 2026-11-23
 Development build, not a complete SR3 rules release.
 
 Implemented:
 Priority and adjustable Build Point creation; 14 Companion metavariants;
 custom-race editing and reusable definitions; linked-attribute skill costs;
+optional external NightLife pack with all 16 supplied rebuilt races, no variant
+surcharge, Halfling 5 BP / D and Sasquatch 15 BP / B. Attributes and costs are
+automated; special traits remain descriptive. See race-packs/README.md;
 Knowledge/Language pools; creation specialization and literacy ratings;
 selected skill/item editing and removal; equipment quantities and prices;
 Spell Point purchases/sales; Edge/Flaw cost accounting; cyberware grade costs;
@@ -26,6 +29,11 @@ Prices and free-contact eligibility remain user-reviewed rather than inferred.
 Lands; 6,484 active entries. See docs/EQUIPMENT_REVIEW_2026-11-12.md.
 
 Verification:
+Race-pack commit 943ad2c passed all Windows tests, vet, build, native startup,
+installer build/install/launch/uninstall and installed pack hash checks in run
+45005589908. Artifact upload failed because GitHub's storage quota was full;
+the workflow was retried on November 23. A downloadable installer is not yet
+confirmed for this commit.
 Local Go tests/vet, Windows cross-vet/build and four Python tests pass.
 Special-character commit 95460ac passed Windows acceptance run 43444144321,
 including native ghoul/shapeshifter editors, animal advancement, PDF export,
@@ -47,7 +55,6 @@ Still required for complete SR3 coverage:
 - Vehicle/deck customization and comprehensive availability/legality checks.
 - Book-by-book verification of catalog values and complete legacy field fidelity.
 - Direct Windows 10/11 desktop and visual/DPI acceptance.
-- Locate/import the user's recalculated race sheet; it has not been imported.
 
 6,484 active catalog entries, including 35 checked equipment additions.
 The original quarantine archive has 2,633 rows; 24 now have checked active
