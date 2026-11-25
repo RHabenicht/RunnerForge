@@ -56,7 +56,7 @@ jobs:
         run: ..\installer\test-install.ps1
       - uses: actions/upload-artifact@v4
         with:
-          retention-days: ${{ github.event_name == 'pull_request' && 3 || 14 }}
+          retention-days: 1
           name: RunnerForge-Windows-development
           path: |
             dist/RunnerForge-Setup-0.2.0.exe
